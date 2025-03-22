@@ -8,37 +8,114 @@
     .hidden{
         display: none;
     }
+    body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            font-size: 1.1em;
+            color: #555;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        input[type="file"] {
+            margin: 20px 0;
+        }
 </style>
 <body>
 <div style="text-align: center">
 <h2>Now here is where the fun begins, select from the options below to describe how you would like to edit your video</h2>
 <p> Please select an option from the options list for what kind of edits you will like done to your video</p>
-   <form>
-  <input type="checkbox" id="option1" name="option1" value="audio">
-  <label for="option1"> <b>I would like to remove the audio</b></label><br>
-  <input type="checkbox" id="option2" name="option2" value="speed">
-  <label for="option2"> <b>I would like to change the speed</b></label><br>
-  <input type="checkbox" id="option3" name="option3" value="brightness">
-  <label for="option3"> <b>I would like to change the brightness</b></label>
-   </form>
+   <form id="list">
+    <input type="checkbox" id="option1" name="option1" value="audio">
+    <label for="option1"> <b>I would like to remove the audio</b></label><br>
+    <input type="checkbox" id="option2" name="option2" value="speed">
+    <label for="option2"> <b>I would like to change the speed</b></label><br>
+    <input type="checkbox" id="option3" name="option3" value="brightness">
+    <label for="option3"> <b>I would like to change the brightness</b></label><br>
+    <label for="speed_change" id="speed1" class="hidden">Speed Change(Please enter a number between 0.5 and 2.0):</label><br>
+    <input type="number" id="speed_change" class="hidden" name="speed_change" min="0.5" max="2.0"><br>
+    <label for="brightness_change" id="brightness1" class="hidden">Brightness Change(Please enter a number between -1.0 and 1.0):</label><br>
+    <input type="number" id="brightness_change" class="hidden" name="brightness_change" min="-1.0" max="1.0">
+  </form>
 
-   <form>
-  <label for="speed_change">Speed Change(Please enter a number between 0.5 and 2.0):</label><br>
-  <input type="number" id="speed_change" class="hidden" name="speed_change" min="0.5" max="2.0"><br>
-  <label for="brightness_change">Brightness Change(Please enter a number between -1.0 and 1.0):label><br>
-  <input type="number" id="brightness_change" class="hidden" name="brightness_change" min="-1.0" max="1.0">
-    </form>
+    <button type="button" id="Submission" onclick="receive()">Submit Changes</button>
+
 
     <script>
     document.getElementById("option2").addEventListener("change", function () {
         let speedInput = document.getElementById("speed_change");
+        let speedLabel = document.getElementById("speed1");
         speedInput.classList.toggle("hidden", !this.checked); // Show when checked, hide when unchecked
+        speedLabel.classList.toggle("hidden", !this.checked);
     });
 
     document.getElementById("option3").addEventListener("change", function () {
         let brightnessInput = document.getElementById("brightness_change");
+        let brightnessLabel = document.getElementById("brightness1");
         brightnessInput.classList.toggle("hidden", !this.checked);
+        brightnessLabel.classList.toggle("hidden", !this.checked);
     });
+
+    window.onload = function receive(){
+        var savedFile = localStorage.getItem("uploadedFile");
+        if (savedFile) {
+            console.log("Retrieved file:", savedFile);
+            alert("Retrieved file:", savedFile);
+            videoEditor(savedFile);
+        } else {
+            console.log("No file found.");
+            alert("There was an issue and your file was not retrieved, please try again");
+        }
+    }
+
+     function videoEditor(file) {
+     fetch(
+    let options = document.querySelectorAll("#list input[type='checkbox']:checked"); // used to get checked checkboxes
+    let selectedOptions = [];
+
+    options.forEach(option => {
+        selectedOptions.push(option.value); // Store values of selected checkboxes
+    });
+
+    let speedValue = document.getElementById("speed_change").value;
+    let brightnessValue = document.getElementById("brightness_change").value;
+
+    if (selectedOptions.includes("speed") && speedValue) {
+        selectedOptions.push(speedValue);
+        fetch(change_speed())
+        .then(
+    }
+    if (selectedOptions.includes("brightness") && brightnessValue) {
+        selectedOptions.push(brightnessValue);
+
+    }
+}
+
 </script>
 
 </div>

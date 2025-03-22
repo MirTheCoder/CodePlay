@@ -48,9 +48,22 @@
     <h2>Welcome to the video editing website, where we offer you a various amount of options to edit your videos</h2>
     <p> to get started, please click the button below in order to upload a video that you would like to edit</p>
     <form action="editor" method="post"enctype="multipart/form-data">
-        <input type ="file" name="file" accept ="video/*" required>
-        <button type="submit">Upload</button>
+        <input type ="file" name="file" id="documents" accept ="video/*" required>
+        <button type="submit" onclick="save()">Upload</button>
     </form>
+        <script>
+        function save(){
+            var space = document.getElementById("documents").value;
+            if(space){
+            localStorage.setItem("uploadedFile", space); // puts the file in local storage in order to be used across multiple html files
+            console.log("successfully saved: ", space);
+            alert("successfully saved: ", space);
+            } else {
+            console.log("There has been an error");
+            alert("There has been an error");
+            }
+        }
+        </script>
     </div>
 </body>
 </html>

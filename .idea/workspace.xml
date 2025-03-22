@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="Some of the python files and html files needed for the video editing code">
-      <change afterPath="$PROJECT_DIR$/WebApp/templates/product.html" afterDir="false" />
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="Some edits to the video editor, added some editing functions using ffmpeg and was able to create a toggle affect for some of the editing options talked about in my html files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/VideoEditor.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/VideoEditor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/templates/editor.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/editor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/video.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/video.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,11 +114,20 @@
       <option name="project" value="LOCAL" />
       <updated>1742404984668</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Some edits to the video editor, added some editing functions using ffmpeg and was able to create a toggle affect for some of the editing options talked about in my html files">
+      <option name="closed" value="true" />
+      <created>1742439445954</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742439445954</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Some of the python files and html files needed for the video editing code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some of the python files and html files needed for the video editing code" />
+    <MESSAGE value="Some edits to the video editor, added some editing functions using ffmpeg and was able to create a toggle affect for some of the editing options talked about in my html files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some edits to the video editor, added some editing functions using ffmpeg and was able to create a toggle affect for some of the editing options talked about in my html files" />
   </component>
 </project>
