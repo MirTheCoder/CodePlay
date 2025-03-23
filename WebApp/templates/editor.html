@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to The editing page</title>
-</head>
-<style>
-    .hidden{
-        display: none;
-    }
-    body {
+    <style>
+        .hide {
+            display: none;
+        }
+        .slide{
+            bottom: 40px;
+            right: 100px;
+        }
+        .hidden {
+            display: none;
+        }
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -45,32 +51,39 @@
         input[type="file"] {
             margin: 20px 0;
         }
-</style>
+    </style>
+</head>
 <body>
-<div style="text-align: center">
-<h2>Now here is where the fun begins, select from the options below to describe how you would like to edit your video</h2>
-<p> Please select an option from the options list for what kind of edits you will like done to your video</p>
-   <form id="list">
-    <input type="checkbox" id="option1" name="option1" value="audio">
-    <label for="option1"> <b>I would like to remove the audio</b></label><br>
-    <input type="checkbox" id="option2" name="option2" value="speed">
-    <label for="option2"> <b>I would like to change the speed</b></label><br>
-    <input type="checkbox" id="option3" name="option3" value="brightness">
-    <label for="option3"> <b>I would like to change the brightness</b></label><br>
-    <label for="speed_change" id="speed1" class="hidden">Speed Change(Please enter a number between 0.5 and 2.0):</label><br>
-    <input type="number" id="speed_change" class="hidden" name="speed_change" min="0.5" max="2.0"><br>
-    <label for="brightness_change" id="brightness1" class="hidden">Brightness Change(Please enter a number between -1.0 and 1.0):</label><br>
-    <input type="number" id="brightness_change" class="hidden" name="brightness_change" min="-1.0" max="1.0">
-  </form>
+<div class="container">
+    <h2>Now here is where the fun begins, select from the options below to describe how you would like to edit your video</h2>
+    <p>Please select an option from the options list for what kind of edits you would like done to your video</p>
+    <form id="list" action="product">
+        <input type="checkbox" id="option1" name="option1">
+        <label for="option1"><b>I would like to remove the audio</b></label><br>
+        <input type="checkbox" id="option2" name="option2">
+        <label for="option2"><b>I would like to change the speed</b></label><br>
+        <input type="checkbox" id="option3" name="option3">
+        <label for="option3"><b>I would like to change the brightness</b></label><br>
+        <label for="speed_change" id="speed1" class="hidden">Speed Change (Please enter a number between 0.5 and 2.0):</label><br>
+        <input type="number" id="speed_change" class="hidden" name="speed_change" min="0.5" max="2.0"><br>
+        <label for="brightness_change" id="brightness1" class="hidden">Brightness Change (Please enter a number between -1.0 and 1.0):</label><br>
+        <input type="number" id="brightness_change" class="hidden" name="brightness_change" min="-1.0" max="1.0"><br>
 
-    <button type="button" id="Submission" onclick="receive()">Submit Changes</button>
+        <button type="button" id="Submission" onclick="receive()">Submit Changes</button>
+    </form>
 
+    <button type="button" id="moving" onclick="navigate()" class="hide slide">Press to continue</button>
 
-    <script>
+    <div id="result"></div> <!-- Add this to display the result -->
+
+</div>
+
+<script>
+    // Show/hide speed and brightness inputs based on checkbox selection
     document.getElementById("option2").addEventListener("change", function () {
         let speedInput = document.getElementById("speed_change");
         let speedLabel = document.getElementById("speed1");
-        speedInput.classList.toggle("hidden", !this.checked); // Show when checked, hide when unchecked
+        speedInput.classList.toggle("hidden", !this.checked);
         speedLabel.classList.toggle("hidden", !this.checked);
     });
 
@@ -81,44 +94,104 @@
         brightnessLabel.classList.toggle("hidden", !this.checked);
     });
 
-    window.onload = function receive(){
+    // Show "Press to continue" button once the form is submitted (or based on a condition)
+    function receive() {
         var savedFile = localStorage.getItem("uploadedFile");
         if (savedFile) {
             console.log("Retrieved file:", savedFile);
-            alert("Retrieved file:", savedFile);
+            alert("Retrieved file: " + savedFile);
             videoEditor(savedFile);
         } else {
             console.log("No file found.");
-            alert("There was an issue and your file was not retrieved, please try again");
+            alert("There was an issue and your file was not retrieved, please try again.");
         }
+
+        // After processing, show the button to continue
+        let buttonPress = document.getElementById("moving");
+        buttonPress.classList.remove("hide"); // Make the button visible
     }
 
-     function videoEditor(file) {
-     fetch(
-    let options = document.querySelectorAll("#list input[type='checkbox']:checked"); // used to get checked checkboxes
-    let selectedOptions = [];
+    // Video editing function
+    function videoEditor(file) {
+        let options = document.querySelectorAll("#list input[type='checkbox']:checked");
+        let selectedOptions = [];
 
-    options.forEach(option => {
-        selectedOptions.push(option.value); // Store values of selected checkboxes
-    });
+        options.forEach(option => {
+            selectedOptions.push(option.id); // Use the checkbox ID for identifying selected options
+        });
 
-    let speedValue = document.getElementById("speed_change").value;
-    let brightnessValue = document.getElementById("brightness_change").value;
+        let speedValue = document.getElementById("speed_change").value;
+        let brightnessValue = document.getElementById("brightness_change").value;
 
-    if (selectedOptions.includes("speed") && speedValue) {
-        selectedOptions.push(speedValue);
-        fetch(change_speed())
-        .then(
+        if(selectedOptions.includes("option1")){
+            fetch("http://127.0.0.1:5000/change_audio_api", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    input_file: file,
+                    output_video: "output_video.mp4",
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerText = "Output Video: " + data.output_video;
+                file = data.output_video;
+                alert("Video has been successfully edited, thank you!");
+            })
+            .catch(error => alert("Error:", error));
+        }
+
+        if (selectedOptions.includes("option2") && speedValue) {
+            fetch("http://127.0.0.1:5000/change_speed_api", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    input_file: file,
+                    output_video: "output_video.mp4",
+                    speed: speedValue
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerText = "Output Video: " + data.output_video;
+                file = data.output_video
+                alert("Video has been successfully edited, thank you!");
+            })
+            .catch(error => alert("Error:", error));
+        }
+
+        if (selectedOptions.includes("option3") && brightnessValue) {
+            fetch("http://127.0.0.1:5000/change_brightness_api", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    input_file: file,
+                    output_video: "output_video_brightness.mp4",
+                    brightness: brightnessValue
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerText = "Brightness adjusted. Output Video: " + data.output_video;
+                file = data.output_video
+                alert("Video brightness has been successfully adjusted.");
+            })
+            .catch(error => alert("Error:", error));
+        }
+
+        localStorage.setItem("uploadedFile", file);
     }
-    if (selectedOptions.includes("brightness") && brightnessValue) {
-        selectedOptions.push(brightnessValue);
 
+    // Navigation function
+    function navigate(){
+        window.location.href = "product.html"; // Redirect to another page
     }
-}
-
 </script>
-
-</div>
-
 </body>
 </html>
