@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="more edits to the files, I was successfully able to save the file that is selected and then call it again from a different html. We have also been able to toggle some of the options. Still working on calling the python functions to edit the videos via ffmpeg.">
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="Update, we have made some very great progress. We were able to finally connect to the python functions from the html forms via json request and have successfully had the output files edited and returned back to us. Now I just need to do some formating for one of the buttons and then finish the final html file called &quot;product&quot; which will display the edited video and allow a person to download it.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/VideoEditor.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/VideoEditor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/templates/editor.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/editor.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -130,13 +129,22 @@
       <option name="project" value="LOCAL" />
       <updated>1742658313839</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Update, we have made some very great progress. We were able to finally connect to the python functions from the html forms via json request and have successfully had the output files edited and returned back to us. Now I just need to do some formating for one of the buttons and then finish the final html file called &quot;product&quot; which will display the edited video and allow a person to download it.">
+      <option name="closed" value="true" />
+      <created>1742704962233</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1742704962233</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Some of the python files and html files needed for the video editing code" />
     <MESSAGE value="Some edits to the video editor, added some editing functions using ffmpeg and was able to create a toggle affect for some of the editing options talked about in my html files" />
     <MESSAGE value="more edits to the files, I was successfully able to save the file that is selected and then call it again from a different html. We have also been able to toggle some of the options. Still working on calling the python functions to edit the videos via ffmpeg." />
-    <option name="LAST_COMMIT_MESSAGE" value="more edits to the files, I was successfully able to save the file that is selected and then call it again from a different html. We have also been able to toggle some of the options. Still working on calling the python functions to edit the videos via ffmpeg." />
+    <MESSAGE value="Update, we have made some very great progress. We were able to finally connect to the python functions from the html forms via json request and have successfully had the output files edited and returned back to us. Now I just need to do some formating for one of the buttons and then finish the final html file called &quot;product&quot; which will display the edited video and allow a person to download it." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update, we have made some very great progress. We were able to finally connect to the python functions from the html forms via json request and have successfully had the output files edited and returned back to us. Now I just need to do some formating for one of the buttons and then finish the final html file called &quot;product&quot; which will display the edited video and allow a person to download it." />
   </component>
 </project>
