@@ -36,7 +36,7 @@ def change_speed(input_file, output_video, speed):
     command = [
         "ffmpeg",
         "-i", input_file, #used to identify what the input file is
-        "-vf", f"setpts={speed}*PTS", #changes the brightness according to the users preference
+        "-vf", f"setpts={speed}*PTS", #changes the speed according to the users preference
         "-af", f"atempo = {match}",  # Ensures audio is copied without re-encoding
         output_video #sets the edited video as the output video
     ]
