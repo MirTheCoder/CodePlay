@@ -6,10 +6,10 @@ import sqlalchemy
 app = Flask(__name__)
 app.secret_key = "QETYUIPKHGDAVXBM10928374"
 app.permanent_session_lifetime = timedelta(minutes = 13)
-app.config['SQLALCHEMY_URI'] = 'sqlite:///users.sqlite3'
+db = SQLAlchemy()
+db.init_app(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-db = SQLAlchemy(app)
 
 class users(db.Model):
     #Each row will be given a unique id, this is how we store data in the database view rows and columns
