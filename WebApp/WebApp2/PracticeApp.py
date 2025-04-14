@@ -7,9 +7,10 @@ app = Flask(__name__)
 app.secret_key = "QETYUIPKHGDAVXBM10928374"
 app.permanent_session_lifetime = timedelta(minutes = 13)
 db = SQLAlchemy()
-db.init_app(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db.init_app(app)
+
 
 class users(db.Model):
     #Each row will be given a unique id, this is how we store data in the database view rows and columns
@@ -38,7 +39,7 @@ def login():
         else:
             usr = users(user, "")
             db.session.add(usr)
-            db.commit()
+            db.session.commit()
         return redirect(url_for("user"))
     else:
         if "user" in session:
@@ -56,7 +57,7 @@ def user():
             session["email"] = email
             found_user = users.query.filter_by(name=user).first()
             found_user.email = email
-            db.commit()
+            db.session.commit()
             flash("Email was saved!")
             flash(f"Email: {email}")
         else:
@@ -79,6 +80,7 @@ def logout():
     session.pop("email", None)
     return redirect(url_for("login"))
 if __name__ == "__main__":
-    #Creates the database when the python file is run
-    db.create_all()
+    with app.app_context():
+        # Creates the database when the python file is run
+        db.create_all()
     app.run(debug = True)
