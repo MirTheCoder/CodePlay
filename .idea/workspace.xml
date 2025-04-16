@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="more edits to the files, I was successfully able to save the file that is selected and then call it again from a different html. We have also been able to toggle some of the options. Still working on calling the python functions to edit the videos via ffmpeg.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/VideoEditor.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/VideoEditor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/templates/editor.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/editor.html" afterDir="false" />
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="The database has finally been set up and we have successfully got it initialized and can now start inputing data into the database and also putting rows or different catagories for each user (ex. phone number, grade, job, etc...)">
+      <change beforePath="$PROJECT_DIR$/WebApp/WebApp2/PracticeApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/WebApp2/PracticeApp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/WebApp2/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/WebApp2/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/instance/test.db" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/instance/test.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,12 +31,12 @@
     &quot;assignee&quot;: &quot;MirTheCoder&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/MirTheCoder/CodePlay.git&quot;,
-    &quot;accountId&quot;: &quot;7a082490-1493-415b-9de6-26f8fb52c801&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/MirTheCoder/CodePlay.git",
+    "accountId": "32bf1a16-cea4-419c-8506-e8bd4a4713b1"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -46,18 +46,49 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Python.VideoEditor.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.PracticeApp.executor": "Run",
+    "Python.VideoEditor.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
-  <component name="RunManager">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/WebApp/WebApp2/templates" />
+      <recent name="$PROJECT_DIR$/WebApp/WebApp2" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.PracticeApp">
+    <configuration name="PracticeApp" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="CodePlay" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12 (FlaskProjects)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/WebApp" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/WebApp/WebApp2/PracticeApp.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="VideoEditor" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="CodePlay" />
       <option name="ENV_FILES" value="" />
@@ -67,7 +98,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.12 (CodePlay)" />
+      <option name="SDK_NAME" value="Python 3.12 (FlaskProjects)" />
       <option name="WORKING_DIRECTORY" value="C:\pythonProject\CodePlay\WebApp" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -81,11 +112,15 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.VideoEditor" />
+      <item itemvalue="Python.PracticeApp" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-495700d161d3-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.22562.220" />
+        <option value="bundled-python-sdk-6a3326d57233-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.24807.21" />
       </set>
     </attachedChunks>
   </component>
@@ -130,13 +165,66 @@
       <option name="project" value="LOCAL" />
       <updated>1742658313839</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="more edits to the files, I was successfully able to save the file that is selected and then call it again from a different html. We have also been able to toggle some of the options. Still working on calling the python functions to edit the videos via ffmpeg.">
+      <option name="closed" value="true" />
+      <created>1744572106073</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744572106073</updated>
+    </task>
+    <task id="LOCAL-00006" summary="We have started working on a new web applicaiton that has sessions, user login, and will potentially have a database to save data that is specific to the user who  is logged in.">
+      <option name="closed" value="true" />
+      <created>1744581997009</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1744581997009</updated>
+    </task>
+    <task id="LOCAL-00007" summary="We have now added a section that allows users to enter in their email which we will later save under their name in the database that we hope to create eventually">
+      <option name="closed" value="true" />
+      <created>1744582774583</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1744582774583</updated>
+    </task>
+    <task id="LOCAL-00008" summary="We have started working on creating the database to store the users email and name. We are having some little errors for storing in the database but we are still working on it. Will hopefully be able to">
+      <option name="closed" value="true" />
+      <created>1744598172810</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1744598172810</updated>
+    </task>
+    <task id="LOCAL-00009" summary="We have edited the database">
+      <option name="closed" value="true" />
+      <created>1744601010120</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1744601010120</updated>
+    </task>
+    <task id="LOCAL-00010" summary="The database has finally been set up and we have successfully got it initialized and can now start inputing data into the database and also putting rows or different catagories for each user (ex. phone number, grade, job, etc...)">
+      <option name="closed" value="true" />
+      <created>1744635711163</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1744635711163</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Some of the python files and html files needed for the video editing code" />
     <MESSAGE value="Some edits to the video editor, added some editing functions using ffmpeg and was able to create a toggle affect for some of the editing options talked about in my html files" />
     <MESSAGE value="more edits to the files, I was successfully able to save the file that is selected and then call it again from a different html. We have also been able to toggle some of the options. Still working on calling the python functions to edit the videos via ffmpeg." />
-    <option name="LAST_COMMIT_MESSAGE" value="more edits to the files, I was successfully able to save the file that is selected and then call it again from a different html. We have also been able to toggle some of the options. Still working on calling the python functions to edit the videos via ffmpeg." />
+    <MESSAGE value="We have started working on a new web applicaiton that has sessions, user login, and will potentially have a database to save data that is specific to the user who  is logged in." />
+    <MESSAGE value="We have now added a section that allows users to enter in their email which we will later save under their name in the database that we hope to create eventually" />
+    <MESSAGE value="We have started working on creating the database to store the users email and name. We are having some little errors for storing in the database but we are still working on it. Will hopefully be able to" />
+    <MESSAGE value="We have edited the database" />
+    <MESSAGE value="The database has finally been set up and we have successfully got it initialized and can now start inputing data into the database and also putting rows or different catagories for each user (ex. phone number, grade, job, etc...)" />
+    <option name="LAST_COMMIT_MESSAGE" value="The database has finally been set up and we have successfully got it initialized and can now start inputing data into the database and also putting rows or different catagories for each user (ex. phone number, grade, job, etc...)" />
   </component>
 </project>
