@@ -7,8 +7,7 @@
         .hide {
             display: none;
         }
-        .slide {
-            position: fixed;
+        .slide{
             bottom: 40px;
             right: 100px;
         }
@@ -72,8 +71,9 @@
 
         <button type="button" id="Submission" onclick="receive()">Submit Changes</button>
     </form>
-
-    <button type="button" id="moving" onclick="navigate()" class="hide slide">Press to continue</button>
+    <a href="http://127.0.0.1:5000/product">
+    <button type="button" id="moving" class="hide slide">Press to continue</button>
+    </a>
 
     <div id="result"></div> <!-- Add this to display the result -->
 
@@ -98,6 +98,10 @@
     // Show "Press to continue" button once the form is submitted (or based on a condition)
     function receive() {
         var savedFile = localStorage.getItem("uploadedFile");
+        file = request.files['file']
+        file_path = f"uploads/{file.filename}"
+        file.save(file_path)
+
         if (savedFile) {
             console.log("Retrieved file:", savedFile);
             alert("Retrieved file: " + savedFile);
@@ -108,7 +112,6 @@
         }
 
         // After processing, show the button to continue
-
         let buttonPress = document.getElementById("moving");
         buttonPress.classList.remove("hide"); // Make the button visible
     }
@@ -125,7 +128,7 @@
         let speedValue = document.getElementById("speed_change").value;
         let brightnessValue = document.getElementById("brightness_change").value;
 
-        if (selectedOptions.includes("option1")) {
+        if(selectedOptions.includes("option1")){
             fetch("http://127.0.0.1:5000/change_audio_api", {
                 method: "POST",
                 headers: {
@@ -160,7 +163,7 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById("result").innerText = "Output Video: " + data.output_video;
-                file = data.output_video;
+                file = data.output_video
                 alert("Video has been successfully edited, thank you!");
             })
             .catch(error => alert("Error:", error));
@@ -181,18 +184,13 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById("result").innerText = "Brightness adjusted. Output Video: " + data.output_video;
-                file = data.output_video;
+                file = data.output_video
                 alert("Video brightness has been successfully adjusted.");
             })
             .catch(error => alert("Error:", error));
         }
-
-        localStorage.setItem("uploadedFile", file);
-    }
-
-    // Navigation function
-    function navigate() {
-        window.location.href = "product.html"; // Redirect to another page
+        localStorage.clear();
+        localStorage.setItem("uploadFile", file);
     }
 </script>
 </body>
