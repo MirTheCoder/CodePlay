@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="We have created a new database and have included a password and age column within the database. We also have a create account feature where the user can create an account if they don't have one and have it stored within the database that we have created. When the user tries to log in, they have to use their username and password which will only go through if they have it registered within the database">
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="We have successfully created the create.html file which allows a user to create an account by inputting the required details for the database to save their information">
+      <change afterPath="$PROJECT_DIR$/WebApp/WebApp2/templates/details.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/WebApp2/PracticeApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/WebApp2/PracticeApp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/WebApp2/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/WebApp2/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/instance/test.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/WebApp2/templates/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/WebApp2/templates/create.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +222,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744774106425</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="We have successfully created the create.html file which allows a user to create an account by inputting the required details for the database to save their information">
+      <option name="closed" value="true" />
+      <created>1744826425862</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1744826425862</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -235,6 +243,7 @@
     <MESSAGE value="We have edited the database" />
     <MESSAGE value="The database has finally been set up and we have successfully got it initialized and can now start inputing data into the database and also putting rows or different catagories for each user (ex. phone number, grade, job, etc...)" />
     <MESSAGE value="We have created a new database and have included a password and age column within the database. We also have a create account feature where the user can create an account if they don't have one and have it stored within the database that we have created. When the user tries to log in, they have to use their username and password which will only go through if they have it registered within the database" />
-    <option name="LAST_COMMIT_MESSAGE" value="We have created a new database and have included a password and age column within the database. We also have a create account feature where the user can create an account if they don't have one and have it stored within the database that we have created. When the user tries to log in, they have to use their username and password which will only go through if they have it registered within the database" />
+    <MESSAGE value="We have successfully created the create.html file which allows a user to create an account by inputting the required details for the database to save their information" />
+    <option name="LAST_COMMIT_MESSAGE" value="We have successfully created the create.html file which allows a user to create an account by inputting the required details for the database to save their information" />
   </component>
 </project>
