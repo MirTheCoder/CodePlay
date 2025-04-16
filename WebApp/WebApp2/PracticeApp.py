@@ -46,7 +46,7 @@ def login():
         found_pswd = users.query.filter_by(pswd = word).first()
         if found_user and found_pswd:
             valid = False
-            session["user"] = found_user.name
+            session["user"] = found_user.uname
             session["password"] = found_user.pswd
             return redirect(url_for("user"))
         else:
@@ -94,15 +94,15 @@ def create():
         email = request.form["em"]
         age = request.form["ag"]
         usr = users(user, email,age,word)
-        db.session.add(usr)
-        db.session.commit()
         session["user"] = user
         session["word"] = word
         session["email"] = email
         session["age"] = age
-        return
+        db.session.add(usr)
+        db.session.commit()
+        return redirect(url_for("user"))
+    return render_template("create.html")
     # found_user = users.query.filter_by(name = user).first()
-    return "Hi"
 @app.route("/logout")
 def logout():
     if "user" in session:
