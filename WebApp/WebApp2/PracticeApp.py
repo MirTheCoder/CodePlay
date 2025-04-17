@@ -87,8 +87,12 @@ def user():
 @app.route("/details")
 def details():
     if "user" in session:
-        hold = session["image"]
-    return render_template("details.html", )
+        username = session["user"]
+        found_user = users.query.filter_by(uname = username).first()
+        hold = found_user.image_file
+        email = found_user.email
+        age = found_user.age
+    return render_template("details.html", photo = hold, zone = email, num = age)
 @app.route("/create",methods = ["POST", "GET"])
 def create():
     if request.method == "POST":
@@ -98,7 +102,7 @@ def create():
         email = request.form["em"]
         age = request.form["ag"]
         image = request.form["png"]
-        usr = users(user, email,age,word)
+        usr = users(user,email,age,word,image)
         session["user"] = user
         session["word"] = word
         session["email"] = email
