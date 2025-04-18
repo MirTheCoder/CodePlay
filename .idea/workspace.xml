@@ -4,11 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="We have created a new database and have included a password and age column within the database. We also have a create account feature where the user can create an account if they don't have one and have it stored within the database that we have created. When the user tries to log in, they have to use their username and password which will only go through if they have it registered within the database">
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="Some slight little tweaks to help with the &quot;press to continue&quot; button =)">
+      <change beforePath="$PROJECT_DIR$/.idea/CodePlay.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CodePlay.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/WebApp2/PracticeApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/WebApp2/PracticeApp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/WebApp2/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/WebApp2/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/instance/test.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/VideoEditor.py" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/VideoEditor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/WebApp2/PracticeApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/PracticeApp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/WebApp2/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/WebApp2/templates/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/WebApp2/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/WebApp2/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/WebApp2/templates/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/editor.html" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/templates/editor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/product.html" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/templates/product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/video.html" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/templates/video.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +44,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/MirTheCoder/CodePlay.git&quot;,
-    &quot;accountId&quot;: &quot;32bf1a16-cea4-419c-8506-e8bd4a4713b1&quot;
+    &quot;accountId&quot;: &quot;7a082490-1493-415b-9de6-26f8fb52c801&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -76,7 +85,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.12 (FlaskProjects)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/WebApp" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -99,12 +107,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.12 (FlaskProjects)" />
       <option name="WORKING_DIRECTORY" value="C:\pythonProject\CodePlay\WebApp" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/WebApp/VideoEditor.py" />
+      <option name="SCRIPT_NAME" value="C:\pythonProject\CodePlay\WebApp\VidEdits\VideoEditor.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -114,14 +121,14 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.VideoEditor" />
       <item itemvalue="Python.PracticeApp" />
+      <item itemvalue="Python.VideoEditor" />
     </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-6a3326d57233-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.24807.21" />
+        <option value="bundled-python-sdk-495700d161d3-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.22562.220" />
       </set>
     </attachedChunks>
   </component>
