@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = "QETYUIPKHGDAVXBM10928374"
 app.permanent_session_lifetime = timedelta(minutes = 13)
 db = SQLAlchemy()
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///base.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 
@@ -20,12 +20,14 @@ class users(db.Model):
     email = db.Column(db.String(100))
     age = db.Column(db.Integer)
     pswd = db.Column(db.String(100))
+    image_file = db.Column(db.String(200), default="default.jpg")
     #Used to define each person or ID within our database
-    def __init__(self, uname, email, age, pswd):
+    def __init__(self, uname, email, age, pswd, image):
         self.uname = uname
         self.email = email
         self.age = age
         self.pswd = pswd
+        self.image = image
 
 
 @app.route("/")
@@ -84,7 +86,13 @@ def user():
         return redirect(url_for("login"))
 @app.route("/details")
 def details():
-    return "Hello"
+    if "user" in session:
+        username = session["user"]
+        found_user = users.query.filter_by(uname = username).first()
+        hold = found_user.image_file
+        email = found_user.email
+        age = found_user.age
+    return render_template("details.html", photo = hold, zone = email, num = age)
 @app.route("/create",methods = ["POST", "GET"])
 def create():
     if request.method == "POST":
@@ -93,11 +101,13 @@ def create():
         word = request.form["ps"]
         email = request.form["em"]
         age = request.form["ag"]
-        usr = users(user, email,age,word)
+        image = request.form["png"]
+        usr = users(user,email,age,word,image)
         session["user"] = user
         session["word"] = word
         session["email"] = email
         session["age"] = age
+        session["image"] = image
         db.session.add(usr)
         db.session.commit()
         return redirect(url_for("user"))
