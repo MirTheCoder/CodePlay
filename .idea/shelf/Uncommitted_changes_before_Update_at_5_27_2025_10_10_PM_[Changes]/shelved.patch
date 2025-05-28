@@ -1,0 +1,388 @@
+Index: VidEdits/templates/editor.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Welcome to The editing page</title>\r\n    <style>\r\n        .hide {\r\n            display: none;\r\n        }\r\n        .slide{\r\n            bottom: 40px;\r\n            right: 100px;\r\n        }\r\n        .hidden {\r\n            display: none;\r\n        }\r\n        body {\r\n            font-family: Arial, sans-serif;\r\n            margin: 0;\r\n            padding: 0;\r\n            background-color: #f4f4f9;\r\n        }\r\n        h2 {\r\n            color: #333;\r\n        }\r\n        p {\r\n            font-size: 1.1em;\r\n            color: #555;\r\n        }\r\n        .container {\r\n            max-width: 800px;\r\n            margin: 50px auto;\r\n            padding: 20px;\r\n            background-color: white;\r\n            border-radius: 8px;\r\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\r\n            text-align: center;\r\n        }\r\n        button {\r\n            padding: 10px 20px;\r\n            background-color: #007bff;\r\n            color: white;\r\n            font-size: 1.1em;\r\n            border: none;\r\n            border-radius: 5px;\r\n            cursor: pointer;\r\n        }\r\n        button:hover {\r\n            background-color: #0056b3;\r\n        }\r\n        input[type=\"file\"] {\r\n            margin: 20px 0;\r\n        }\r\n    </style>\r\n</head>\r\n<body>\r\n<div class=\"container\">\r\n    <h2>Now here is where the fun begins, select from the options below to describe how you would like to edit your video</h2>\r\n    <p>Please select an option from the options list for what kind of edits you would like done to your video</p>\r\n    <form id=\"list\" action=\"product\">\r\n        <input type=\"checkbox\" id=\"option1\" name=\"option1\">\r\n        <label for=\"option1\"><b>I would like to remove the audio</b></label><br>\r\n        <input type=\"checkbox\" id=\"option2\" name=\"option2\">\r\n        <label for=\"option2\"><b>I would like to change the speed</b></label><br>\r\n        <input type=\"checkbox\" id=\"option3\" name=\"option3\">\r\n        <label for=\"option3\"><b>I would like to change the brightness</b></label><br>\r\n        <label for=\"speed_change\" id=\"speed1\" class=\"hidden\">Speed Change (Please enter a number between 0.5 and 2.0):</label><br>\r\n        <input type=\"number\" id=\"speed_change\" class=\"hidden\" name=\"speed_change\" min=\"0.5\" max=\"2.0\"><br>\r\n        <label for=\"brightness_change\" id=\"brightness1\" class=\"hidden\">Brightness Change (Please enter a number between -1.0 and 1.0):</label><br>\r\n        <input type=\"number\" id=\"brightness_change\" class=\"hidden\" name=\"brightness_change\" min=\"-1.0\" max=\"1.0\"><br>\r\n\r\n        <button type=\"button\" id=\"Submission\" onclick=\"receive()\">Submit Changes</button>\r\n    </form>\r\n    <a href=\"http://127.0.0.1:5000/product\">\r\n    <button type=\"button\" id=\"moving\" class=\"hide slide\">Press to continue</button>\r\n    </a>\r\n\r\n    <div id=\"result\"></div> <!-- Add this to display the result -->\r\n\r\n</div>\r\n\r\n<script>\r\n    // Show/hide speed and brightness inputs based on checkbox selection\r\n    document.getElementById(\"option2\").addEventListener(\"change\", function () {\r\n        let speedInput = document.getElementById(\"speed_change\");\r\n        let speedLabel = document.getElementById(\"speed1\");\r\n        speedInput.classList.toggle(\"hidden\", !this.checked);\r\n        speedLabel.classList.toggle(\"hidden\", !this.checked);\r\n    });\r\n\r\n    document.getElementById(\"option3\").addEventListener(\"change\", function () {\r\n        let brightnessInput = document.getElementById(\"brightness_change\");\r\n        let brightnessLabel = document.getElementById(\"brightness1\");\r\n        brightnessInput.classList.toggle(\"hidden\", !this.checked);\r\n        brightnessLabel.classList.toggle(\"hidden\", !this.checked);\r\n    });\r\n\r\n    // Show \"Press to continue\" button once the form is submitted (or based on a condition)\r\n    function receive() {\r\n        var savedFile = localStorage.getItem(\"uploadedFile\");\r\n        file = request.files['file']\r\n        file_path = f\"uploads/{file.filename}\"\r\n        file.save(file_path)\r\n\r\n        if (savedFile) {\r\n            console.log(\"Retrieved file:\", savedFile);\r\n            alert(\"Retrieved file: \" + savedFile);\r\n            videoEditor(savedFile);\r\n        } else {\r\n            console.log(\"No file found.\");\r\n            alert(\"There was an issue and your file was not retrieved, please try again.\");\r\n        }\r\n\r\n        // After processing, show the button to continue\r\n        let buttonPress = document.getElementById(\"moving\");\r\n        buttonPress.classList.remove(\"hide\"); // Make the button visible\r\n    }\r\n\r\n    // Video editing function\r\n    function videoEditor(file) {\r\n        let options = document.querySelectorAll(\"#list input[type='checkbox']:checked\");\r\n        let selectedOptions = [];\r\n\r\n        options.forEach(option => {\r\n            selectedOptions.push(option.id); // Use the checkbox ID for identifying selected options\r\n        });\r\n\r\n        let speedValue = document.getElementById(\"speed_change\").value;\r\n        let brightnessValue = document.getElementById(\"brightness_change\").value;\r\n\r\n        if(selectedOptions.includes(\"option1\")){\r\n            fetch(\"http://127.0.0.1:5000/change_audio_api\", {\r\n                method: \"POST\",\r\n                headers: {\r\n                    \"Content-Type\": \"application/json\"\r\n                },\r\n                body: JSON.stringify({\r\n                    input_file: file,\r\n                    output_video: \"output_video.mp4\",\r\n                })\r\n            })\r\n            .then(response => response.json())\r\n            .then(data => {\r\n                document.getElementById(\"result\").innerText = \"Output Video: \" + data.output_video;\r\n                file = data.output_video;\r\n                alert(\"Video has been successfully edited, thank you!\");\r\n            })\r\n            .catch(error => alert(\"Error:\", error));\r\n        }\r\n\r\n        if (selectedOptions.includes(\"option2\") && speedValue) {\r\n            fetch(\"http://127.0.0.1:5000/change_speed_api\", {\r\n                method: \"POST\",\r\n                headers: {\r\n                    \"Content-Type\": \"application/json\"\r\n                },\r\n                body: JSON.stringify({\r\n                    input_file: file,\r\n                    output_video: \"output_video.mp4\",\r\n                    speed: speedValue\r\n                })\r\n            })\r\n            .then(response => response.json())\r\n            .then(data => {\r\n                document.getElementById(\"result\").innerText = \"Output Video: \" + data.output_video;\r\n                file = data.output_video\r\n                alert(\"Video has been successfully edited, thank you!\");\r\n            })\r\n            .catch(error => alert(\"Error:\", error));\r\n        }\r\n\r\n        if (selectedOptions.includes(\"option3\") && brightnessValue) {\r\n            fetch(\"http://127.0.0.1:5000/change_brightness_api\", {\r\n                method: \"POST\",\r\n                headers: {\r\n                    \"Content-Type\": \"application/json\"\r\n                },\r\n                body: JSON.stringify({\r\n                    input_file: file,\r\n                    output_video: \"output_video_brightness.mp4\",\r\n                    brightness: brightnessValue\r\n                })\r\n            })\r\n            .then(response => response.json())\r\n            .then(data => {\r\n                document.getElementById(\"result\").innerText = \"Brightness adjusted. Output Video: \" + data.output_video;\r\n                file = data.output_video\r\n                alert(\"Video brightness has been successfully adjusted.\");\r\n            })\r\n            .catch(error => alert(\"Error:\", error));\r\n        }\r\n        localStorage.clear();\r\n        localStorage.setItem(\"uploadFile\", file);\r\n    }\r\n</script>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/VidEdits/templates/editor.html b/VidEdits/templates/editor.html
+--- a/VidEdits/templates/editor.html	(revision b064351b383f2b37083d9218422b057ab737a09e)
++++ b/VidEdits/templates/editor.html	(date 1748315912689)
+@@ -97,10 +97,8 @@
+ 
+     // Show "Press to continue" button once the form is submitted (or based on a condition)
+     function receive() {
++        //Collect the video submitted in the previous page from the local storage
+         var savedFile = localStorage.getItem("uploadedFile");
+-        file = request.files['file']
+-        file_path = f"uploads/{file.filename}"
+-        file.save(file_path)
+ 
+         if (savedFile) {
+             console.log("Retrieved file:", savedFile);
+@@ -178,7 +176,7 @@
+                 body: JSON.stringify({
+                     input_file: file,
+                     output_video: "output_video_brightness.mp4",
+-                    brightness: brightnessValue
++                    light: brightnessValue
+                 })
+             })
+             .then(response => response.json())
+Index: VidEdits/templates/video.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Video Editor</title>\r\n</head>\r\n<style>\r\n    body {\r\n            font-family: Arial, sans-serif;\r\n            margin: 0;\r\n            padding: 0;\r\n            background-color: #f4f4f9;\r\n        }\r\n        h2 {\r\n            color: #333;\r\n        }\r\n        p {\r\n            font-size: 1.1em;\r\n            color: #555;\r\n        }\r\n        .container {\r\n            max-width: 800px;\r\n            margin: 50px auto;\r\n            padding: 20px;\r\n            background-color: white;\r\n            border-radius: 8px;\r\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\r\n            text-align: center;\r\n        }\r\n        button {\r\n            padding: 10px 20px;\r\n            background-color: #007bff;\r\n            color: white;\r\n            font-size: 1.1em;\r\n            border: none;\r\n            border-radius: 5px;\r\n            cursor: pointer;\r\n        }\r\n        button:hover {\r\n            background-color: #0056b3;\r\n        }\r\n        input[type=\"file\"] {\r\n            margin: 20px 0;\r\n        }\r\n</style>\r\n<body>\r\n    <div style = \"text-align: center\">\r\n    <h2>Welcome to the video editing website, where we offer you a various amount of options to edit your videos</h2>\r\n    <p> to get started, please click the button below in order to upload a video that you would like to edit</p>\r\n    <form action=\"editor\" method=\"post\"enctype=\"multipart/form-data\">\r\n        <input type =\"file\" name=\"file\" id=\"documents\" accept =\"video/*\" required>\r\n        <button type=\"submit\" onclick=\"save()\">Upload</button>\r\n    </form>\r\n        <script>\r\n        function save(){\r\n            var space = document.getElementById(\"documents\").value;\r\n            if(space){\r\n            localStorage.setItem(\"uploadedFile\", space); // puts the file in local storage in order to be used across multiple html files\r\n            console.log(\"successfully saved: \", space);\r\n            alert(\"successfully saved: \", space);\r\n            } else {\r\n            console.log(\"There has been an error\");\r\n            alert(\"There has been an error\");\r\n            }\r\n        }\r\n        </script>\r\n    </div>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/VidEdits/templates/video.html b/VidEdits/templates/video.html
+--- a/VidEdits/templates/video.html	(revision b064351b383f2b37083d9218422b057ab737a09e)
++++ b/VidEdits/templates/video.html	(date 1748358300264)
+@@ -42,27 +42,66 @@
+         input[type="file"] {
+             margin: 20px 0;
+         }
++        .shadow{
++            display: none;
++        }
+ </style>
+ <body>
+     <div style = "text-align: center">
+     <h2>Welcome to the video editing website, where we offer you a various amount of options to edit your videos</h2>
+     <p> to get started, please click the button below in order to upload a video that you would like to edit</p>
+-    <form action="editor" method="post"enctype="multipart/form-data">
+-        <input type ="file" name="file" id="documents" accept ="video/*" required>
+-        <button type="submit" onclick="save()">Upload</button>
+-    </form>
++        <form action="editor" id="input">
++            <input type ="file" name="Myfile" id="documents" accept ="video/*" required>
++            <button type="submit" onclick="uploadVideo()">Upload</button>
++        </form>
++        <button onclick="window.location.href='{{ url_for('new_route') }}'">Go to New Page</button>
++
++
+         <script>
+-        function save(){
+-            var space = document.getElementById("documents").value;
+-            if(space){
+-            localStorage.setItem("uploadedFile", space); // puts the file in local storage in order to be used across multiple html files
+-            console.log("successfully saved: ", space);
+-            alert("successfully saved: ", space);
++        function save() {
++            var space = document.getElementById("documents").value
++            if (space) {
++                localStorage.setItem("uploadedFile", space);
++                localStorage.setItem("filename", space.name);// optional
++                console.log("Successfully saved:", space);
++                alert("Successfully saved: " + space);
++                var buttonNext = document.getElementById("next");
++                buttonNext.classList.remove("shadow");
+             } else {
+-            console.log("There has been an error");
+-            alert("There has been an error");
++                console.log("There has been an error");
++                alert("There has been an error");
+             }
+         }
++
++        function uploadVideo() {
++            const input = document.getElementById("documents");
++            const file = input.files[0];
++
++
++            if (!file) {
++                alert("No file selected");
++                return;
++            }
++
++            const formData = new FormData();
++            formData.append("video", file);
++
++            fetch("http://127.0.0.1:5000/upload", {
++                method: "POST",
++                body: formData
++            })
++            .then(response => response.text())
++            .then(data => {
++                console.log("Video uploaded:", data);
++                alert("Upload successful");
++                save();
++            })
++            .catch(error => {
++                console.error("Upload failed:", error);
++                alert("Upload failed");
++            });
++        }
++
+         </script>
+     </div>
+ </body>
+Index: VidEdits/VideoEditor.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from flask import Flask, render_template,request,jsonify\r\nimport subprocess\r\napp = Flask(__name__)\r\n\r\n@app.route('/')\r\ndef home():\r\n    return render_template('video.html')\r\n\r\n@app.route('/editor',methods=['POST'])\r\ndef editor():\r\n    return render_template('editor.html')\r\n\r\ndef remove_audio(input_file, output_video):\r\n    command = [\r\n        \"ffmpeg\",\r\n        \"-i\", input_file,  #used to identify what the input file is\r\n        \"-an\", #removes the audio from the video\r\n        output_video, #sets the edited video as the output video\r\n    ]\r\n    subprocess.run(command)\r\n    return output_video\r\n\r\ndef change_brightness(input_file, output_video, level):\r\n    command = [\r\n        \"ffmpeg\",\r\n        \"-i\", input_file, #used to identify what the input file is\r\n        \"-vf\", f\"eq=brightness={level}\", #changes the brightness according to the users preference\r\n        \"-c:a\", \"copy\",  # Ensures audio is copied without re-encoding\r\n        output_video #sets the edited video as the output video\r\n    ]\r\n    subprocess.run(command)\r\n    return output_video\r\n\r\ndef change_speed(input_file, output_video, speed):\r\n    match = 1/speed\r\n    command = [\r\n        \"ffmpeg\",\r\n        \"-i\", input_file, #used to identify what the input file is\r\n        \"-vf\", f\"setpts={speed}*PTS\", #changes the speed according to the users preference\r\n        \"-af\", f\"atempo = {match}\",  # Ensures audio is copied without re-encoding\r\n        output_video #sets the edited video as the output video\r\n    ]\r\n    subprocess.run(command)\r\n    return output_video\r\n@app.route(\"/change_audio_api\", methods=['POST'])\r\ndef change_audio_api():\r\n    data = request.json\r\n    input_file = data.get('input_file')\r\n    output_video = data.get('output_video')\r\n    result = remove_audio(input_file, output_video)\r\n    return jsonify({\"output_video\": result})\r\n@app.route(\"/change_brightness_api\", methods=['POST'])\r\ndef change_brightness_api():\r\n    data = request.json\r\n    input_file = data.get('input_file')\r\n    output_video = data.get('output_video')\r\n    light = float(data.get('light'))\r\n\r\n    result = change_brightness(input_file, output_video, light)\r\n    return jsonify({\"output_video\": result})\r\n@app.route('/change_speed_api', methods=['POST'])\r\ndef change_speed_api():\r\n    data = request.json\r\n    input_file = data.get('input_file')\r\n    output_video = data.get('output_video')\r\n    speed = float(data.get('speed'))\r\n\r\n    result = change_speed(input_file, output_video, speed)\r\n    return jsonify({\"output_video\": result})\r\n@app.route(\"/product\")\r\ndef product():\r\n    return render_template(\"product.html\")\r\nif __name__ == '__main__':\r\n    app.run(debug=True)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/VidEdits/VideoEditor.py b/VidEdits/VideoEditor.py
+--- a/VidEdits/VideoEditor.py	(revision b064351b383f2b37083d9218422b057ab737a09e)
++++ b/VidEdits/VideoEditor.py	(date 1748356989285)
+@@ -1,11 +1,50 @@
++import shutil
++
+ from flask import Flask, render_template,request,jsonify
+ import subprocess
++import os, base64
++
++UPLOAD_FOLDER = 'uploads'
++os.makedirs(UPLOAD_FOLDER, exist_ok=True)
++
+ app = Flask(__name__)
+ 
++def clear_directory(dir_path):
++    if os.path.exists(dir_path):
++        shutil.rmtree(dir_path)  # delete directory and everything inside
++    os.makedirs(dir_path)
+ @app.route('/')
+ def home():
++    clear_directory(UPLOAD_FOLDER)
+     return render_template('video.html')
+ 
++@app.route('/upload', methods=['POST'])
++def upload():
++    if not os.path.exists("uploads"):
++        try:
++            UPLOAD_FOLDER = 'uploads'
++            os.makedirs(UPLOAD_FOLDER, exist_ok=True)
++        except:
++            return "Error: Creation of uploads folder was unsuccessful"
++    else:
++        try:
++                if 'video' not in request.files:
++                    return "No video file uploaded", 400
++
++                file = request.files['video']
++                filename = file.filename
++
++                if not filename.lower().endswith('.mp4'):
++                    return "Only MP4 files allowed", 400
++
++                save_path = os.path.join("uploads", filename)
++                file.save(save_path)
++
++                return f"Saved video to /uploads/{filename}"
++        except Exception as e:
++            print("Error: ", e)
++
++
+ @app.route('/editor',methods=['POST'])
+ def editor():
+     return render_template('editor.html')
+@@ -55,7 +94,6 @@
+     input_file = data.get('input_file')
+     output_video = data.get('output_video')
+     light = float(data.get('light'))
+-
+     result = change_brightness(input_file, output_video, light)
+     return jsonify({"output_video": result})
+ @app.route('/change_speed_api', methods=['POST'])
+Index: VidEdits/templates/product.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>Edited Video</title>\r\n</head>\r\n<body>\r\n    <h2>Congratulations! Here is your edited video. Hope you have a wonderful day and enjoy! \uD83D\uDE0A</h2>\r\n\r\n    <video id=\"videoPlayer\" width=\"400\" height=\"300\" controls>\r\n\r\n    </video>\r\n\r\n    <script>\r\n        function playVideo() {\r\n            let savedVideo = localStorage.getItem(\"uploadFile\");\r\n\r\n            if (savedVideo) {\r\n                let videoPlayer = document.getElementById(\"videoPlayer\");\r\n                videoPlayer.src = savedVideo;  // Set video source\r\n                videoPlayer.load();  // Ensure video loads\r\n            } else {\r\n                alert(\"No video found in localStorage.\");\r\n            }\r\n        }\r\n        window.onload = playVideo;\r\n    </script>\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/VidEdits/templates/product.html b/VidEdits/templates/product.html
+--- a/VidEdits/templates/product.html	(revision b064351b383f2b37083d9218422b057ab737a09e)
++++ b/VidEdits/templates/product.html	(date 1748356989271)
+@@ -11,19 +11,57 @@
+ 
+     </video>
+ 
+-    <script>
+-        function playVideo() {
+-            let savedVideo = localStorage.getItem("uploadFile");
++        <script>
++            function playVideo(text) {
++                let savedVideo = localStorage.getItem("uploadFile");
+ 
+-            if (savedVideo) {
+-                let videoPlayer = document.getElementById("videoPlayer");
+-                videoPlayer.src = savedVideo;  // Set video source
+-                videoPlayer.load();  // Ensure video loads
+-            } else {
+-                alert("No video found in localStorage.");
++                if (savedVideo) {
++                    let videoPlayer = document.getElementById("videoPlayer");
++                    videoPlayer.src = text;  // Set video source
++                    videoPlayer.load();  // Ensure video loads
++                } else {
++                    alert("No video found in localStorage.");
++                }
+             }
++        /*function setVideo() {
++        // Get base64-encoded file from localStorage (assumes it's already stored)
++        const videoData = localStorage.getItem("uploadFile");
++        const filename = localStorage.getItem("filename") || "video.mp4";
++
++        if (!videoData) {
++            alert("Error: No video in localStorage under 'uploadFile'");
++            return;
+         }
+-        window.onload = playVideo;
++
++        // Optionally re-store for consistency
++        localStorage.setItem("myVideo", videoData);
++
++        const base64 = videoData.split(',')[1]; // remove "data:video/mp4;base64,..."
++
++        fetch("http://127.0.0.1:5000/upload", {
++            method: "POST",
++            headers: {
++                "Content-Type": "application/json"
++            },
++            body: JSON.stringify({
++                filename: filename,
++                filedata: base64
++            })
++        })
++        .then(response => response.text())
++        .then(data => {
++            alert("Video successfully sent to server");
++            console.log(data);
++            playVideo(data);
++        })
++        .catch(error => {
++            console.error("Upload failed:", error);
++            alert("Error uploading video");
++        });
++    }*/
++
++    window.onload = playVideo;
++
+     </script>
+ </body>
+ </html>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"c5fb4df1-a9c3-445c-a203-2ff77ade7b58\" name=\"Changes\" comment=\"Some slight little tweaks to help with the &quot;press to continue&quot; button =)\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n        <option value=\"HTML File\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;MirTheCoder&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/MirTheCoder/CodePlay.git&quot;,\r\n    &quot;accountId&quot;: &quot;7a082490-1493-415b-9de6-26f8fb52c801&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 5\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2uXme2wnX7gfhDsnB6skshjxC8X\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,\r\n    &quot;Python.PracticeApp.executor&quot;: &quot;Run&quot;,\r\n    &quot;Python.VideoEditor.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"$PROJECT_DIR$/WebApp/WebApp2/templates\" />\r\n      <recent name=\"$PROJECT_DIR$/WebApp/WebApp2\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Python.PracticeApp\">\r\n    <configuration name=\"PracticeApp\" type=\"PythonConfigurationType\" factoryName=\"Python\" nameIsGenerated=\"true\">\r\n      <module name=\"CodePlay\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/WebApp\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/WebApp/WebApp2/PracticeApp.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"VideoEditor\" type=\"PythonConfigurationType\" factoryName=\"Python\" nameIsGenerated=\"true\">\r\n      <module name=\"CodePlay\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"C:\\pythonProject\\CodePlay\\WebApp\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/WebApp/VideoEditor.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Python.PracticeApp\" />\r\n      <item itemvalue=\"Python.VideoEditor\" />\r\n    </list>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-python-sdk-495700d161d3-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.22562.220\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"c5fb4df1-a9c3-445c-a203-2ff77ade7b58\" name=\"Changes\" comment=\"\" />\r\n      <created>1742403384388</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1742403384388</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Some of the python files and html files needed for the video editing code\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1742404140368</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1742404140368</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Some of the python files and html files needed for the video editing code\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1742404984668</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1742404984668</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Some edits to the video editor, added some editing functions using ffmpeg and was able to create a toggle affect for some of the editing options talked about in my html files\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1742439445954</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1742439445954</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"more edits to the files, I was successfully able to save the file that is selected and then call it again from a different html. We have also been able to toggle some of the options. Still working on calling the python functions to edit the videos via ffmpeg.\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1742658313839</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1742658313839</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"more edits to the files, I was successfully able to save the file that is selected and then call it again from a different html. We have also been able to toggle some of the options. Still working on calling the python functions to edit the videos via ffmpeg.\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1744572106073</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1744572106073</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"We have started working on a new web applicaiton that has sessions, user login, and will potentially have a database to save data that is specific to the user who  is logged in.\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1744581997009</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1744581997009</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"We have now added a section that allows users to enter in their email which we will later save under their name in the database that we hope to create eventually\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1744582774583</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1744582774583</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"We have started working on creating the database to store the users email and name. We are having some little errors for storing in the database but we are still working on it. Will hopefully be able to\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1744598172810</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1744598172810</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"We have edited the database\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1744601010120</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1744601010120</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"The database has finally been set up and we have successfully got it initialized and can now start inputing data into the database and also putting rows or different catagories for each user (ex. phone number, grade, job, etc...)\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1744635711163</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1744635711163</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"We have created a new database and have included a password and age column within the database. We also have a create account feature where the user can create an account if they don't have one and have it stored within the database that we have created. When the user tries to log in, they have to use their username and password which will only go through if they have it registered within the database\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1744774106425</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1744774106425</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"12\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Some of the python files and html files needed for the video editing code\" />\r\n    <MESSAGE value=\"Some edits to the video editor, added some editing functions using ffmpeg and was able to create a toggle affect for some of the editing options talked about in my html files\" />\r\n    <MESSAGE value=\"more edits to the files, I was successfully able to save the file that is selected and then call it again from a different html. We have also been able to toggle some of the options. Still working on calling the python functions to edit the videos via ffmpeg.\" />\r\n    <MESSAGE value=\"We have started working on a new web applicaiton that has sessions, user login, and will potentially have a database to save data that is specific to the user who  is logged in.\" />\r\n    <MESSAGE value=\"We have now added a section that allows users to enter in their email which we will later save under their name in the database that we hope to create eventually\" />\r\n    <MESSAGE value=\"We have started working on creating the database to store the users email and name. We are having some little errors for storing in the database but we are still working on it. Will hopefully be able to\" />\r\n    <MESSAGE value=\"We have edited the database\" />\r\n    <MESSAGE value=\"The database has finally been set up and we have successfully got it initialized and can now start inputing data into the database and also putting rows or different catagories for each user (ex. phone number, grade, job, etc...)\" />\r\n    <MESSAGE value=\"We have created a new database and have included a password and age column within the database. We also have a create account feature where the user can create an account if they don't have one and have it stored within the database that we have created. When the user tries to log in, they have to use their username and password which will only go through if they have it registered within the database\" />\r\n    <MESSAGE value=\"Just added another web app directory that has a web application about some digital art that I have made over the past year or so. I also just did a little reformatting in CodePlay to make it look a little more neater\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Just added another web app directory that has a web application about some digital art that I have made over the past year or so. I also just did a little reformatting in CodePlay to make it look a little more neater\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision b064351b383f2b37083d9218422b057ab737a09e)
++++ b/.idea/workspace.xml	(date 1748398214220)
+@@ -5,7 +5,12 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="Some slight little tweaks to help with the &quot;press to continue&quot; button =)">
++      <change afterPath="$PROJECT_DIR$/VidEdits/templates/productone.html" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/VidEdits/VideoEditor.py" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/VideoEditor.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/VidEdits/templates/editor.html" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/templates/editor.html" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/VidEdits/templates/product.html" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/templates/product.html" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/VidEdits/templates/video.html" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/templates/video.html" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -54,7 +59,7 @@
+     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
++    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+   }
+ }</component>
+   <component name="RecentsManager">
+@@ -63,7 +68,7 @@
+       <recent name="$PROJECT_DIR$/WebApp/WebApp2" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="Python.PracticeApp">
++  <component name="RunManager" selected="Python.VideoEditor">
+     <configuration name="PracticeApp" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+       <module name="CodePlay" />
+       <option name="ENV_FILES" value="" />
+@@ -95,11 +100,12 @@
+         <env name="PYTHONUNBUFFERED" value="1" />
+       </envs>
+       <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="C:\pythonProject\CodePlay\WebApp" />
++      <option name="SDK_NAME" value="Python 3.12 (CodePlay)" />
++      <option name="WORKING_DIRECTORY" value="C:\pythonProject\CodePlay\VidEdits" />
+       <option name="IS_MODULE_SDK" value="false" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/WebApp/VideoEditor.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/VidEdits/VideoEditor.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <option name="EMULATE_TERMINAL" value="false" />
+@@ -217,7 +223,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1744774106425</updated>
+     </task>
+-    <option name="localTasksCounter" value="12" />
++    <task id="LOCAL-00012" summary="Some slight little tweaks to help with the &quot;press to continue&quot; button =)">
++      <option name="closed" value="true" />
++      <created>1748288274542</created>
++      <option name="number" value="00012" />
++      <option name="presentableId" value="LOCAL-00012" />
++      <option name="project" value="LOCAL" />
++      <updated>1748288274542</updated>
++    </task>
++    <option name="localTasksCounter" value="13" />
+     <servers />
+   </component>
+   <component name="VcsManagerConfiguration">
+@@ -231,6 +245,7 @@
+     <MESSAGE value="The database has finally been set up and we have successfully got it initialized and can now start inputing data into the database and also putting rows or different catagories for each user (ex. phone number, grade, job, etc...)" />
+     <MESSAGE value="We have created a new database and have included a password and age column within the database. We also have a create account feature where the user can create an account if they don't have one and have it stored within the database that we have created. When the user tries to log in, they have to use their username and password which will only go through if they have it registered within the database" />
+     <MESSAGE value="Just added another web app directory that has a web application about some digital art that I have made over the past year or so. I also just did a little reformatting in CodePlay to make it look a little more neater" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Just added another web app directory that has a web application about some digital art that I have made over the past year or so. I also just did a little reformatting in CodePlay to make it look a little more neater" />
++    <MESSAGE value="Some slight little tweaks to help with the &quot;press to continue&quot; button =)" />
++    <option name="LAST_COMMIT_MESSAGE" value="Some slight little tweaks to help with the &quot;press to continue&quot; button =)" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: VidEdits/templates/productone.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/VidEdits/templates/productone.html b/VidEdits/templates/productone.html
+new file mode 100644
+--- /dev/null	(date 1748318789288)
++++ b/VidEdits/templates/productone.html	(date 1748318789288)
+@@ -0,0 +1,27 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++    <meta charset="UTF-8">
++    <title>Edited Video</title>
++    <h2>Congratulations! Here is your edited video. Hope you have a wonderful day and enjoy! 😊</h2>
++
++    <video id="videoPlayer" width="400" height="300" controls>
++
++    </video>
++
++
++    <script>
++            function playVideo() {
++                    const videoPath = {{ path|tojson }};
++                    let videoPlayer = document.getElementById("videoPlayer");
++                    videoPlayer.src = videoPath;  // Set video source
++                    videoPlayer.load();  // Ensure video loads
++            }
++        window.onload = playVideo;
++
++    </script>
++</head>
++<body>
++
++</body>
++</html>
+\ No newline at end of file
