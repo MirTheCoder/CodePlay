@@ -4,29 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="Some slight little tweaks to help with the &quot;press to continue&quot; button =)">
-      <change afterPath="$PROJECT_DIR$/VidEdits/templates/productone.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebArt/static/Embrace of Nature.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebArt/static/Immanuel.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebArt/static/Pump It Up.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebArt/static/Village Hero.mp4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebArt/templates/EmbraceOfNature.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebArt/templates/Immanuel.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebArt/templates/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebArt/templates/villageHero.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/CodePlay.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CodePlay.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="I added a couple more images for a total of six images/videos done. I also moved all the css styling for each of the images into one base html that all the images can extend to. And I just worked out any kinks or issues within the system as well =)">
+      <change afterPath="$PROJECT_DIR$/Library/Books.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/templates/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/templates/style.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VidEdits/VideoEditor.py" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/VideoEditor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VidEdits/templates/editor.html" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/templates/editor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VidEdits/templates/product.html" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/templates/product.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VidEdits/templates/video.html" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/templates/video.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebArt/portfolio.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebArt/portfolio.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebArt/static/Embrace of  Nature.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebArt/static/Embrace of Nature.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebArt/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebArt/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebArt/templates/pumpitUp.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebArt/templates/pumpitUp.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebArt/templates/retro.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebArt/templates/retro.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebArt/templates/retroBash.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebArt/templates/retroBash.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +54,7 @@
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "DefaultHtmlFileTemplate": "HTML File",
+    "Python.Books.executor": "Run",
     "Python.PracticeApp.executor": "Run",
     "Python.VideoEditor.executor": "Run",
     "Python.portfolio.executor": "Run",
@@ -92,7 +75,30 @@
       <recent name="$PROJECT_DIR$/WebApp/WebApp2" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.portfolio">
+  <component name="RunManager" selected="Python.Books">
+    <configuration name="Books" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="CodePlay" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12 (CodePlay)" />
+      <option name="WORKING_DIRECTORY" value="C:\pythonProject\CodePlay\Library" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Library/Books.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="PracticeApp" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="CodePlay" />
       <option name="ENV_FILES" value="" />
@@ -137,33 +143,10 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="portfolio" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="CodePlay" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.12 (CodePlay)" />
-      <option name="WORKING_DIRECTORY" value="C:\pythonProject\CodePlay\WebArt" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/WebArt/portfolio.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Python.PracticeApp" />
       <item itemvalue="Python.VideoEditor" />
-      <item itemvalue="Python.portfolio" />
+      <item itemvalue="Python.Books" />
     </list>
   </component>
   <component name="SharedIndexes">
@@ -270,7 +253,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744774106425</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="I added a couple more images for a total of six images/videos done. I also moved all the css styling for each of the images into one base html that all the images can extend to. And I just worked out any kinks or issues within the system as well =)">
+      <option name="closed" value="true" />
+      <created>1748458173820</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1748458173820</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -284,6 +275,7 @@
     <MESSAGE value="The database has finally been set up and we have successfully got it initialized and can now start inputing data into the database and also putting rows or different catagories for each user (ex. phone number, grade, job, etc...)" />
     <MESSAGE value="We have created a new database and have included a password and age column within the database. We also have a create account feature where the user can create an account if they don't have one and have it stored within the database that we have created. When the user tries to log in, they have to use their username and password which will only go through if they have it registered within the database" />
     <MESSAGE value="Just added another web app directory that has a web application about some digital art that I have made over the past year or so. I also just did a little reformatting in CodePlay to make it look a little more neater" />
-    <option name="LAST_COMMIT_MESSAGE" value="Just added another web app directory that has a web application about some digital art that I have made over the past year or so. I also just did a little reformatting in CodePlay to make it look a little more neater" />
+    <MESSAGE value="I added a couple more images for a total of six images/videos done. I also moved all the css styling for each of the images into one base html that all the images can extend to. And I just worked out any kinks or issues within the system as well =)" />
+    <option name="LAST_COMMIT_MESSAGE" value="I added a couple more images for a total of six images/videos done. I also moved all the css styling for each of the images into one base html that all the images can extend to. And I just worked out any kinks or issues within the system as well =)" />
   </component>
 </project>
