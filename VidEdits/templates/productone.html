@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edited Video</title>
+    <h2>Congratulations! Here is your edited video. Hope you have a wonderful day and enjoy! 😊</h2>
+
+    <video id="videoPlayer" width="400" height="300" controls>
+
+    </video>
+
+
+    <script>
+            function playVideo() {
+                    const videoPath = {{ path|tojson }};
+                    let videoPlayer = document.getElementById("videoPlayer");
+                    videoPlayer.src = videoPath;  // Set video source
+                    videoPlayer.load();  // Ensure video loads
+            }
+        window.onload = playVideo;
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

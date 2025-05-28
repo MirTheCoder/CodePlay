@@ -1,10 +1,49 @@
+import shutil
+
 from flask import Flask, render_template,request,jsonify
 import subprocess
+import os, base64
+
+UPLOAD_FOLDER = 'uploads'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
 app = Flask(__name__)
 
+def clear_directory(dir_path):
+    if os.path.exists(dir_path):
+        shutil.rmtree(dir_path)  # delete directory and everything inside
+    os.makedirs(dir_path)
 @app.route('/')
 def home():
+    clear_directory(UPLOAD_FOLDER)
     return render_template('video.html')
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    if not os.path.exists("uploads"):
+        try:
+            UPLOAD_FOLDER = 'uploads'
+            os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+        except:
+            return "Error: Creation of uploads folder was unsuccessful"
+    else:
+        try:
+                if 'video' not in request.files:
+                    return "No video file uploaded", 400
+
+                file = request.files['video']
+                filename = file.filename
+
+                if not filename.lower().endswith('.mp4'):
+                    return "Only MP4 files allowed", 400
+
+                save_path = os.path.join("uploads", filename)
+                file.save(save_path)
+
+                return f"Saved video to /uploads/{filename}"
+        except Exception as e:
+            print("Error: ", e)
+
 
 @app.route('/editor',methods=['POST'])
 def editor():
@@ -55,7 +94,6 @@ def change_brightness_api():
     input_file = data.get('input_file')
     output_video = data.get('output_video')
     light = float(data.get('light'))
-
     result = change_brightness(input_file, output_video, light)
     return jsonify({"output_video": result})
 @app.route('/change_speed_api', methods=['POST'])

@@ -42,27 +42,66 @@
         input[type="file"] {
             margin: 20px 0;
         }
+        .shadow{
+            display: none;
+        }
 </style>
 <body>
     <div style = "text-align: center">
     <h2>Welcome to the video editing website, where we offer you a various amount of options to edit your videos</h2>
     <p> to get started, please click the button below in order to upload a video that you would like to edit</p>
-    <form action="editor" method="post"enctype="multipart/form-data">
-        <input type ="file" name="file" id="documents" accept ="video/*" required>
-        <button type="submit" onclick="save()">Upload</button>
-    </form>
+        <form action="editor" id="input">
+            <input type ="file" name="Myfile" id="documents" accept ="video/*" required>
+            <button type="submit" onclick="uploadVideo()">Upload</button>
+        </form>
+        <button onclick="window.location.href='{{ url_for('new_route') }}'">Go to New Page</button>
+
+
         <script>
-        function save(){
-            var space = document.getElementById("documents").value;
-            if(space){
-            localStorage.setItem("uploadedFile", space); // puts the file in local storage in order to be used across multiple html files
-            console.log("successfully saved: ", space);
-            alert("successfully saved: ", space);
+        function save() {
+            var space = document.getElementById("documents").value
+            if (space) {
+                localStorage.setItem("uploadedFile", space);
+                localStorage.setItem("filename", space.name);// optional
+                console.log("Successfully saved:", space);
+                alert("Successfully saved: " + space);
+                var buttonNext = document.getElementById("next");
+                buttonNext.classList.remove("shadow");
             } else {
-            console.log("There has been an error");
-            alert("There has been an error");
+                console.log("There has been an error");
+                alert("There has been an error");
             }
         }
+
+        function uploadVideo() {
+            const input = document.getElementById("documents");
+            const file = input.files[0];
+
+
+            if (!file) {
+                alert("No file selected");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("video", file);
+
+            fetch("http://127.0.0.1:5000/upload", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log("Video uploaded:", data);
+                alert("Upload successful");
+                save();
+            })
+            .catch(error => {
+                console.error("Upload failed:", error);
+                alert("Upload failed");
+            });
+        }
+
         </script>
     </div>
 </body>

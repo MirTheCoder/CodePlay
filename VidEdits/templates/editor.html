@@ -97,10 +97,8 @@
 
     // Show "Press to continue" button once the form is submitted (or based on a condition)
     function receive() {
+        //Collect the video submitted in the previous page from the local storage
         var savedFile = localStorage.getItem("uploadedFile");
-        file = request.files['file']
-        file_path = f"uploads/{file.filename}"
-        file.save(file_path)
 
         if (savedFile) {
             console.log("Retrieved file:", savedFile);
@@ -178,7 +176,7 @@
                 body: JSON.stringify({
                     input_file: file,
                     output_video: "output_video_brightness.mp4",
-                    brightness: brightnessValue
+                    light: brightnessValue
                 })
             })
             .then(response => response.json())
