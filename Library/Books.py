@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+
+from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy
 
@@ -39,9 +40,6 @@ class reviews(db.Model):
         self.review = review
         self.reason = reason
         self.name = name
-def addBook():
-    data = request.json
-    title = data.get('name')
 
 #Here we have our various routes that we will call to access the templates that we need
 @app.route("/")
@@ -58,7 +56,28 @@ def rate():
     return render_template("rate.html", cart = storage)
 @app.route("/upload")
 def upload():
-    return render_template("upload.html")
+    storage = books.query.all()
+    return render_template("upload.html", cart=storage)
+
+
+@app.route("/addBook", methods=["POST"])
+#This is the function we will use to take the users inputs and create a book
+def addBook():
+    #Here is where we ask for the data (which will be in the form of a dictionary) and then store the pieces of this data that we need
+    #into variables so that we can make the book
+        data = request.json
+        title = data.get('name')
+        author = data.get('writer')
+        year = data.get('year')
+        serial = data.get('serial')
+    #This is the book that we will create
+        newBook = books(title,author, year, serial)
+    #We will first add out new book and then commit it to our database
+        db.session.add(newBook)
+        db.session.commit()
+        print("book has successfully be added")
+    #We will return the title and the author back to our fetch method
+        return jsonify({"name": title, "writer": author})
 
 
 

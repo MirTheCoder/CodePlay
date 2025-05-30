@@ -3,8 +3,9 @@
 {% block content %}
 <h2>Upload World</h2>
 
-
-<form action="#" method="POST" class="comic">
+<!-- this form will submit teh book to the library, the one which they had requested to be added by calling the bookMake function -->
+<form action="#" method="POST" class="comic" onsubmit="bookMake(event)">
+  <!-- here we have our inputs and requirements that the user needs to fill in so that they can add a book to the library-->
   <p>Book name: </p>
   <input type="text" id="name" required>
   <p>Book Author: </p>
@@ -13,21 +14,40 @@
   <input type="number" id="year" required>
   <p>Book Serial Number: </p>
   <input type="number" id="serial" required>
-  <button type="submit" onclick="bookMake()"> Add Book</button>
+  <button type="submit"> Add Book</button>
 </form>
 
 <script>
-  function bookMake(){
+  /*  This function will be used to add books to the library*/
+  function bookMake(event){
+  /* this will prevent the form from submitting and refreshing */
   event.preventDefault();
-    var title = document.getElementById("name").value;
-    var writer = document.getElementById("author").value;
+  /* the dupli var is what we will use to say whether the book the user requested to add is in our library already or not*/
+    var dupli = false;
+    /* We have added a variety of variables to each get the users input for the name, author, year, and serial number*/
+    var title = document.getElementById("name").value.toLowerCase();
+    var writer = document.getElementById("author").value.toLowerCase();
     var time = document.getElementById("year").value;
     var num = document.getElementById("serial").value;
+    /*We use this in order to traverse the database of books and see if any of the books perfectly align with the users inputs */
+    for (books in cart){
+      if(books.title.equals(title) && books.author.equals(writer) && books.year == time && books.serial == num){
+      /*If a match is found, then we will say that dupli is true and break out the loop, meaning that the book is already in our system*/
+        dupli = true;
+        break;
+      }
+    }
+
+    }
+    /* will only run if dupli is false */
+    if(!dupli){
+    /* we will use this to call the addBook function from the python side and have it create the book in our database with the variables we give it*/
     fetch("http://127.0.0.1:5000/addBook", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
+                /* Here is the json data that we will be feeding the addBook function on the python side*/
                 body: JSON.stringify({
                     name: title,
                     writer: writer,
@@ -37,9 +57,16 @@
             })
             .then(response => response.json())
             .then(data => {
-                alert(title + " by " + writer + " has been added to our library");
+              /* If the fetch method works and the python function does not return an error, then this will print signifying that it all worked out =)*/
+                alert(data.name + " by " + data.writer + " has been added to our library");
             })
+            /* prints if an error occurs during the fetch method*/
             .catch(error => alert("Error:", error));
+    } else {
+      /* if dupli is false,then this alert will go off */
+      alert("We already have the book within our library")
+    }
+
   }
 
 </script>

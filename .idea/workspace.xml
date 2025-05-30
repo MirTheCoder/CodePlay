@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="added a pop up block that comes up before you navigate to a new tab. I also">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_revert_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Library/instance/test.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Library/templates/rate.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Library/templates/upload.html" afterDir="false" />
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="working on an uploads page that allows users to input a book adn have it saved to teh library or in this case, the books database">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/Books.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Books.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/Library/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/instance/test.db" beforeDir="false" afterPath="$PROJECT_DIR$/Library/instance/test.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/templates/style.html" beforeDir="false" afterPath="$PROJECT_DIR$/Library/templates/style.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/templates/upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/Library/templates/upload.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +19,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -316,7 +313,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748493914913</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="working on an uploads page that allows users to input a book adn have it saved to teh library or in this case, the books database">
+      <option name="closed" value="true" />
+      <created>1748631476379</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1748631476379</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -344,6 +349,7 @@
     <MESSAGE value="I added a couple more images for a total of six images/videos done. I also moved all the css styling for each of the images into one base html that all the images can extend to. And I just worked out any kinks or issues within the system as well =)" />
     <MESSAGE value="some changes I forgot to commit" />
     <MESSAGE value="added some images for links to my library and introduced text overlay" />
-    <option name="LAST_COMMIT_MESSAGE" value="added some images for links to my library and introduced text overlay" />
+    <MESSAGE value="working on an uploads page that allows users to input a book adn have it saved to teh library or in this case, the books database" />
+    <option name="LAST_COMMIT_MESSAGE" value="working on an uploads page that allows users to input a book adn have it saved to teh library or in this case, the books database" />
   </component>
 </project>
