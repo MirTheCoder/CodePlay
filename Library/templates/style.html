@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--This link is meant to help pull the fonts we want from Google fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Chewy&family=Comic+Neue&family=Creepster&family=Freckle+Face&family=Gloria+Hallelujah&family=Luckiest+Guy&family=Monoton&family=Rubik+Moonrocks&family=Special+Elite&display=swap" rel="stylesheet">
-    <!--This block allows the other templates to input their distinct and unique titles-->
 {%block title%}Title{% endblock %}
     <meta charset="UTF-8">
   <style>
@@ -24,7 +22,7 @@
     h2 {
       margin: 0 0 0.3em;
     }
-    /*This formats the fonts that we pulled from Google fonts into classes via css styling that allows us to use them on our text*/
+
     .comic-neue { font-family: 'Comic Neue', cursive; }
     .chewy { font-family: 'Chewy', cursive; }
     .bangers { font-family: 'Bangers', cursive; }
@@ -32,16 +30,18 @@
     .monoton { font-family: 'Monoton', cursive; }
     .rubik {
     font-family: 'Rubik Moonrocks', cursive;
+    font-size: 45px
     }
     .creepster { font-family: 'Creepster', cursive; }
     .gloria { font-family: 'Gloria Hallelujah', cursive; }
     .luckiest { font-family: 'Luckiest Guy', cursive; }
     .elite {
     font-family: 'Special Elite', cursive;
+    font-size: 35px
     }
     * {box-sizing: border-box}
 
-/* Container needed to position the overlay */
+/* Container needed to position the overlay. Adjust the width as needed */
 .container {
   position: relative;
   width: 50%;
@@ -75,47 +75,9 @@
 .container:hover .overlay {
   opacity: 1;
 }
-
-/* This is used to give an outline to our text*/
-    .outline{
-      -webkit-text-stroke: 0.1px rgb(220, 220, 220);
-
-      }
-      .outline2{
-      -webkit-text-stroke: 1.5px black;
-
-      }
-
-/* This is meant to give styling to out toggling system*/
-details {
-    margin: 10px 0;
-    font-family: Arial, sans-serif;
-  }
-
-  summary {
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 18px;
-    padding: 10px 20px;
-    background-color: grey;
-    border: none;
-    border-radius: 5px;
-    display: inline-block
-  }
-
-  ul {
-    margin-left: 20px;
-    padding-left: 0;
-  }
-
-  li {
-    margin: 5px 0;
-  }
   </style>
 </head>
 <body>
-<!--With this block we are able to receive content from the various HTML templates that they can use in their specific templates on top of
-the stuff that the style template lets them inherit -->
 {% block content%}{% endblock %}
 </body>
 </html>

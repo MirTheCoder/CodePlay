@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title> Miracles Library </title>
 <style>
-    /*This is used to help set the background */
     body {
       background-image: url("static/Library.jpg");
       background-size: cover;
@@ -12,25 +11,26 @@
       background-position: center;
       background-size: fixed
     }
-    /* this is used to help change the positions of the images*/
     .move{
          transform: translate(700px, -350px);
 
       }
     .move2{
-         transform: translate(850px, -790px);
+         transform: translate(1000px, -750px);
 
       }
-     .move3{
-         transform: translate(650px, -350px);
+    .outline{
+      -webkit-text-stroke: 0.1px rgb(220, 220, 220);;
 
       }
+      .outline2{
+      -webkit-text-stroke: 1.5px black;;
 
-
-      /* We then edited the container and overlay in order to accommodate for the last two images*/
+      }
     .container2 {
   position: relative;
-  display: inline-block;
+  width: 50%;
+  max-width: 375px;
 }
     /* The overlay effect - lies on top of the container and over the image */
     .overlay2 {
@@ -52,49 +52,31 @@
 }
 </style>
 <body>
-<div class="rubik" style="text-align: center; font-size: 45px" >
+<div class="rubik" style="text-align: center" >
   <h2 class = "outline"><u>Welcome to Miracle's Library</u></h2>
 </div>
 <div style="text-align: center">
-  <p style ="color: white; font-size: 35px" class="elite outline2">To get started, please select on of the images below</p>
+  <p style ="color: white;" class="elite outline2">To get started, please select on of the images below</p>
 </div>
-<!-- We have linked three images to various templates so that it can call it and render it. We also made sure
-that we added the respective classes and an id that will help us identify when we click on the image -->
-<a href="http://127.0.0.1:5000/read" id="reader">
-        <div class="container" >
+<a href="http://127.0.0.1:5000/read">
+        <div class="container">
         <img src="static/toonBook.png" alt="Toon Book" width="300" style="margin-left: 200px">
         <div class="overlay" style="margin-left: 200px">Read a Book</div>
         </div>
 </a>
 <div>
-<a href="http://127.0.0.1:5000/read" id="reader2">
+<a href="http://127.0.0.1:5000/read">
         <div class="container2">
         <img src="static/upload-cat.gif" alt="Upload" width="375" class="move">
         <div class="overlay2 move" >Upload a PDF</div>
         </div>
 </a>
-<a href="http://127.0.0.1:5000/rate" id="reader3">
-        <div class="container2">
-        <img src="static/raterz.png" alt="Upload" class="move3">
-        <div class="overlay2 move3" >Rate/Leave Review</div>
+<a href="http://127.0.0.1:5000/read">
+        <div class="container">
+        <img src="static/raterz.png" alt="Upload" width="1150" class="move2">
+        <div class="overlay move2" >Rate/Leave Review</div>
         </div>
 </a>
 </div>
-
-<script>
-    /* We have created 3 event listeners that will listen for when their respective images (located by id) get clicked and then execute the
-    nav function*/
-    document.getElementById("reader").addEventListener("click", nav);
-    document.getElementById("reader2").addEventListener("click", nav);
-    document.getElementById("reader3").addEventListener("click", nav);
-    //This function listens for when an event is triggered and determines which event is triggered in order to determine which page to relocate to
-    function nav(event){
-        event.preventDefault()
-        if(confirm("Are you sure you want to leave this page")){
-                window.location.href = event.currentTarget.href;
-        }
-    }
-
-</script>
 </body>
 {% endblock %}
