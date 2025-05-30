@@ -4,7 +4,7 @@
 <h2>Upload World</h2>
 
 <!-- this form will submit teh book to the library, the one which they had requested to be added by calling the bookMake function -->
-<form action="#" method="POST" class="comic" onsubmit="bookMake(event)">
+<form class="comic" onsubmit="bookMake(event)">
   <!-- here we have our inputs and requirements that the user needs to fill in so that they can add a book to the library-->
   <p>Book name: </p>
   <input type="text" id="name" required>
@@ -30,8 +30,8 @@
     var time = document.getElementById("year").value;
     var num = document.getElementById("serial").value;
     /*We use this in order to traverse the database of books and see if any of the books perfectly align with the users inputs */
-    for (books in cart){
-      if(books.title.equals(title) && books.author.equals(writer) && books.year == time && books.serial == num){
+    for ( let book of cart){
+      if(book.title.equals(title) && book.author.equals(writer) && book.year == time && book.serial == num){
       /*If a match is found, then we will say that dupli is true and break out the loop, meaning that the book is already in our system*/
         dupli = true;
         break;
@@ -64,7 +64,7 @@
             .catch(error => alert("Error:", error));
     } else {
       /* if dupli is false,then this alert will go off */
-      alert("We already have the book within our library")
+      alert("We already have the book within our library");
     }
 
   }
