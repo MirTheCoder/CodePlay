@@ -18,57 +18,47 @@
 </form>
 
 <script>
-  /*  This function will be used to add books to the library*/
+  const cart = {{ cart | safe }};
   function bookMake(event){
-  /* this will prevent the form from submitting and refreshing */
-  event.preventDefault();
-  /* the dupli var is what we will use to say whether the book the user requested to add is in our library already or not*/
+    event.preventDefault();
+
     var dupli = false;
-    /* We have added a variety of variables to each get the users input for the name, author, year, and serial number*/
     var title = document.getElementById("name").value.toLowerCase();
     var writer = document.getElementById("author").value.toLowerCase();
     var time = document.getElementById("year").value;
     var num = document.getElementById("serial").value;
-    /*We use this in order to traverse the database of books and see if any of the books perfectly align with the users inputs */
-    for ( let book of cart){
-      if(book.title.equals(title) && book.author.equals(writer) && book.year == time && book.serial == num){
-      /*If a match is found, then we will say that dupli is true and break out the loop, meaning that the book is already in our system*/
+
+    for (book in cart){
+      if(book.title == title && book.author == writer && book.year == time && book.serial == num){
         dupli = true;
         break;
       }
     }
 
-    }
-    /* will only run if dupli is false */
+
     if(!dupli){
-    /* we will use this to call the addBook function from the python side and have it create the book in our database with the variables we give it*/
-    fetch("http://127.0.0.1:5000/addBook", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                /* Here is the json data that we will be feeding the addBook function on the python side*/
-                body: JSON.stringify({
-                    name: title,
-                    writer: writer,
-                    year: time,
-                    serial: num,
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-              /* If the fetch method works and the python function does not return an error, then this will print signifying that it all worked out =)*/
-                alert(data.name + " by " + data.writer + " has been added to our library");
-            })
-            /* prints if an error occurs during the fetch method*/
-            .catch(error => alert("Error:", error));
+      fetch("http://127.0.0.1:5000/addBook", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: title,
+          writer: writer,
+          year: time,
+          serial: num,
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert(data.name + " by " + data.writer + " has been added to our library");
+      })
+      .catch(error => alert("Error: " + error)); // fixed error display too
     } else {
-      /* if dupli is false,then this alert will go off */
       alert("We already have the book within our library");
     }
-
   }
-
 </script>
+
 
 {% endblock %}

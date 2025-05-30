@@ -2,6 +2,7 @@
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy
+import json
 
 app = Flask(__name__)
 app.secret_key = "HASGGTYEIFGEG21356253725"
@@ -26,6 +27,14 @@ class books(db.Model):
         self.author = author
         self.year = year
         self.serialNum = serialNum
+
+    def to_dict(self):
+        return {
+            "title": self.title.lower(),
+            "author": self.author.lower(),
+            "year": str(self.year),
+            "serial": str(self.serialNum)
+        }
 
 # This is database where we will keep the reviews for each book
 class reviews(db.Model):
@@ -57,7 +66,7 @@ def rate():
 @app.route("/upload")
 def upload():
     storage = books.query.all()
-    return render_template("upload.html", cart=storage)
+    return render_template("upload.html", ccart=json.dumps([book.to_dict() for book in storage]))
 
 
 @app.route("/addBook", methods=["POST"])
