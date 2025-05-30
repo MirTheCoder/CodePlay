@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="some changes I forgot to commit">
-      <change afterPath="$PROJECT_DIR$/Library/static/Library.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Library/static/TheCat.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Library/static/White square.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Library/static/rating.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Library/static/toonBook.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Library/static/upload-cat.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Library/templates/read.html" afterDir="false" />
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="added a pop up block that comes up before you navigate to a new tab. I also">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_revert_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/instance/test.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/templates/rate.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/templates/upload.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/Books.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Books.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/Library/templates/home.html" afterDir="false" />
@@ -78,11 +75,11 @@
       <recent name="C:\pythonProject\CodePlay\WebArt\static" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\pythonProject\CodePlay" />
       <recent name="C:\pythonProject\CodePlay\Library\static" />
       <recent name="C:\pythonProject\CodePlay\Library" />
       <recent name="C:\pythonProject\CodePlay\Library\templates\images" />
       <recent name="$PROJECT_DIR$/WebApp/WebApp2/templates" />
-      <recent name="$PROJECT_DIR$/WebApp/WebApp2" />
     </key>
   </component>
   <component name="RunManager" selected="Python.Books">
@@ -311,8 +308,27 @@
       <option name="project" value="LOCAL" />
       <updated>1748476052421</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="added some images for links to my library and introduced text overlay">
+      <option name="closed" value="true" />
+      <created>1748493914913</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1748493914913</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Some of the python files and html files needed for the video editing code" />
@@ -327,6 +343,7 @@
     <MESSAGE value="Just added another web app directory that has a web application about some digital art that I have made over the past year or so. I also just did a little reformatting in CodePlay to make it look a little more neater" />
     <MESSAGE value="I added a couple more images for a total of six images/videos done. I also moved all the css styling for each of the images into one base html that all the images can extend to. And I just worked out any kinks or issues within the system as well =)" />
     <MESSAGE value="some changes I forgot to commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="some changes I forgot to commit" />
+    <MESSAGE value="added some images for links to my library and introduced text overlay" />
+    <option name="LAST_COMMIT_MESSAGE" value="added some images for links to my library and introduced text overlay" />
   </component>
 </project>

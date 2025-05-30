@@ -1,0 +1,47 @@
+{% extends "style.html" %}
+{% block title %} <b>Uploads</b> {% endblock %}
+{% block content %}
+<h2>Upload World</h2>
+
+
+<form action="#" method="POST" class="comic">
+  <p>Book name: </p>
+  <input type="text" id="name" required>
+  <p>Book Author: </p>
+  <input type="text" id="author" required>
+  <p>Book year: </p>
+  <input type="number" id="year" required>
+  <p>Book Serial Number: </p>
+  <input type="number" id="serial" required>
+  <button type="submit" onclick="bookMake()"> Add Book</button>
+</form>
+
+<script>
+  function bookMake(){
+  event.preventDefault();
+    var title = document.getElementById("name").value;
+    var writer = document.getElementById("author").value;
+    var time = document.getElementById("year").value;
+    var num = document.getElementById("serial").value;
+    fetch("http://127.0.0.1:5000/addBook", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: title,
+                    writer: writer,
+                    year: time,
+                    serial: num,
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(title + " by " + writer + " has been added to our library");
+            })
+            .catch(error => alert("Error:", error));
+  }
+
+</script>
+
+{% endblock %}

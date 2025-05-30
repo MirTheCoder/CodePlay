@@ -1,0 +1,14 @@
+{% extends "style.html" %}
+{% block title %} <b>Rate</b> {% endblock %}
+{% block content %}
+<h2 class="bangers" style="text-align: center; font-size: 45px">Rate A Book</h2>
+<details class="gloria" style="text-align: center">
+  <summary>Click to expand the list</summary>
+  <ul>
+    {% for books in cart %}
+    <li><b>{{books.title}}</b> by <b>{{books.author}}</b></li>
+    {% endfor %}
+  </ul>
+</details>
+
+{% endblock %}
