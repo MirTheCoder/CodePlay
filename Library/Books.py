@@ -66,7 +66,7 @@ def rate():
 @app.route("/upload")
 def upload():
     storage = books.query.all()
-    return render_template("upload.html", ccart=json.dumps([book.to_dict() for book in storage]))
+    return render_template("upload.html", cart=json.dumps([book.to_dict() for book in storage]))
 
 
 @app.route("/addBook", methods=["POST"])
@@ -86,7 +86,7 @@ def addBook():
         db.session.commit()
         print("book has successfully be added")
     #We will return the title and the author back to our fetch method
-        return jsonify({"name": title, "writer": author})
+        return jsonify({"name": title, "Writer": author})
 
 
 

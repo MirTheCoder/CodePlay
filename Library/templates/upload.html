@@ -28,7 +28,7 @@
     var time = document.getElementById("year").value;
     var num = document.getElementById("serial").value;
 
-    for (book in cart){
+    for (let book of cart){
       if(book.title == title && book.author == writer && book.year == time && book.serial == num){
         dupli = true;
         break;
@@ -51,7 +51,7 @@
       })
       .then(response => response.json())
       .then(data => {
-        alert(data.name + " by " + data.writer + " has been added to our library");
+        alert(data.name + " by " + data.Writer + " has been added to our library");
       })
       .catch(error => alert("Error: " + error)); // fixed error display too
     } else {
