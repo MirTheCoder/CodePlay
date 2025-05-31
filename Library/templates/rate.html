@@ -1,14 +1,66 @@
 {% extends "style.html" %}
 {% block title %} <b>Rate</b> {% endblock %}
 {% block content %}
+<style>
+  .book{
+
+  }
+</style>
 <h2 class="bangers" style="text-align: center; font-size: 45px">Rate A Book</h2>
 <details class="gloria" style="text-align: center">
   <summary>Click to expand the list</summary>
   <ul>
     {% for books in cart %}
-    <li><b>{{books.title}}</b> by <b>{{books.author}}</b></li>
+    <li class="book"><b>{{books.title}}</b></li><br>
     {% endfor %}
   </ul>
 </details>
+
+<form id="reviewed" class="hidden" onsubmit="nav2()" style="text-align: center">
+  <p>Please type in your name</p>
+  <input type="text" id="person" required>
+  <p> type in the rating you would like to give to this book</p>
+  <input type="number" min="0" max="5" id="number" required>
+  <p> type in you reasoning for why you gave this rating</p>
+  <!-- this text area is like an input, but it allows you to change the size of the text box response -->
+  <textarea id="response" rows="10" cols="50" required></textarea>
+  <button type="submit">Submit Review</button>
+</form>
+
+<script>
+  const form = document.getElementById("reviewed");
+  const books = document.querySelectorAll(".book");
+
+  books.forEach(book => {
+    book.addEventListener("click", function () {
+      form.classList.remove("hidden");
+      var title = this.textContent.trim();
+      localStorage.setItem("cover", title);
+    });
+  });
+  function nav2(){
+    var page = localStorage.getItem("cover", title);
+    var who = document.getElementById("person").value;
+    var number = document.getElementById("number").value;
+    var why = document.getElementById("response").value;
+    fetch("http://127.0.0.1:5000/addReview", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    title: page,
+                    name: who,
+                    rate: number,
+                    reason: why,
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+
+            })
+            .catch(error => alert("Error:", error));
+  }
+</script>
 
 {% endblock %}
