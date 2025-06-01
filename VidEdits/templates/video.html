@@ -50,7 +50,7 @@
     <div style = "text-align: center">
     <h2>Welcome to the video editing website, where we offer you a various amount of options to edit your videos</h2>
     <p> to get started, please click the button below in order to upload a video that you would like to edit</p>
-        <form id="input" onsubmit="uploadVideo() return false;"  enctype="multipart/form-data">
+        <form action="editor" id="input" onsubmit="return uploadVideo()"  enctype="multipart/form-data">
             <input type ="file" name="Myfile" id="documents" accept ="video/*" required>
             <button type="submit">Upload</button>
         </form>
@@ -58,13 +58,11 @@
 
 
         <script>
-            function save() {
-                var space = document.getElementById("documents").value
-                if (space) {
-                    localStorage.setItem("uploadedFile", space);
-                    localStorage.setItem("filename", space.name);// optional
-                    console.log("Successfully saved:", space);
-                    alert("Successfully saved: " + space);
+            function save(name) {
+                if (name) {
+                    localStorage.setItem("uploadedFile", name);
+                    console.log("Successfully saved:", name);
+                    alert("Successfully saved: " + name);
                     window.location.href="http://127.0.0.1:5000/editor";
                 } else {
                     console.log("There has been an error");
@@ -93,11 +91,12 @@
                 .then(response => response.json())
                 .then(data => {
                     alert("Video has been successfully uploaded");
-                    save();  // You may want to pass filename to save() if needed
+                    save(file.name);  // You may want to pass filename to save() if needed
                 })
                 .catch(error => {
                     console.error("Error:", error);
                     alert("Upload failed");
+                    return false;
                 });
             }
 

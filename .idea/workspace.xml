@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="did some css styling to my webArt">
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="making some edits to the upload function to see how I can store the users file selection into our uploads directory">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VidEdits/VideoEditor.py" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/VideoEditor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VidEdits/templates/video.html" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/templates/video.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -277,7 +276,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748397108277</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="making some edits to the upload function to see how I can store the users file selection into our uploads directory">
+      <option name="closed" value="true" />
+      <created>1748811978611</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1748811978611</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -303,6 +310,7 @@
     <MESSAGE value="We have created a new database and have included a password and age column within the database. We also have a create account feature where the user can create an account if they don't have one and have it stored within the database that we have created. When the user tries to log in, they have to use their username and password which will only go through if they have it registered within the database" />
     <MESSAGE value="Just added another web app directory that has a web application about some digital art that I have made over the past year or so. I also just did a little reformatting in CodePlay to make it look a little more neater" />
     <MESSAGE value="did some css styling to my webArt" />
-    <option name="LAST_COMMIT_MESSAGE" value="did some css styling to my webArt" />
+    <MESSAGE value="making some edits to the upload function to see how I can store the users file selection into our uploads directory" />
+    <option name="LAST_COMMIT_MESSAGE" value="making some edits to the upload function to see how I can store the users file selection into our uploads directory" />
   </component>
 </project>
