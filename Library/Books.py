@@ -39,10 +39,10 @@ class books(db.Model):
 # This is database where we will keep the reviews for each book
 class reviews(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
-    title = db.Column(db.String(1000))
+    title = db.Column(db.String(10000000))
     review = db.Column(db.Integer)
-    reason = db.Column(db.String(1000))
-    name = db.Column(db.String(1000))
+    reason = db.Column(db.String(10000000))
+    name = db.Column(db.String(10000000))
 
     def __init__(self, title, review, reason, name):
         self.title = title
@@ -80,13 +80,30 @@ def addBook():
         year = data.get('year')
         serial = data.get('serial')
     #This is the book that we will create
-        newBook = books(title,author, year, serial)
+        newReview = reviews(title,author, year, serial)
     #We will first add out new book and then commit it to our database
-        db.session.add(newBook)
+        db.session.add(newReview)
+        db.session.commit()
+        print("review has successfully be added")
+    #We will return the title and the author back to our fetch method
+        return jsonify({"name": title, "Writer": author})
+@app.route("/addReview", methods=["POST"])
+def addReview():
+    #Here is where we ask for the data (which will be in the form of a dictionary) and then store the pieces of this data that we need
+    #into variables so that we can make the book
+        data = request.json
+        name = data.get('title')
+        title = data.get('name')
+        rating = data.get('rate')
+        serial = data.get('reason')
+    #This is the book that we will create
+        newReview = reviews(name,title, rating, serial)
+    #We will first add out new book and then commit it to our database
+        db.session.add(newReview)
         db.session.commit()
         print("book has successfully be added")
     #We will return the title and the author back to our fetch method
-        return jsonify({"name": title, "Writer": author})
+        return jsonify({"name": name, "title": title , "rating": rating, "serial": serial})
 
 
 
