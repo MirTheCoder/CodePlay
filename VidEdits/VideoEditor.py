@@ -1,8 +1,8 @@
 import shutil
-
+from flask_cors import CORS
 from flask import Flask, render_template,request,jsonify
 import subprocess
-import os, base64
+import os
 
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -22,27 +22,25 @@ def home():
 def upload():
     if not os.path.exists("uploads"):
         try:
-            UPLOAD_FOLDER = 'uploads'
-            os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-        except:
-            return "Error: Creation of uploads folder was unsuccessful"
-    else:
-        try:
-                if 'video' not in request.files:
-                    return jsonify({"message": "No video found"})
-
-                file = request.files['myFile']
-                filename = file.filename
-
-                if not filename.lower().endswith('.mp4'):
-                    return jsonify({"message": "Only mp4 videos are allowed"})
-
-                save_path = os.path.join("uploads", filename)
-                file.save(save_path)
-
-                return jsonify({"video": file})
+            os.makedirs("uploads", exist_ok=True)
         except Exception as e:
-            print("Error: ", e)
+            return jsonify({"message": f"Error: {e}" })
+    try:
+            if 'video' not in request.files:
+                return jsonify({"message": "No video found"})
+
+            file = request.files['video']
+            filename = file.filename
+
+            if not filename.lower().endswith('.mp4'):
+                return jsonify({"message": "Only mp4 videos are allowed"})
+
+            save_path = os.path.join("uploads", filename)
+            file.save(save_path)
+
+            return jsonify({"video": "upload was successful indeed"})
+    except Exception as e:
+        print("Error: ", e)
 
 
 @app.route('/editor',methods=['POST'])

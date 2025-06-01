@@ -50,7 +50,7 @@
     <div style = "text-align: center">
     <h2>Welcome to the video editing website, where we offer you a various amount of options to edit your videos</h2>
     <p> to get started, please click the button below in order to upload a video that you would like to edit</p>
-        <form id="input" onsubmit="uploadVideo()">
+        <form id="input" onsubmit="uploadVideo() return false;"  enctype="multipart/form-data">
             <input type ="file" name="Myfile" id="documents" accept ="video/*" required>
             <button type="submit">Upload</button>
         </form>
@@ -72,32 +72,35 @@
             }
         }
 
-        function uploadVideo() {
-            const file = document.getElementById("documents");
+        function uploadVideo(event) {
+            event.preventDefault();  // <-- This stops the form from reloading the page
+
+            const input = document.getElementById("documents");
+            const file = input.files[0];
 
             if (!file) {
                 alert("No file selected");
                 return;
             }
 
-                fetch("http://127.0.0.1:5000/upload", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        input_file: file,
-                        output_video: "output_video.mp4",
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    alert("Video has been successfully uploaded");
-                    save();
-                })
-                .catch(error => alert("Error:", error));
-            }
+            const formData = new FormData();
+            formData.append("video", file);
+
+            fetch("http://127.0.0.1:5000/upload", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Video has been successfully uploaded");
+                save();  // You may want to pass filename to save() if needed
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Upload failed");
+            });
         }
+
 
         </script>
     </div>
