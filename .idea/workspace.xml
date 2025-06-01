@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="did some css styling to my webArt">
-      <change beforePath="$PROJECT_DIR$/.idea/CodePlay.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CodePlay.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/Library/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/templates/style.html" beforeDir="false" afterPath="$PROJECT_DIR$/Library/templates/style.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_27_25__10_01_PM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_28_25__6_29_PM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_30_25__4_06_PM__Changes_.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,21 +46,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.Books.executor": "Run",
-    "Python.PracticeApp.executor": "Run",
-    "Python.VideoEditor.executor": "Run",
-    "Python.portfolio.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.Books.executor&quot;: &quot;Run&quot;,
+    &quot;Python.PracticeApp.executor&quot;: &quot;Run&quot;,
+    &quot;Python.VideoEditor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.portfolio.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/WebApp/WebApp2/templates" />
@@ -160,10 +158,10 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.PracticeApp" />
-      <item itemvalue="Python.portfolio" />
       <item itemvalue="Python.Books" />
+      <item itemvalue="Python.PracticeApp" />
       <item itemvalue="Python.VideoEditor" />
+      <item itemvalue="Python.portfolio" />
     </list>
   </component>
   <component name="SharedIndexes">
