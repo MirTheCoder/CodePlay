@@ -5,6 +5,7 @@
     <title>Video Editor</title>
 </head>
 <style>
+    /* This is the styling that we will be using for our code */
     body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -47,10 +48,13 @@
         }
 </style>
 <body>
+    <!-- This div class if given a text align style in order to ensure that the input form and our text are in the center of the screen -->
     <div style = "text-align: center">
     <h2>Welcome to the video editing website, where we offer you a various amount of options to edit your videos</h2>
     <p> to get started, please click the button below in order to upload a video that you would like to edit</p>
-        <form action="editor" id="input" onsubmit="return uploadVideo()"  enctype="multipart/form-data">
+        <!-- This form will ask the user for a video input and then upon submission will call the uploadVideo function -->
+        <form id="input" onsubmit="uploadVideo()"  enctype="multipart/form-data">
+            <!-- This input takes only video files and is a required field to fill before the final submission -->
             <input type ="file" name="Myfile" id="documents" accept ="video/*" required>
             <button type="submit">Upload</button>
         </form>
@@ -69,18 +73,25 @@
                     alert("There has been an error");
                 }
             }
-
+            /* This function helps to send the users video file to the backend python code */
             function uploadVideo() {
+            /*  This will make sure that the form does not do an early submission, the form won't do a reload or page navigation
+            thanks to this*/
                 event.preventDefault();  // <-- This stops the form from reloading the page
 
+                /* This code will find the input tag (the one that takes the users file input) via its id element
+                and then extract the file itself from the input tag*/
                 const input = document.getElementById("documents");
                 const file = input.files[0];
 
+                /*
                 if (!file) {
                     alert("No file selected");
                     return;
-                }
+                }   */
 
+                /* This right here creates a new form data object in order to store data from the forms within our HTML code
+                 via a key value pair (for instance we are storing the users file under the key value "video" in our form data object*/
                 const formData = new FormData();
                 formData.append("video", file);
 

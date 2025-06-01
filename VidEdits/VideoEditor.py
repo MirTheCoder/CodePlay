@@ -18,6 +18,7 @@ def home():
     clear_directory(UPLOAD_FOLDER)
     return render_template('video.html')
 
+
 @app.route('/upload', methods=['POST'])
 def upload():
     if not os.path.exists("uploads"):
@@ -43,7 +44,8 @@ def upload():
         print("Error: ", e)
 
 
-
+#Because we are using window.location.href (a javascript method) to navigate to the editor template, we have
+#to make GET one of the acceptable methods since window.location uses GET request to navigate to a new window or location
 @app.route('/editor',methods=['POST', 'GET'])
 def editor():
     return render_template('editor.html')
