@@ -29,18 +29,18 @@ def upload():
     else:
         try:
                 if 'video' not in request.files:
-                    return "No video file uploaded", 400
+                    return jsonify({"message": "No video found"})
 
-                file = request.files['video']
+                file = request.files['myFile']
                 filename = file.filename
 
                 if not filename.lower().endswith('.mp4'):
-                    return "Only MP4 files allowed", 400
+                    return jsonify({"message": "Only mp4 videos are allowed"})
 
                 save_path = os.path.join("uploads", filename)
                 file.save(save_path)
 
-                return f"Saved video to /uploads/{filename}"
+                return jsonify({"video": file})
         except Exception as e:
             print("Error: ", e)
 
