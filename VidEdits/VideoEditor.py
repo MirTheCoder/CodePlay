@@ -44,7 +44,7 @@ def upload():
 
 
 
-@app.route('/editor',methods=['POST'])
+@app.route('/editor',methods=['POST', 'GET'])
 def editor():
     return render_template('editor.html')
 
