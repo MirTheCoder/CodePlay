@@ -1,8 +1,8 @@
 import shutil
-from flask_cors import CORS
+
 from flask import Flask, render_template,request,jsonify
 import subprocess
-import os
+import os, base64
 
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -41,6 +41,7 @@ def upload():
             return jsonify({"video": "upload was successful indeed"})
     except Exception as e:
         print("Error: ", e)
+
 
 
 @app.route('/editor',methods=['POST'])

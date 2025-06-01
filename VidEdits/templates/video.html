@@ -58,48 +58,48 @@
 
 
         <script>
-        function save() {
-            var space = document.getElementById("documents").value
-            if (space) {
-                localStorage.setItem("uploadedFile", space);
-                localStorage.setItem("filename", space.name);// optional
-                console.log("Successfully saved:", space);
-                alert("Successfully saved: " + space);
-                window.location.href="http://127.0.0.1:5000/editor";
-            } else {
-                console.log("There has been an error");
-                alert("There has been an error");
-            }
-        }
-
-        function uploadVideo(event) {
-            event.preventDefault();  // <-- This stops the form from reloading the page
-
-            const input = document.getElementById("documents");
-            const file = input.files[0];
-
-            if (!file) {
-                alert("No file selected");
-                return;
+            function save() {
+                var space = document.getElementById("documents").value
+                if (space) {
+                    localStorage.setItem("uploadedFile", space);
+                    localStorage.setItem("filename", space.name);// optional
+                    console.log("Successfully saved:", space);
+                    alert("Successfully saved: " + space);
+                    window.location.href="http://127.0.0.1:5000/editor";
+                } else {
+                    console.log("There has been an error");
+                    alert("There has been an error");
+                }
             }
 
-            const formData = new FormData();
-            formData.append("video", file);
+            function uploadVideo() {
+                event.preventDefault();  // <-- This stops the form from reloading the page
 
-            fetch("http://127.0.0.1:5000/upload", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert("Video has been successfully uploaded");
-                save();  // You may want to pass filename to save() if needed
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("Upload failed");
-            });
-        }
+                const input = document.getElementById("documents");
+                const file = input.files[0];
+
+                if (!file) {
+                    alert("No file selected");
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append("video", file);
+
+                fetch("http://127.0.0.1:5000/upload", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert("Video has been successfully uploaded");
+                    save();  // You may want to pass filename to save() if needed
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Upload failed");
+                });
+            }
 
 
         </script>
