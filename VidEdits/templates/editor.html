@@ -133,15 +133,13 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    input_file: file,
                     output_video: "output_video.mp4",
                 })
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById("result").innerText = "Output Video: " + data.output_video;
-                file = data.output_video;
-                alert("Video has been successfully edited, thank you!");
+                answer = data.message;
+                alert(answer);
             })
             .catch(error => alert("Error:", error));
         }
@@ -153,16 +151,14 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    input_file: file,
                     output_video: "output_video.mp4",
                     speed: speedValue
                 })
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById("result").innerText = "Output Video: " + data.output_video;
-                file = data.output_video
-                alert("Video has been successfully edited, thank you!");
+                answer = data.message;
+                alert(answer);
             })
             .catch(error => alert("Error:", error));
         }
@@ -174,16 +170,14 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    input_file: file,
                     output_video: "output_video_brightness.mp4",
                     light: brightnessValue
                 })
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById("result").innerText = "Brightness adjusted. Output Video: " + data.output_video;
-                file = data.output_video
-                alert("Video brightness has been successfully adjusted.");
+                answer = data.message;
+                alert(answer);
             })
             .catch(error => alert("Error:", error));
         }

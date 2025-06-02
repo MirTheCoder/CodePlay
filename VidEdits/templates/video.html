@@ -94,17 +94,22 @@
                  via a key value pair (for instance we are storing the users file under the key value "video" in our form data object*/
                 const formData = new FormData();
                 formData.append("video", file);
-
+                /* This fetch command will send the formData to the upload python method which will allow the upload python method to
+                extract the video from the formData*/
                 fetch("http://127.0.0.1:5000/upload", {
+                    /* Here we say how  we are going to send the file and we establish that we are sending the formData over to the backend (python)*/
                     method: "POST",
                     body: formData
                 })
                 .then(response => response.json())
                 .then(data => {
+                /* This will trigger only if the fetch command was successful (meaning that is successfully went through and we received data back successfully*/
                     alert("Video has been successfully uploaded");
-                    save(file.name);  // You may want to pass filename to save() if needed
+                    /* Here we are going to pass the file name that we received into the save method*/
+                    save(file.name);
                 })
                 .catch(error => {
+                /* These will only run if an error is thrown during the fetching process*/
                     console.error("Error:", error);
                     alert("Upload failed");
                     return false;

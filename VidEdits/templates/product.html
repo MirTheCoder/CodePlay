@@ -1,67 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edited Video</title>
-</head>
-<body>
-    <h2>Congratulations! Here is your edited video. Hope you have a wonderful day and enjoy! 😊</h2>
+    <head>
+        <meta charset="UTF-8">
+        <title>Edited Video</title>
+    </head>
+    <body>
+        <h2>Congratulations! Here is your edited video. Hope you have a wonderful day and enjoy! 😊</h2>
 
-    <video id="videoPlayer" width="400" height="300" controls>
+        <video id="videoPlayer" src= "{{video}}" width="400" height="300" controls>
 
-    </video>
-
-        <script>
-            function playVideo(text) {
-                let savedVideo = localStorage.getItem("uploadFile");
-
-                if (savedVideo) {
-                    let videoPlayer = document.getElementById("videoPlayer");
-                    videoPlayer.src = text;  // Set video source
-                    videoPlayer.load();  // Ensure video loads
-                } else {
-                    alert("No video found in localStorage.");
-                }
-            }
-        /*function setVideo() {
-        // Get base64-encoded file from localStorage (assumes it's already stored)
-        const videoData = localStorage.getItem("uploadFile");
-        const filename = localStorage.getItem("filename") || "video.mp4";
-
-        if (!videoData) {
-            alert("Error: No video in localStorage under 'uploadFile'");
-            return;
-        }
-
-        // Optionally re-store for consistency
-        localStorage.setItem("myVideo", videoData);
-
-        const base64 = videoData.split(',')[1]; // remove "data:video/mp4;base64,..."
-
-        fetch("http://127.0.0.1:5000/upload", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                filename: filename,
-                filedata: base64
-            })
-        })
-        .then(response => response.text())
-        .then(data => {
-            alert("Video successfully sent to server");
-            console.log(data);
-            playVideo(data);
-        })
-        .catch(error => {
-            console.error("Upload failed:", error);
-            alert("Error uploading video");
-        });
-    }*/
-
-    window.onload = playVideo;
-
-    </script>
-</body>
+        </video>
+    </body>
 </html>
