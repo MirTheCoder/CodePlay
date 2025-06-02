@@ -73,7 +73,7 @@ def remove_audio(input_file, output_video):
     try:
      subprocess.run(command, check=True)
     except Exception as e:
-        print("Video editing error")
+        print("Error1: ", e)
     # We use this following code to get the file name of the video in order to create a new path for the video in which we can use to store
     # the video within our uploads directory
     return output_path
@@ -92,7 +92,7 @@ def change_brightness(input_file, output_video, level):
     try:
         subprocess.run(command, check=True)
     except Exception as e:
-        print("Video editing error")
+        print("Error2: ", e)
     # We use this following code to get the file name of the video in order to create a new path for the video in which we can use to store
     # the video within our uploads directory
     return output_path
@@ -113,7 +113,7 @@ def change_speed(input_file, output_video, speed):
     try:
         subprocess.run(command, check=True)
     except Exception as e:
-        print("Video editing error")
+        print("Error3: ", e)
     # We use this following code to get the file name of the video in order to create a new path for the video in which we can use to store
     # the video within our uploads directory
     return output_path

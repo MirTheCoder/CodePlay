@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="Added some comments to my code to give the viewer and myself a better understanding and reminder of what the code does">
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="We have successfully edited the code to retrieve the video and save it into the uploads director, align with returning the video after the edits are done. Now we just have to do some tweaks to the ffmpeg editing commands">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VidEdits/VideoEditor.py" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/VideoEditor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VidEdits/templates/editor.html" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/templates/editor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VidEdits/templates/product.html" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/templates/product.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VidEdits/templates/video.html" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/templates/video.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -312,7 +309,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748814689584</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="We have successfully edited the code to retrieve the video and save it into the uploads director, align with returning the video after the edits are done. Now we just have to do some tweaks to the ffmpeg editing commands">
+      <option name="closed" value="true" />
+      <created>1748841598382</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1748841598382</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -341,6 +346,7 @@
     <MESSAGE value="making some edits to the upload function to see how I can store the users file selection into our uploads directory" />
     <MESSAGE value="Finally got the video to save to the uploads directory" />
     <MESSAGE value="Added some comments to my code to give the viewer and myself a better understanding and reminder of what the code does" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added some comments to my code to give the viewer and myself a better understanding and reminder of what the code does" />
+    <MESSAGE value="We have successfully edited the code to retrieve the video and save it into the uploads director, align with returning the video after the edits are done. Now we just have to do some tweaks to the ffmpeg editing commands" />
+    <option name="LAST_COMMIT_MESSAGE" value="We have successfully edited the code to retrieve the video and save it into the uploads director, align with returning the video after the edits are done. Now we just have to do some tweaks to the ffmpeg editing commands" />
   </component>
 </project>
