@@ -2,7 +2,7 @@ import shutil
 
 from flask import Flask, render_template,request,jsonify
 import subprocess
-import os, base64
+import os
 #This is how we will initially create our uploads directory
 if not os.path.exists("static/uploads"):
     os.makedirs("static/uploads", exist_ok=True)
@@ -107,7 +107,7 @@ def change_speed(input_file, output_video, speed):
         "ffmpeg",
         "-i", input_file, #used to identify what the input file is
         "-vf", f"setpts={speed}*PTS", #changes the speed according to the users preference
-        "-af", f"atempo ={match}",  # Ensures audio is copied without re-encoding
+        "-af", f"atempo={match}",  # Ensures audio is copied without re-encoding
         output_path #saves the edited video to our output path which will save the video directly to our uploads folder as output.mp4
     ]
     try:

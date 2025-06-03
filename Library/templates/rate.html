@@ -8,6 +8,10 @@
     {% for books in cart %}
     <p><li class="book"><b>{{books.title}}</b></li></p>
     {% endfor %}
+    <form class="hidden">
+      <p>Type in your name</p>
+      <p>What is your rating on this book</p>
+    </form>
   </ul>
 </details>
 <script>
@@ -16,7 +20,8 @@
     const bookElements = document.querySelectorAll(".book");
     bookElements.forEach(function(bookElement) {
         bookElement.addEventListener("click", function() {
-            alert("You clicked on: " + bookElement.textContent.trim());
+            store = bookElement.textContent.trim();
+            localStorage.setItem("bookTitle", store);
         });
     });
 });
