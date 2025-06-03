@@ -2,13 +2,24 @@
 {% block title %} <b>Rate</b> {% endblock %}
 {% block content %}
 <h2 class="bangers" style="text-align: center; font-size: 45px">Rate A Book</h2>
-<details class="gloria" style="text-align: center">
+<details class="gloria" style="text-align: center" id="list">
   <summary>Click to expand the list</summary>
   <ul>
     {% for books in cart %}
-    <li><b>{{books.title}}</b> by <b>{{books.author}}</b></li>
+    <p><li class="book"><b>{{books.title}}</b></li></p>
     {% endfor %}
   </ul>
 </details>
+<script>
+  document = document.getElementById("list");
+  document.addEventListener("click", function() {
+    const bookElements = document.querySelectorAll(".book");
+    bookElements.forEach(function(bookElement) {
+        bookElement.addEventListener("click", function() {
+            alert("You clicked on: " + bookElement.textContent.trim());
+        });
+    });
+});
+</script>
 
 {% endblock %}
