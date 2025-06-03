@@ -8,23 +8,60 @@
     {% for books in cart %}
     <p><li class="book"><b>{{books.title}}</b></li></p>
     {% endfor %}
-    <form class="hidden">
-      <p>Type in your name</p>
-      <p>What is your rating on this book</p>
-    </form>
   </ul>
 </details>
+  <form class="hidden" id="review" style="text-align: center" onsubmit="addReview()">
+      <p>Please type in your name</p>
+      <input type="text" id="person" required>
+      <p>What is your rating on this book</p>
+      <input type="number" id="num" min="0" max="5" required>
+      <p>Please state your reasoning</p>
+      <textarea rows="5" cols="50" id="response" required></textarea>
+      <button type="submit"> Submit Review</button>
+    </form>
 <script>
   document = document.getElementById("list");
+  form = document.getElementById("review");
   document.addEventListener("click", function() {
     const bookElements = document.querySelectorAll(".book");
     bookElements.forEach(function(bookElement) {
         bookElement.addEventListener("click", function() {
+            alert("You have selected: " + bookElement.textContent.trim());
             store = bookElement.textContent.trim();
+            localStorage.clear();
             localStorage.setItem("bookTitle", store);
+            form.classList.remove("hidden");
         });
     });
 });
+
+  function addReview(){
+   const person = document.getElementById("person").textContent.trim();
+   const num = document.getElementById("num").value;
+   const response = document.getElementById("response").textContent.trim();
+   const book = localStorage.getItem("bookTitle");
+   fetch("http://127.0.0.1:5000/addReview", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: person,
+          rating: num,
+          text: response,
+          title: book,
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert(data.name + " by " + data.Writer + " has been added to our library");
+      })
+      .catch(error => alert("Error: " + error)); // fixed error display too
+    } else {
+      alert("We already have the book within our library");
+    }
+  }
+  }
 </script>
 
 {% endblock %}

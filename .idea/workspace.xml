@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="We have successfully edited the code to retrieve the video and save it into the uploads director, align with returning the video after the edits are done. Now we just have to do some tweaks to the ffmpeg editing commands">
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="We made some edits to the rate class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VidEdits/VideoEditor.py" beforeDir="false" afterPath="$PROJECT_DIR$/VidEdits/VideoEditor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/templates/rate.html" beforeDir="false" afterPath="$PROJECT_DIR$/Library/templates/rate.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +67,7 @@
       <recent name="$PROJECT_DIR$/WebApp/WebApp2" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.VideoEditor">
+  <component name="RunManager" selected="Python.Books">
     <configuration name="Books" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="CodePlay" />
       <option name="ENV_FILES" value="" />
@@ -325,7 +325,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748842169867</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="We made some edits to the rate class">
+      <option name="closed" value="true" />
+      <created>1748970780825</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1748970780825</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -355,6 +363,7 @@
     <MESSAGE value="Finally got the video to save to the uploads directory" />
     <MESSAGE value="Added some comments to my code to give the viewer and myself a better understanding and reminder of what the code does" />
     <MESSAGE value="We have successfully edited the code to retrieve the video and save it into the uploads director, align with returning the video after the edits are done. Now we just have to do some tweaks to the ffmpeg editing commands" />
-    <option name="LAST_COMMIT_MESSAGE" value="We have successfully edited the code to retrieve the video and save it into the uploads director, align with returning the video after the edits are done. Now we just have to do some tweaks to the ffmpeg editing commands" />
+    <MESSAGE value="We made some edits to the rate class" />
+    <option name="LAST_COMMIT_MESSAGE" value="We made some edits to the rate class" />
   </component>
 </project>
