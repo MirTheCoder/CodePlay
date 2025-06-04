@@ -2,21 +2,37 @@
 {% block title %} <b>Book Shelf</b> {% endblock %}
 {% block content %}
 <h2>Read A Book</h2>
-<p class="hidden" id="book">{{cart}}</p>
-<button onclick="loadFile()">Load File</button>
-<pre id="output"></pre>
+
+<!-- This is where we store the path to the pdf so that we can call it in our script function to obtain the pdf itself
+  but we keep it hidden because we don't need it showing on our screen-->
+<p class="hidden" id="book">{{ cart }}</p>
+
+<!-- This button will display the text that the user will be reading -->
+<button onclick="loadFile()">Press to start reading</button>
+
+<!-- This div class is where we will place the iframe to show the pdf -->
+<div id="reader" style="margin-top: 20px;">
+</div>
 
 <script>
-    const pdf = document.getElementById("book").textContent.trim();
+    /* This function will obtain the pdf using the path given to it and then display it with an iframe*/
   function loadFile() {
-    fetch(pdf)
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("output").textContent = data;
-      })
-      .catch(error => console.error("Error loading file:", error));
+    /* This will get the pdf path from our hidden <p> which holds the path in it*/
+    const pdfPath = document.getElementById("book").textContent.trim();
+
+    // We will use document to create an iframe and send the path to it so that it can display the document
+    const iframe = document.createElement("iframe");
+    iframe.src = pdfPath;
+    iframe.width = "100%";
+    iframe.height = "600px";
+    iframe.type = "application/pdf";
+
+    /* We use the reader element to get a hold of the div class we want to add out iframe to*/
+    const readerDiv = document.getElementById("reader");
+    readerDiv.innerHTML = "";  // clear previous iframe if any
+    /* This allows us to add the iframe to the div clas*/
+    readerDiv.appendChild(iframe);
   }
 </script>
-
 
 {% endblock %}

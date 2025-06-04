@@ -59,7 +59,8 @@
       .then(response => response.json())
       .then(data => {
       /* We will alert the user that the book has been added to the database if it was truly successful*/
-        alert(title + " by " + writer + " has been added to our library");
+        alert(data.title + " by " + data.Writer + " has been added to our library");
+        location.reload();
       })
       .catch(error => alert("Error: " + error)); // fixed error display too
     } else {

@@ -43,6 +43,8 @@ class books(db.Model):
             "year": str(self.year),
             "serial": str(self.serialNum)
         }
+    def send_pdf(self):
+        return self.pdf
 
 # This is database where we will keep the reviews for each book
 class reviews(db.Model):
@@ -67,7 +69,8 @@ def home():
 
 @app.route("/read")
 def read():
-    return render_template("read.html")
+    booker = books.query.all()
+    return render_template("read.html", cart=booker)
 
 
 
@@ -88,26 +91,29 @@ def upload():
 
 @app.route("/addBook", methods=["POST"])
 #This is the function we will use to take the users inputs and create a book
-def addBook(reqeust=None):
+def addBook():
     #Here is where we ask for the data (which will be in the form of a dictionary) and then store the pieces of this data that we need
     #into variables so that we can make the book
-        data = request.json
+    try:
         title = request.form['name']
-        author = reqeust.form['writer']
-        year = request.form['year']
-        serial = request.form['serial']
+        author = request.form['writer']
+        year = int(request.form['year'])
+        serial = int(request.form['serial'])
         pdf = request.files['pdf']
         file_name = pdf.filename
-        pdfpath = os.path.join("books",file_name)
+        pdfpath = os.path.join("static/books",file_name)
         pdf.save(pdfpath)
     #This is the book that we will create
-        newReview = books(title,author, year, serial, pdfpath)
+        newBook = books(title,author, year, serial, pdfpath)
     #We will first add out new book and then commit it to our database
-        db.session.add(newReview)
+        db.session.add(newBook)
         db.session.commit()
         print("book has successfully been added")
     #We will return the title and the author back to our fetch method
-        return jsonify({"name": title, "Writer": author})
+        return jsonify({"title": title, "Writer": author})
+    except Exception as e:
+        print("Error in addBook: ", e)
+        return jsonify({"title": "ERROR", "Writer": "ERROR"})
 
 
 
@@ -167,8 +173,8 @@ def viewBook():
 def reader():
     title = session.get('book_title')
     if title:
-        reading = books.query.filter_by(title=title).pdf()
-        return render_template("reader.html", cart = reading )
+        reading = books.query.filter_by(title=title).first()
+        return render_template("reader.html", cart = reading.send_pdf() )
 
 with app.app_context():
     db.create_all()
