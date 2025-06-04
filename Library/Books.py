@@ -121,9 +121,9 @@ def seeReviews():
     title = session.get('review_title')
     if title:
         storage = reviews.query.filter_by(title=title).all()
-        render_template("seeReviews.html", cart=storage)
+        return render_template("seeReviews.html", cart=storage)
     else:
-        render_template("seeReviews.html")
+        return render_template("seeReviews.html")
 
 
 if __name__ == '__main__':
