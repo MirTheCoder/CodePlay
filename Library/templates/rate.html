@@ -1,16 +1,47 @@
 {% extends "style.html" %}
 {% block title %} <b>Rate</b> {% endblock %}
 {% block content %}
+<style>
+.toggle-container {
+  display: flex;
+  justify-content: center; /* Center the whole group */
+  gap: 20px;               /* Spacing between the two details */
+  align-items: flex-start; /* Align tops of each <details> */
+}
+
+details {
+  width: 200px;             /* Optional: consistent width */
+}
+    .hide{
+        display: none;
+
+    }
+</style>
 <h2 class="bangers" style="text-align: center; font-size: 45px">Rate A Book</h2>
-<details class="gloria" style="text-align: center" id="list">
+<div class="toggle-container">
+<button type="button" id="see" onclick="switcher(event)">See Reviews</button>
+<button type="button" id="rate" onclick="add(event)">Write a review</button>
+</div>
+
+<div class="toggle-container">
+<details class="gloria hide" style="text-align: left" id="list">
   <summary>Click to expand the list</summary>
   <ul>
     {% for books in cart %}
-    <p><li class="book"><b>{{books.title}}</b></li></p>
+    <p><li class="book" style="text-align: center;"><b>{{books.title}}</b></li></p>
     {% endfor %}
   </ul>
 </details>
-  <form class="hidden" id="review" style="text-align: center" onsubmit="addReview()">
+<details class="gloria hide" style="text-align: right" id="doc">
+  <summary>Select a book to see reviews</summary>
+  <ul>
+    {% for books in cart %}
+    <p><li class="book2" style="text-align: center"><b>{{books.title}}</b></li></p>
+    {% endfor %}
+  </ul>
+</details>
+</div>
+  <form class="hide" id="review" style="text-align: center" onsubmit="addReview(event)">
       <p>Please type in your name</p>
       <input type="text" id="person" required>
       <p>What is your rating on this book</p>
@@ -20,32 +51,83 @@
       <button type="submit"> Submit Review</button>
     </form>
 <script>
-  document = document.getElementById("list");
+    /*We are using this to get the Element or details list that holds our list of books to choose from in order to see
+    the reviews, and then we will store it in the reviews variable */
+    const review = document.getElementById("doc");
+  /* This variable will  hold the details element that holds the list of books we can write a review on*/
+  letter = document.getElementById("list");
+  /* This holds the form that we will have the user fill out in order to submit their review*/
   form = document.getElementById("review");
-  document.addEventListener("click", function() {
-    const bookElements = document.querySelectorAll(".book");
+
+
+
+  doc.addEventListener("click", function() {
+    /* This selects all the elements within the book class and adds an event listener to them*/
+    const bookElements = document.querySelectorAll(".book2");
     bookElements.forEach(function(bookElement) {
         bookElement.addEventListener("click", function() {
+            /* We will take whichever book the user clicks on and store the book name while allowing them to fill out a
+            review form*/
             alert("You have selected: " + bookElement.textContent.trim());
-            store = bookElement.textContent.trim();
-            localStorage.clear();
-            localStorage.setItem("bookTitle", store);
-            form.classList.remove("hidden");
+            fetch("http://127.0.0.1:5000/loadReviews", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          title: bookElement.textContent.trim(),
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if(confirm(data.message)){
+            window.location.href = "http://127.0.0.1:5000/seeReviews";
+        }
+      })
+      .catch(error => alert("Error: " + error)); // fixed error display too
+
         });
     });
 });
 
-  function addReview(){
-   const person = document.getElementById("person").textContent.trim();
+
+
+letter.addEventListener("click", function() {
+    /* This selects all the elements within the book class and adds an event listener to them*/
+    const bookElements = document.querySelectorAll(".book");
+    bookElements.forEach(function(bookElement) {
+        bookElement.addEventListener("click", function() {
+            /* We will take whichever book the user clicks on and store the book name while allowing them to fill out a
+            review form*/
+            alert("You have selected: " + bookElement.textContent.trim());
+            /* trim removes the white space at the beginning and end of the text, and text content just gets the text
+            content of the list value*/
+            store = bookElement.textContent.trim();
+            localStorage.clear();
+            localStorage.setItem("bookTitle", store);
+            form.classList.remove("hide");
+        });
+    });
+});
+
+
+    /* This takes the values that the user put in for the review of the book they selected*/
+  function addReview(event){
+    event.preventDefault();
+   const person = document.getElementById("person").value.trim();
    const num = document.getElementById("num").value;
-   const response = document.getElementById("response").textContent.trim();
+   const response = document.getElementById("response").value.trim();
+   /* We grab the title of the book the user selected earlier from local storage and then store it within this variable*/
    const book = localStorage.getItem("bookTitle");
+
+
    fetch("http://127.0.0.1:5000/addReview", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
+        /* Here we send the persons name, the rating they gave, the book they chose, and why they rated the book as such*/
           name: person,
           rating: num,
           text: response,
@@ -54,14 +136,37 @@
       })
       .then(response => response.json())
       .then(data => {
-        alert(data.name + " by " + data.Writer + " has been added to our library");
+      /* If the fetch works, we alert the user that the  book review was saved successfully*/
+        alert("Your review on the book " + data.title + " has been successfully saved");
+        /* reloads the page*/
+        location.reload();
       })
-      .catch(error => alert("Error: " + error)); // fixed error display too
-    } else {
-      alert("We already have the book within our library");
+      .catch(error => alert("Error: " + error));
+  }
+
+
+    function switcher(event){
+            if (review.classList.contains("hide")) {
+            review.classList.remove("hide");
+        }
+            if (!letter.classList.contains("hide")) {
+            letter.classList.add("hide");
+        }
+        if (!form.classList.contains("hide")) {
+            form.classList.add("hide");
+        }
     }
-  }
-  }
+
+
+    function add(event){
+    if (letter.classList.contains("hide")) {
+            letter.classList.remove("hide");
+        }
+            if (!review.classList.contains("hide")) {
+            review.classList.add("hide");
+        }
+
+    }
 </script>
 
 {% endblock %}

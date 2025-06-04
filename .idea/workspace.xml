@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="We made some edits to the rate class">
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="We made some edits to the rate class and addReview method">
+      <change afterPath="$PROJECT_DIR$/Library/templates/seeReviews.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/Books.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Books.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/instance/test.db" beforeDir="false" afterPath="$PROJECT_DIR$/Library/instance/test.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/templates/rate.html" beforeDir="false" afterPath="$PROJECT_DIR$/Library/templates/rate.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/templates/style.html" beforeDir="false" afterPath="$PROJECT_DIR$/Library/templates/style.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/templates/upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/Library/templates/upload.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -333,7 +338,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748970780825</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="We made some edits to the rate class and addReview method">
+      <option name="closed" value="true" />
+      <created>1748991572112</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1748991572112</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -364,6 +377,7 @@
     <MESSAGE value="Added some comments to my code to give the viewer and myself a better understanding and reminder of what the code does" />
     <MESSAGE value="We have successfully edited the code to retrieve the video and save it into the uploads director, align with returning the video after the edits are done. Now we just have to do some tweaks to the ffmpeg editing commands" />
     <MESSAGE value="We made some edits to the rate class" />
-    <option name="LAST_COMMIT_MESSAGE" value="We made some edits to the rate class" />
+    <MESSAGE value="We made some edits to the rate class and addReview method" />
+    <option name="LAST_COMMIT_MESSAGE" value="We made some edits to the rate class and addReview method" />
   </component>
 </project>

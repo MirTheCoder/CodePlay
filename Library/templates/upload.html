@@ -18,7 +18,10 @@
 </form>
 
 <script>
+  /* this will store all the books that we have within our library */
   const cart = {{ cart | safe }};
+
+  /* This will check and make sure that there are no exact duplicates within the library*/
   function bookMake(event){
     event.preventDefault();
 
@@ -35,7 +38,8 @@
       }
     }
 
-
+  /* If the input is not considered a duplicate, then we will send the book info to the backend to have it added to
+  the library database */
     if(!dupli){
       fetch("http://127.0.0.1:5000/addBook", {
         method: "POST",
@@ -51,10 +55,12 @@
       })
       .then(response => response.json())
       .then(data => {
+      /* We will alert the user that the book has been added to teh database if it was truly successful*/
         alert(data.name + " by " + data.Writer + " has been added to our library");
       })
       .catch(error => alert("Error: " + error)); // fixed error display too
     } else {
+    /* If a duplicate is found, then we will let the user know that it is already within the database*/
       alert("We already have the book within our library");
     }
   }

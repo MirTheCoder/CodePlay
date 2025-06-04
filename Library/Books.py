@@ -1,8 +1,10 @@
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy
 import json
+
+from sqlalchemy.testing.util import conforms_partial_ordering
 
 app = Flask(__name__)
 app.secret_key = "HASGGTYEIFGEG21356253725"
@@ -89,23 +91,39 @@ def addBook():
         return jsonify({"name": title, "Writer": author})
 @app.route("/addReview", methods=["POST"])
 def addReview():
+    try:
     #Here is where we ask for the data (which will be in the form of a dictionary) and then store the pieces of this data that we need
     #into variables so that we can make the book
         data = request.json
         name = data.get('name')
-        rating = data.get('rating')
-        text = int(data.get('text'))
+        rating = int(data.get('rating'))
+        text = data.get('text')
         title = data.get('title')
     #This is the book that we will create
         newReview = reviews(title,rating, text, name)
     #We will first add out new book and then commit it to our database
         db.session.add(newReview)
         db.session.commit()
-        print("book has successfully be added")
+        print("Review has successfully been added")
     #We will return the title and the author back to our fetch method
-        return jsonify({"name": name, "title": title , "rating": rating, "serial": serial})
-
-
+        return jsonify({"message": "Review has successfully been added"})
+    except Exception as e:
+        print("Error: ", e)
+@app.route("/loadReviews", methods=["POST", "GET"])
+def loadReviews():
+    data = request.json
+    name = data.get("title")
+    #Use sessions to pass data from one app route to another
+    session['review_title'] = name
+    return jsonify({"message": "Navigating to review seeing page"})
+@app.route("/seeReviews", methods=["POST", "GET"])
+def seeReviews():
+    title = session.get('review_title')
+    if title:
+        storage = reviews.query.filter_by(title=title).all()
+        render_template("seeReviews.html", cart=storage)
+    else:
+        render_template("seeReviews.html")
 
 
 if __name__ == '__main__':

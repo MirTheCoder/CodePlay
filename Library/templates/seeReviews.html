@@ -1,0 +1,16 @@
+{% extends "style.html" %}
+{% block title %} <b>seeReviews</b> {% endblock %}
+{% block content %}
+<h2 class="bangers" style="text-align: center; font-size: 45px">Here are your Reviews</h2>
+{% for reviews in cart %}
+    <p>Name: {{reviews.name}}</p>
+    <p>Rating: {{reviews.review}}</p>
+    <p>reason: {{reviews.reason}}</p>
+    {% endfor %}
+<script>
+
+
+
+</script>
+
+{% endblock %}
