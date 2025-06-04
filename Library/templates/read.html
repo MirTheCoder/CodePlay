@@ -1,6 +1,43 @@
 {% extends "style.html" %}
 {% block title %} <b>Book Shelf</b> {% endblock %}
 {% block content %}
-<h2>Hello World</h2>
+<h2 class="bangers" style="text-align: center; font-size: 45px">Pick A Book</h2>
+<details class="gloria hide" style="text-align: left" id="list">
+  <summary>Click to expand the list</summary>
+  <ul>
+    {% for books in cart %}
+    <p><li class="book" style="text-align: center;"><b>{{books.title}}</b></li></p>
+    {% endfor %}
+  </ul>
+</details>
+
+<script>
+    letter = list
+letter.addEventListener("click", function() {
+    /* This selects all the elements within the book class and adds an event listener to them*/
+    const bookElements = document.querySelectorAll(".book");
+    bookElements.forEach(function(bookElement) {
+        bookElement.addEventListener("click", function() {
+            /* We will take whichever book the user clicks on and store the book name while allowing them to fill out a
+            review form*/
+            alert("You have selected: " + bookElement.textContent.trim());
+            /* trim removes the white space at the beginning and end of the text, and text content just gets the text
+            content of the list value*/
+            store = bookElement.textContent.trim();
+            fetch(http://127.0.0.1:5000/viewBook {
+              method: 'POST',
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                 title: bookElement.textContent.trim(),
+              })
+            })
+        });
+    });
+});
+
+
+</script>
 
 {% endblock %}

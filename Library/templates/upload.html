@@ -14,6 +14,8 @@
   <input type="number" id="year" required>
   <p>Book Serial Number: </p>
   <input type="number" id="serial" required>
+  <p>Please add the book file</p>
+  <input type="file" id="doc" accept="application/pdf" required>
   <button type="submit"> Add Book</button>
 </form>
 
@@ -26,10 +28,19 @@
     event.preventDefault();
 
     var dupli = false;
-    var title = document.getElementById("name").value.toLowerCase();
-    var writer = document.getElementById("author").value.toLowerCase();
-    var time = document.getElementById("year").value;
-    var num = document.getElementById("serial").value;
+    const title = document.getElementById("name").value.toLowerCase();
+    const writer = document.getElementById("author").value.toLowerCase();
+    const time = document.getElementById("year").value;
+    const num = document.getElementById("serial").value;
+
+    const input = document.getElementById("doc");
+    const file = input.files[0];
+    const formData = new FormData();
+    formData.append("pdf", file);
+    formData.append("name", title);
+    formData.append("writer", writer);
+    formData.append("year", time);
+    formData.append("serial", num);
 
     for (let book of cart){
       if(book.title == title && book.author == writer && book.year == time && book.serial == num){
@@ -43,20 +54,12 @@
     if(!dupli){
       fetch("http://127.0.0.1:5000/addBook", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name: title,
-          writer: writer,
-          year: time,
-          serial: num,
-        })
+        body: formData
       })
       .then(response => response.json())
       .then(data => {
-      /* We will alert the user that the book has been added to teh database if it was truly successful*/
-        alert(data.name + " by " + data.Writer + " has been added to our library");
+      /* We will alert the user that the book has been added to the database if it was truly successful*/
+        alert(title + " by " + writer + " has been added to our library");
       })
       .catch(error => alert("Error: " + error)); // fixed error display too
     } else {

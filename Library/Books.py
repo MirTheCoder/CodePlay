@@ -3,6 +3,10 @@ from flask import Flask, render_template, request, jsonify, session, redirect, u
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy
 import json
+import os
+from flask_migrate import Migrate
+
+
 
 from sqlalchemy.testing.util import conforms_partial_ordering
 
@@ -23,12 +27,14 @@ class books(db.Model):
     author = db.Column(db.String(100))
     year = db.Column(db.Integer)
     serialNum = db.Column(db.Integer)
+    pdf = db.Column(db.String(300))
 
-    def __init__(self, title, author, year, serialNum):
+    def __init__(self, title, author, year, serialNum, pdf):
         self.title = title
         self.author = author
         self.year = year
         self.serialNum = serialNum
+        self.pdf = pdf
 
     def to_dict(self):
         return {
@@ -56,15 +62,24 @@ class reviews(db.Model):
 @app.route("/")
 def home():
     return render_template("home.html")
+
+
+
 @app.route("/read")
 def read():
     return render_template("read.html")
+
+
+
 @app.route("/rate")
 def rate():
     #Here is how we will gather all the data from our books database model
     storage = books.query.all()
     #We will then import the books data into our rendering template to use for later
     return render_template("rate.html", cart = storage)
+
+
+
 @app.route("/upload")
 def upload():
     storage = books.query.all()
@@ -73,22 +88,29 @@ def upload():
 
 @app.route("/addBook", methods=["POST"])
 #This is the function we will use to take the users inputs and create a book
-def addBook():
+def addBook(reqeust=None):
     #Here is where we ask for the data (which will be in the form of a dictionary) and then store the pieces of this data that we need
     #into variables so that we can make the book
         data = request.json
-        title = data.get('name')
-        author = data.get('writer')
-        year = data.get('year')
-        serial = data.get('serial')
+        title = request.form['name']
+        author = reqeust.form['writer']
+        year = request.form['year']
+        serial = request.form['serial']
+        pdf = request.files['pdf']
+        file_name = pdf.filename
+        pdfpath = os.path.join("books",file_name)
+        pdf.save(pdfpath)
     #This is the book that we will create
-        newReview = books(title,author, year, serial)
+        newReview = books(title,author, year, serial, pdfpath)
     #We will first add out new book and then commit it to our database
         db.session.add(newReview)
         db.session.commit()
         print("book has successfully been added")
     #We will return the title and the author back to our fetch method
         return jsonify({"name": title, "Writer": author})
+
+
+
 @app.route("/addReview", methods=["POST"])
 def addReview():
     try:
@@ -109,6 +131,9 @@ def addReview():
         return jsonify({"message": "Review has successfully been added"})
     except Exception as e:
         print("Error: ", e)
+
+
+
 @app.route("/loadReviews", methods=["POST", "GET"])
 def loadReviews():
     data = request.json
@@ -116,6 +141,9 @@ def loadReviews():
     #Use sessions to pass data from one app route to another
     session['review_title'] = name
     return jsonify({"message": "Navigating to review seeing page"})
+
+
+
 @app.route("/seeReviews", methods=["POST", "GET"])
 def seeReviews():
     title = session.get('review_title')
@@ -125,6 +153,25 @@ def seeReviews():
     else:
         return render_template("seeReviews.html")
 
+
+@app.route("/viewBook", methods=['POST','GET'])
+def viewBook():
+    data = request.json
+    word = data.get("title")
+    session['book_title'] = word
+    return jsonify({"message": "We are now going to navigate to the book for you to read"})
+
+
+
+@app.route("/reader", methods=["POST","GET"])
+def reader():
+    title = session.get('book_title')
+    if title:
+        reading = books.query.filter_by(title=title).pdf()
+        return render_template("reader.html", cart = reading )
+
+with app.app_context():
+    db.create_all()
 
 if __name__ == '__main__':
     app.run(debug=True)
