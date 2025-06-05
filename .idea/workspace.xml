@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="Added a reader that allows the user to read whatever book they have selected">
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="With the help of iframe, I am now able to display the text visibly for the reader to read the book that they selected to read">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/Books.py" beforeDir="false" afterPath="$PROJECT_DIR$/Library/Books.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/templates/read.html" beforeDir="false" afterPath="$PROJECT_DIR$/Library/templates/read.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/templates/reader.html" beforeDir="false" afterPath="$PROJECT_DIR$/Library/templates/reader.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/templates/upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/Library/templates/upload.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -368,7 +364,23 @@
       <option name="project" value="LOCAL" />
       <updated>1749057027165</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="With the help of iframe, I am now able to display the text visibly for the reader to read the book that they selected to read">
+      <option name="closed" value="true" />
+      <created>1749071054839</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1749071054840</updated>
+    </task>
+    <task id="LOCAL-00025" summary="With the help of iframe, I am now able to display the text visibly for the reader to read the book that they selected to read">
+      <option name="closed" value="true" />
+      <created>1749072059922</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1749072059922</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -402,6 +414,7 @@
     <MESSAGE value="We made some edits to the rate class and addReview method" />
     <MESSAGE value="We added an option for the user to see eviews that have already been made or just add their own reviews" />
     <MESSAGE value="Added a reader that allows the user to read whatever book they have selected" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a reader that allows the user to read whatever book they have selected" />
+    <MESSAGE value="With the help of iframe, I am now able to display the text visibly for the reader to read the book that they selected to read" />
+    <option name="LAST_COMMIT_MESSAGE" value="With the help of iframe, I am now able to display the text visibly for the reader to read the book that they selected to read" />
   </component>
 </project>

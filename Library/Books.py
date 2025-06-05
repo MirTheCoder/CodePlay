@@ -139,7 +139,7 @@ def addReview():
         print("Error: ", e)
 
 
-
+#This method will load the reviews that people have written about different books, dependent on which book the user
 @app.route("/loadReviews", methods=["POST", "GET"])
 def loadReviews():
     data = request.json
