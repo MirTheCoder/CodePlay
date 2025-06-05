@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 
 app = Flask(__name__)
-
+#These are all routes to various art templates, wand the first route leads to the home page
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -27,4 +27,6 @@ def villageHero():
 def embraceOfNature():
     return render_template("EmbraceOfNature.html")
 if __name__ == '__main__':
+    #Adding the debugger allows you to see the changes you make in real time on the web server while its running
+    #Also allows you to see error messages as well
     app.run(debug=True)
