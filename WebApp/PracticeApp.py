@@ -105,6 +105,10 @@ def details():
         username = session["user"]
         found_user = users.query.filter_by(uname = username).first()
         email = session["email"]
+        if not email:
+            email = found_user.email
+        if not email:
+            return redirect(url_for("login"))
         age = session["age"]
         picture = session["image"]
     else:
