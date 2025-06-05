@@ -3,7 +3,7 @@
 {% block content %}
 <h2>Read A Book</h2>
 
-<!-- This is where we store the path to the pdf so that we can call it in our script function to obtain the pdf itself
+<!-- This is where we store the path to the pdf so that we can call it in our script function to obtain the pdf itself,
   but we keep it hidden because we don't need it showing on our screen-->
 <p class="hidden" id="book">{{ cart }}</p>
 
@@ -20,7 +20,7 @@
     /* This will get the pdf path from our hidden <p> which holds the path in it*/
     const pdfPath = document.getElementById("book").textContent.trim();
 
-    // We will use document to create an iframe and send the path to it so that it can display the document
+    /* We will use document to create an iframe and send the path to it so that it can display the document */
     const iframe = document.createElement("iframe");
     iframe.src = pdfPath;
     iframe.width = "100%";

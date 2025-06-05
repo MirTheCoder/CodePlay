@@ -2,11 +2,15 @@
 {% block title %} <b>seeReviews</b> {% endblock %}
 {% block content %}
 <h2 class="bangers" style="text-align: center; font-size: 45px">Here are your Reviews</h2>
+/* Checks first to see if the cart has a value associated with it*/
 {% if cart %}
+/* Loops through the cart to display the name of the person, the rating, and the reasoning
+of each review pertaining to the book the selected to see the reviews*/
 {% for reviews in cart %}
     <p>Name: {{reviews.name}}</p>
     <p>Rating: {{reviews.review}}</p>
     <p>reason: {{reviews.reason}}</p>
+/* Used to create a line that separates each review*/
 <hr>
     {% endfor %}
 {% endif %}

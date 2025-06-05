@@ -75,16 +75,21 @@ details {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
+        /* The title of the book that we will be sending over to the backend */
           title: bookElement.textContent.trim(),
         })
       })
       .then(response => response.json())
       .then(data => {
+      /* Before navigating to the next page, a pop up will appear to have the user confirm that
+      they are ready to navigate off of the page*/
         if(confirm(data.message)){
+            /* Calls on the seeReviews route via get request*/
             window.location.href = "http://127.0.0.1:5000/seeReviews";
         }
       })
-      .catch(error => alert("Error: " + error)); // fixed error display too
+      /* Catch an error if it be present*/
+      .catch(error => alert("Error: " + error));
 
         });
     });
@@ -103,8 +108,10 @@ letter.addEventListener("click", function() {
             /* trim removes the white space at the beginning and end of the text, and text content just gets the text
             content of the list value*/
             store = bookElement.textContent.trim();
+            /* We will first clear local storage and then save the book title in local storage for later*/
             localStorage.clear();
             localStorage.setItem("bookTitle", store);
+            /* allows the form for rating to now be shown*/
             form.classList.remove("hide");
         });
     });
@@ -146,6 +153,7 @@ letter.addEventListener("click", function() {
 
 
     function switcher(event){
+    /* If the see reviews option is selected, then we will hide the option to write a review*/
             if (review.classList.contains("hide")) {
             review.classList.remove("hide");
         }
@@ -159,6 +167,8 @@ letter.addEventListener("click", function() {
 
 
     function add(event){
+    /* If the option to write a review is selected, then we will hide the
+    ability to see the reviews*/
     if (letter.classList.contains("hide")) {
             letter.classList.remove("hide");
         }

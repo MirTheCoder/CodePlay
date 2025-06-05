@@ -63,17 +63,22 @@ class reviews(db.Model):
 #Here we have our various routes that we will call to access the templates that we need
 @app.route("/")
 def home():
+    #This will bring us to our starting page or home template
     return render_template("home.html")
 
 
 
 @app.route("/read")
+#This will bring the user to a place where they can select from the options of books within
+#our library
 def read():
+    #This is used to get all the books within the library so that we can send it over
+    #To the read template
     booker = books.query.all()
     return render_template("read.html", cart=booker)
 
 
-
+#This will take us to the page that will allow us to rate the books
 @app.route("/rate")
 def rate():
     #Here is how we will gather all the data from our books database model
@@ -82,13 +87,16 @@ def rate():
     return render_template("rate.html", cart = storage)
 
 
-
+#This will take the user to a page where they can upload a new book to the library and
+#add it to the database
 @app.route("/upload")
 def upload():
+    #Collects all the books in our library currently in order to actually read the book
     storage = books.query.all()
     return render_template("upload.html", cart=json.dumps([book.to_dict() for book in storage]))
 
-
+#This will take the user inputs from upload and use them in order to create an instance
+#of the book class in order to add it to the library database
 @app.route("/addBook", methods=["POST"])
 #This is the function we will use to take the users inputs and create a book
 def addBook():
@@ -116,7 +124,8 @@ def addBook():
         return jsonify({"title": "ERROR", "Writer": "ERROR"})
 
 
-
+#This will take the rating info that user input from the rate page and create an instance of
+#rate with it
 @app.route("/addReview", methods=["POST"])
 def addReview():
     try:
@@ -142,40 +151,60 @@ def addReview():
 #This method will load the reviews that people have written about different books, dependent on which book the user
 @app.route("/loadReviews", methods=["POST", "GET"])
 def loadReviews():
+    #Here we ask for the user data via json in order to receive the title of the book that they
+    #want to see the reviews of
     data = request.json
+    #This is where we will store the name of the book that the user wants to review
     name = data.get("title")
     #Use sessions to pass data from one app route to another
     session['review_title'] = name
+    #What we return to the HTML template or the fetch command
     return jsonify({"message": "Navigating to review seeing page"})
 
 
-
+#This method will be used to send over to the HTML the reviews that people have written on
+#book of interest
 @app.route("/seeReviews", methods=["POST", "GET"])
 def seeReviews():
+    #We will retrieve the title of the book from session
     title = session.get('review_title')
+    #Check to see if the title has a value in it
     if title:
+        #Used to collect all the reviews on the specified title
         storage = reviews.query.filter_by(title=title).all()
+        #Return the list of reviews to the template in order to display all the reviews for
+        #that book
         return render_template("seeReviews.html", cart=storage)
     else:
+        #renders just the template if title has no value in it
         return render_template("seeReviews.html")
 
-
+#This will take the title of the book the user wants to read and store it in a session
+#key value
 @app.route("/viewBook", methods=['POST','GET'])
 def viewBook():
+    #Used to get the title of the book that the user selected and bring it to the backend
     data = request.json
     word = data.get("title")
+    #Stores the title in session "book_title"
     session['book_title'] = word
+    #What we return back to the fetch command
     return jsonify({"message": "We are now going to navigate to the book for you to read"})
 
 
-
+#Used to send the correct path to the pdf or book that the user would like to read in order
+#for them to view it
 @app.route("/reader", methods=["POST","GET"])
 def reader():
+    #This will get the title and see if the title actually has a value stored inside it
     title = session.get('book_title')
     if title:
+        #If it does, then we will get the first occurrence of the book title
         reading = books.query.filter_by(title=title).first()
+        #We will call on the .send_pdf() attribute to get the pdf path of the book and
+        #send it to the users end
         return render_template("reader.html", cart = reading.send_pdf() )
-
+#Used to create the database if it is empty and not made yet
 with app.app_context():
     db.create_all()
 

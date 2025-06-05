@@ -30,6 +30,7 @@ letter.addEventListener("click", function() {
                 "Content-Type": "application/json"
               },
               body: JSON.stringify({
+                /* This is the title that the user picks that we will be sending to the backend*/
                  title: bookElement.textContent.trim(),
               })
             })
@@ -37,9 +38,11 @@ letter.addEventListener("click", function() {
             .then(data => {
               /* We will alert the user that the book has been added to the database if it was truly successful*/
               alert("You selected: " + store);
+              /* calls on the reader option in order to actually display the book*/
               window.location.href = "http://127.0.0.1:5000/reader";
             })
-      .catch(error => alert("Error: " + error));
+         /* In case there are any errors*/
+        .catch(error => alert("Error: " + error));
         });
     });
 });
