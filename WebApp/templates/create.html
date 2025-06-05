@@ -11,15 +11,16 @@
     {% endwith %}
 
 <h2>Enter your account details to make a new account</h2>
-<form action="#" method = "post">
+<!-- This is where the user will input their credentials and information to create a new account-->
+<form action="#" method = "post" enctype="multipart/form-data">
     <p>User Name: </p>
-    <p><input type = "text" name="nm"></p>
+    <p><input type = "text" name="nm" required></p>
     <p>Password: </p>
-    <p><input type="text" name="ps"></p>
+    <p><input type="text" name="ps" required></p>
     <p>Email: </p>
-    <p><input type = "text" name = "em"></p>
+    <p><input type = "text" name = "em" required></p>
     <p>Age: </p>
-    <p><input type = "number" name = "ag"></p>
+    <p><input type = "number" name = "ag" required></p>
     <p>Profile Picture: </p>
     <p><input type ="file" name="png" accept ="image/*" required></p>
     <p><input type="submit" value="submit"></p>

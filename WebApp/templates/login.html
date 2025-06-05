@@ -16,6 +16,8 @@
     alert("This account does not exist, please enter a valid account or create an account");
     </script>
 {% endif %}
+<!-- If the user is not in session, then this form will run, and once submitted, it will refresh itself in order to
+check with the backend if the credentials are legit-->
 <form action="#" method = "post">
     <p>User Name: </p>
     <p><input type = "text" name="nm"></p>
@@ -23,7 +25,8 @@
     <p><input type="text" name="ps"></p>
     <p><input type="submit" value="submit"></p>
 </form>
-
+<!-- This will allow the user to navigate to the create page in order to create an account if they do not have one and
+ want to make an account or just want to make a new account for the fun of it-->
 <a href="http://127.0.0.1:5000/create">
     <button type="button"> Create Account</button>
 </a>

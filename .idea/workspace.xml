@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="With the help of iframe, I am now able to display the text visibly for the reader to read the book that they selected to read">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_28_25,_6_29_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_28_25__6_29_PM__Changes_.xml" beforeDir="false" />
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="Adding some comments to my web art project">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebArt/portfolio.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebArt/portfolio.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebArt/templates/EmbraceOfNature.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebArt/templates/EmbraceOfNature.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebArt/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebArt/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/PracticeApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/PracticeApp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/instance/base.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +72,7 @@
       <recent name="$PROJECT_DIR$/WebApp/WebApp2" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Books">
+  <component name="RunManager" selected="Python.PracticeApp">
     <configuration name="Books" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="CodePlay" />
       <option name="ENV_FILES" value="" />
@@ -104,11 +105,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/WebApp" />
+      <option name="WORKING_DIRECTORY" value="C:\pythonProject\CodePlay\WebApp" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/WebApp/WebApp2/PracticeApp.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/WebApp/PracticeApp.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -385,7 +386,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749072059922</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Adding some comments to my web art project">
+      <option name="closed" value="true" />
+      <created>1749095092580</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1749095092581</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -420,6 +429,7 @@
     <MESSAGE value="We added an option for the user to see eviews that have already been made or just add their own reviews" />
     <MESSAGE value="Added a reader that allows the user to read whatever book they have selected" />
     <MESSAGE value="With the help of iframe, I am now able to display the text visibly for the reader to read the book that they selected to read" />
-    <option name="LAST_COMMIT_MESSAGE" value="With the help of iframe, I am now able to display the text visibly for the reader to read the book that they selected to read" />
+    <MESSAGE value="Adding some comments to my web art project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding some comments to my web art project" />
   </component>
 </project>
