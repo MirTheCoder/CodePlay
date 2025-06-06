@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="made some changes to my webapp database">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_revert_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_revert__Changes_.xml" beforeDir="false" />
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="Adding some comments to my web art project">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/PracticeApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/PracticeApp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/instance/test.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/instance/base.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/create.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -393,23 +394,7 @@
       <option name="project" value="LOCAL" />
       <updated>1749095092581</updated>
     </task>
-    <task id="LOCAL-00027" summary="made a few edits and comments to my webapp project">
-      <option name="closed" value="true" />
-      <created>1749099082311</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1749099082311</updated>
-    </task>
-    <task id="LOCAL-00028" summary="made some changes to my webapp database">
-      <option name="closed" value="true" />
-      <created>1749137318590</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1749137318590</updated>
-    </task>
-    <option name="localTasksCounter" value="29" />
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -445,8 +430,6 @@
     <MESSAGE value="Added a reader that allows the user to read whatever book they have selected" />
     <MESSAGE value="With the help of iframe, I am now able to display the text visibly for the reader to read the book that they selected to read" />
     <MESSAGE value="Adding some comments to my web art project" />
-    <MESSAGE value="made a few edits and comments to my webapp project" />
-    <MESSAGE value="made some changes to my webapp database" />
-    <option name="LAST_COMMIT_MESSAGE" value="made some changes to my webapp database" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding some comments to my web art project" />
   </component>
 </project>
