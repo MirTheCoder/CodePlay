@@ -104,13 +104,13 @@ def details():
     if "user" in session:
         username = session["user"]
         found_user = users.query.filter_by(uname = username).first()
-        email = session["email"]
         age = session["age"]
         picture = session["image"]
+        email = session["email"]
     else:
         flash("You are not logged in","info")
         return redirect(url_for("login"))
-    return render_template("details.html", photo = picture, email = email, num = age)
+    return render_template("details.html", photo = picture, email = email, num = age, user = username)
 @app.route("/create",methods = ["POST", "GET"])
 def create():
     #This allows the user to create an account and have all their details stored within the session

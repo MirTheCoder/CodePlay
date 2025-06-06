@@ -2,9 +2,16 @@
 {% block title %} Details {% endblock %}
 
 {% block content %}
-<img src={{photo}} alt="Your Profile Picture" class="pic" width="400">
-<p>Your Email: {{email}}</p>
-<p>Your Age: {{num}}</p>
+<img style="border: 7px solid #555; border-radius: 10px; background-color: powderblue;" src="{{photo}}" alt="Your Profile Picture" class="pic" width="200">
+<p style="font-size: 42px">{{user}}</p>
+<p style="font-size: 32px"><b>Contact: </b></p>
+<p><u>Email: {{email}} </u></p>
+<p><u>Phone Number: N/A</u></p>
+<p style="font-size: 32px"><b>Personal Info: </b></p>
+<p><u> Age: {{num}}</u></p>
+<p><u>Address: 123 practice street, pretend town, fake state</u></p>
+<p style="font-size: 32px"><b>Education: </b></p>
+<p style="font-size: 32px; margin-left: 800px; margin-bottom: 450px"><b>Bio: </b></p>
 
 
 {% endblock %}
