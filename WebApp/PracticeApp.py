@@ -19,11 +19,21 @@ class users(db.Model):
     #Each row will be given a unique id, this is how we store data in the database view rows and columns
     _id = db.Column("id", db.Integer, primary_key=True)
     #These are the type of data that we are storing, but we give a limit of 100 to the amount columns that can be stored
-    uname = db.Column(db.String(100))
-    email = db.Column(db.String(100))
-    age = db.Column(db.Integer)
-    pswd = db.Column(db.String(100))
-    image = db.Column(db.String(20000000000000000000))
+    uname = db.Column(db.String(100), nullable=True, default=None)
+    email = db.Column(db.String(100), nullable=True, default=None)
+    age = db.Column(db.Integer, nullable=True, default=None)
+    pswd = db.Column(db.String(1000), nullable=True, default=None)
+    image = db.Column(db.Text, nullable=True, default=None)
+    education1 = db.Column(db.String(2000) , nullable=True, default=None)
+    education2 = db.Column(db.String(2000), nullable=True, default=None)
+    education3 = db.Column(db.String(2000), nullable=True, default=None)
+    activity1 = db.Column(db.String(2000), nullable=True, default=None)
+    activity2 = db.Column(db.String(2000), nullable=True, default=None)
+    activity3 = db.Column(db.String(2000), nullable=True, default=None)
+    phone = db.Column(db.Integer, nullable=True, default=None)
+    birth = db.Column(db.String(1000), nullable=True, default=None)
+    address = db.Column(db.String(1000), nullable=True, default=None)
+    bio = db.Column(db.Text, nullable=True, default=None)
     #Used to define each person or ID within our database
     def __init__(self, uname, email, age, pswd, image):
         self.uname = uname
@@ -45,15 +55,14 @@ def login():
     if request.method == "POST":
         #The session timer starts
         session.permanent = True
-        #Here we will retrive the username and password input by the user in the sign-in form if their session has expired,
+        #Here we will retrieve the username and password input by the user in the sign-in form if their session has expired,
         #and they have to do a post request or fill out a form to get in
         user = request.form["nm"]
         word = request.form["ps"]
         #session["user"] = user
-        found_user = users.query.filter_by(uname = user).first()
-        found_pswd = users.query.filter_by(pswd = word).first()
-        if found_user and found_pswd:
-            #If the username and password are found within the user database, tehn we will give the user access to the user page
+        found_user = users.query.filter_by(uname=user, pswd=word).first()
+        if found_user:
+            #If the username and password are found within the user database, then we will give the user access to the user page
             valid = False
             session["user"] = found_user.uname
             session["password"] = found_user.pswd
@@ -105,7 +114,6 @@ def details():
         username = session["user"]
         found_user = users.query.filter_by(uname = username).first()
         if found_user:
-            print("user has been found")
             age = found_user.age
             picture = found_user.image
             mail = found_user.email
@@ -152,6 +160,19 @@ def logout():
     session.pop("email", None)
     #Returns the user back to the login page
     return redirect(url_for("login"))
+@app.route("/edit")
+def edit():
+    if "user" in session:
+        username = session["user"]
+        found_user = users.query.filter_by(uname=username).first()
+        signed = True
+        image = found_user.image
+        email = found_user.email
+        return render_template("edit.html", pic = image, email = email)
+    else:
+        flash("You are not logged in", "info")
+        return redirect(url_for("login"))
+
 if __name__ == "__main__":
     with app.app_context():
         # Creates the database when the python file is run

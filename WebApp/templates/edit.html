@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Editor{% endblock %}
+{% block content %}
+<form action="#" method="post" enctype="multipart/form-data">
+    <input type="file" id="fileUpload" accept="image/*" style="display: none">
+
+    <label for="fileUpload">
+    <div style="overflow: auto;">
+      {% if pic %}
+        <img src="{{pic}}" alt="Click to upload"  width="300" style="cursor: pointer; border: 2px dashed gray; padding: 5px;
+        float: left; margin: 10px; width: 200px;">
+        <p style="font-size: 15px"><b>Click here to change the image</b></p>
+      {% else %}
+        <img src="static/profile_icon.png" alt="Click to upload"  width="300" style="cursor: pointer; border: 2px dashed gray; padding: 5px;
+        float: left; margin: 10px; width: 200px;">
+        <p>Click here to change the image</p>
+      {% endif %}
+    </div>
+    </label>
+
+    <p style="font-size: 32px"><b>Contact: </b></p>
+    <div class="image-text-container">
+    {% if email %}
+        <p>Email: {{email}}</p>
+    {% else %}
+        <p>Enter email:</p>
+    {% endif %}
+    </div>
+    <img src="static/edit_symbol.png" id="edit1" alt="Change Email" width="30px">
+    <input type="text" id="emailChange" class = "hide">
+    <div>
+
+    </div>
+</form>
+<script>
+    const pencil = document.getElementById("edit1");
+    const email = document.getElementById("emailChange");
+    pencil.addEventListener("click", function(){
+        email.classList.remove("hide");
+    });
+</script>
+{% endblock %}

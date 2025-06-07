@@ -4,12 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="Made some edits to the details page, to touch up on how the users details appear">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_30_25,_4_06_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_30_25__4_06_PM__Changes_.xml" beforeDir="false" />
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="Made some edits to the details page, to touch up on how the users details appear along. I also edited the database class as well">
+      <change afterPath="$PROJECT_DIR$/WebApp/static/edit_symbol.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WebApp/static/profile_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WebApp/templates/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_30_2025_9_56_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_30_2025_9_56_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/PracticeApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/PracticeApp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/create.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/user.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,12 +71,13 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\pythonProject\CodePlay\WebApp\static" />
       <recent name="C:\pythonProject\CodePlay\VidEdits\static" />
       <recent name="$PROJECT_DIR$/WebApp/WebApp2/templates" />
       <recent name="$PROJECT_DIR$/WebApp/WebApp2" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.portfolio">
+  <component name="RunManager" selected="Python.PracticeApp">
     <configuration name="Books" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="CodePlay" />
       <option name="ENV_FILES" value="" />
@@ -392,7 +399,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749095092581</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Made some edits to the details page, to touch up on how the users details appear along. I also edited the database class as well">
+      <option name="closed" value="true" />
+      <created>1749274739353</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1749274739353</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -428,6 +443,7 @@
     <MESSAGE value="Added a reader that allows the user to read whatever book they have selected" />
     <MESSAGE value="With the help of iframe, I am now able to display the text visibly for the reader to read the book that they selected to read" />
     <MESSAGE value="Adding some comments to my web art project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding some comments to my web art project" />
+    <MESSAGE value="Made some edits to the details page, to touch up on how the users details appear along. I also edited the database class as well" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made some edits to the details page, to touch up on how the users details appear along. I also edited the database class as well" />
   </component>
 </project>

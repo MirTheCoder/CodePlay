@@ -18,7 +18,11 @@
     }
 </style>
 <body style="background-color:lightgrey">
-<img style="border: 7px solid #555; border-radius: 10px; background-color: powderblue;" src="{{photo}}" alt="Your Profile Picture" class="pic" width="200">
+{% if photo %}
+    <img style="border: 7px solid #555; border-radius: 10px; background-color: powderblue;" src="{{photo}}" alt="Your Profile Picture" class="pic" width="200">
+{% else %}
+    <img style="border: 7px solid #555; border-radius: 10px; background-color: powderblue;" src="static/profile_icon.png" alt="Your Profile Picture" class="pic" width="200">
+{% endif %}
 <p style="font-size: 42px; color: black"> {{user}} </p>
 <p style="font-size: 32px"><b>Contact: </b></p>
 <p><u>Email: {{email}} </u></p>
