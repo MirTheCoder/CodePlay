@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="Adding some comments to my web art project">
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="Made some edits to the details page, to touch up on how the users details appear">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_30_25,_4_06_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_30_25__4_06_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/PracticeApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/PracticeApp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/instance/base.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/templates/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/create.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/details.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +70,7 @@
       <recent name="$PROJECT_DIR$/WebApp/WebApp2" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.PracticeApp">
+  <component name="RunManager" selected="Python.portfolio">
     <configuration name="Books" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="CodePlay" />
       <option name="ENV_FILES" value="" />

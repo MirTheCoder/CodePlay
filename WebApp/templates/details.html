@@ -2,16 +2,48 @@
 {% block title %} Details {% endblock %}
 
 {% block content %}
+
+<style>
+    .word{
+        background-color: grey;
+        border: 7px solid #555;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 18px;
+        font-color: white;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+
+    }
+</style>
+<body style="background-color:lightgrey">
 <img style="border: 7px solid #555; border-radius: 10px; background-color: powderblue;" src="{{photo}}" alt="Your Profile Picture" class="pic" width="200">
-<p style="font-size: 42px">{{user}}</p>
+<p style="font-size: 42px; color: black"> {{user}} </p>
 <p style="font-size: 32px"><b>Contact: </b></p>
 <p><u>Email: {{email}} </u></p>
 <p><u>Phone Number: N/A</u></p>
 <p style="font-size: 32px"><b>Personal Info: </b></p>
 <p><u> Age: {{num}}</u></p>
+<p><u>Birthday: N/A</u></p>
 <p><u>Address: 123 practice street, pretend town, fake state</u></p>
 <p style="font-size: 32px"><b>Education: </b></p>
-<p style="font-size: 32px; margin-left: 800px; margin-bottom: 450px"><b>Bio: </b></p>
-
-
+<div style="transform: translate(800px, -850px); max-width: 600px;"  >
+    <p style="font-size: 32px;"><b>Bio: </b></p>
+    <p style="color: white; " class="word">
+    This is just  practice bio in order to see just how things look on the screen but let us just start by just talking
+    about a bunch of stuff that doesn't really matter because I honestly am just testing out the system to see how
+    things look and the view on this page. It is pretty cool and phenomenal the amount of things you can do with code
+    and the opportunists that it gives you. So much beauty in code, and it definitely is a gift that was given to us
+    indeed. This is just  practice bio in order to see just how things look on the screen but let us just start by just
+    talking about a bunch of stuff that doesn't really matter because I honestly am just testing out the system  to
+    see how things look and the view on this page. It is pretty cool and phenomenal the amount of things you can do
+    with code and the opportunists that it gives you. So much beauty in code, and it definitely is a gift that was
+    given to us indeed</p>
+    <p style="font-size: 32px;"><b>Activities/Hobbies: </b></p>
+    <p style="color: white; " class="word">Activity 1: </p>
+    <p style="color: white; " class="word">Activity 2: </p>
+    <p style="color: white; " class="word">Activity 3: </p>
+</div>
+</body>
 {% endblock %}

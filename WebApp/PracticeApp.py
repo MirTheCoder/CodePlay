@@ -23,7 +23,7 @@ class users(db.Model):
     email = db.Column(db.String(100))
     age = db.Column(db.Integer)
     pswd = db.Column(db.String(100))
-    image_file = db.Column(db.String(20000000000000000000))
+    image = db.Column(db.String(20000000000000000000))
     #Used to define each person or ID within our database
     def __init__(self, uname, email, age, pswd, image):
         self.uname = uname
@@ -80,7 +80,7 @@ def user():
     if "user" in session:
         user = session["user"]
         flash("Login successful", "info")
-        #In the user page, the user can add their email and it will be saved within the database for their specific user
+        #In the user page, the user can add their email, and it will be saved within the database for their specific user
         if request.method == "POST":
             email = request.form["email"]
             session["email"] = email
@@ -104,13 +104,15 @@ def details():
     if "user" in session:
         username = session["user"]
         found_user = users.query.filter_by(uname = username).first()
-        email = session["email"]
-        age = session["age"]
-        picture = session["image"]
+        if found_user:
+            print("user has been found")
+            age = found_user.age
+            picture = found_user.image
+            mail = found_user.email
     else:
         flash("You are not logged in","info")
         return redirect(url_for("login"))
-    return render_template("details.html", photo = picture, email = email, num = age)
+    return render_template("details.html", photo = picture, email = mail, num = age, user = username)
 @app.route("/create",methods = ["POST", "GET"])
 def create():
     #This allows the user to create an account and have all their details stored within the session
