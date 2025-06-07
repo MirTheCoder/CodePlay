@@ -28,13 +28,25 @@
     </div>
     <img src="static/edit_symbol.png" id="edit1" alt="Change Email" width="30px">
     <input type="text" id="emailChange" class = "hide">
+    <div class="image-text-container">
+    {% if phone %}
+        <p>Phone Number: {{phone}}</p>
+    {% else %}
+        <p>Enter Phone Number:</p>
+    {% endif %}
+    </div>
+    <img src="static/edit_symbol.png" id="edit2" alt="Change Email" width="30px">
+    <input type="number">
     <div>
 
     </div>
+    <button type="submit"> Submit Changes</button>
 </form>
 <script>
     const pencil = document.getElementById("edit1");
+    const pencil1 = document.getElementById("edit2");
     const email = document.getElementById("emailChange");
+    const email2 = document.getElementById("phoneChange");
     pencil.addEventListener("click", function(){
         email.classList.remove("hide");
     });
