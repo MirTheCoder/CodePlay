@@ -2,7 +2,7 @@
 {% block title %}Editor{% endblock %}
 {% block content %}
 <form action="#" method="post" enctype="multipart/form-data">
-    <input type="file" id="fileUpload" accept="image/*" style="display: none">
+    <input type="file" id="fileUpload" accept="image/*" style="display: none" name="image">
 
     <label for="fileUpload">
     <div style="overflow: auto;">
@@ -27,7 +27,7 @@
     {% endif %}
     </div>
     <img src="static/edit_symbol.png" id="edit1" alt="Change Email" width="30px">
-    <input type="text" id="emailChange" class = "hide">
+    <input type="text" id="emailChange" class = "hide" name="email">
     <div class="image-text-container">
     {% if phone %}
         <p>Phone Number: {{phone}}</p>
@@ -36,9 +36,18 @@
     {% endif %}
     </div>
     <img src="static/edit_symbol.png" id="edit2" alt="Change Email" width="30px">
-    <input type="number">
-    <div>
-
+    <input type="number" id="phoneChange" class="hide">
+    <p style="font-size: 32px"><b>Education: </b></p>
+    <div class="image-text-container">
+    <p id="edu1" style="border: 2px dashed black; border-radius: 10px;">Add(optional)</p>
+        <textarea rows="3" cols="30" id="text1" name="active1" class="hide"></textarea>
+        <button type="button" style="padding: 3px" id="edu1.2">save</button>
+    <p id="edu2" class="hide" style="border: 2px dashed black; border-radius: 10px;">Add(optional)</p>
+        <textarea rows="3" cols="30" id="text2" name="active2" class="hide"></textarea>
+        <button type="button" style="padding: 3px" id="edu2.2" class="hide">save</button>
+    <p id="edu3" class="hide" style="border: 2px dashed black; border-radius: 10px;">Add(optional)</p>
+        <textarea rows="3" cols="30" id="text3" name="active3" class="hide"></textarea>
+        <button type="button" style="padding: 3px" id="edu3.2" class="hide">save</button>
     </div>
     <button type="submit"> Submit Changes</button>
 </form>
@@ -46,7 +55,17 @@
     const pencil = document.getElementById("edit1");
     const pencil1 = document.getElementById("edit2");
     const email = document.getElementById("emailChange");
-    const email2 = document.getElementById("phoneChange");
+    const phone = document.getElementById("phoneChange");
+    const act1 = document.getElementById("edu1");
+    const act2 = document.getElementById("edu2");
+    const act3 = document.getElementById("edu3");
+    const text1 = document.getElementById("text1");
+    const text2 = document.getElementById("text2");
+    const text3 = document.getElementById("text3");
+    const save1 = document.getElementById("edu1.2");
+    const save2 = document.getElementById("edu2.2");
+    const save3 = document.getElementById("edu3.2");
+
     pencil.addEventListener("click", function(){
         if(email.classList.contains("hide")){
             email.classList.remove("hide");
@@ -54,5 +73,23 @@
             email.classList.add("hide");
         }
     });
+
+    pencil1.addEventListener("click", function(){
+        if(phone.classList.contains("hide")){
+            phone.classList.remove("hide");
+        } else {
+            phone.classList.add("hide");
+        }
+    });
+
+    act1.addEventListener("click", function(){
+        if(text1.classList.contains("hide")){
+            text1.classList.remove("hide");
+        } else {
+            text1.classList.add("hide");
+        }
+    });
+
+
 </script>
 {% endblock %}

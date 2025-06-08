@@ -128,23 +128,34 @@ def create():
     if request.method == "POST":
         session.permanent = True
         user = request.form["nm"]
+        found_user = users.query.filter_by(uname=user).first()
         word = request.form["ps"]
+        found_pswd = users.query.filter_by(uname=word).first()
         email = request.form["em"]
-        age = request.form["ag"]
-        pic = request.files["png"]
-        session["user"] = user
-        session["word"] = word
-        session["email"] = email
-        session["age"] = age
-        picture = os.path.join("static", pic.filename)
-        pic.save(picture)
-        session["image"] = picture
-        usr = users(user, email, age, word, picture)
-        #add the new account to the database
-        db.session.add(usr)
-        db.session.commit()
-        #Sends the new user to the user page
-        return redirect(url_for("user"))
+        found_email = users.query.filter_by(uname=email).first()
+
+        if found_user:
+            flash("Username has already been taken","info")
+        elif found_pswd:
+            flash("Username has already been taken", "info")
+        elif found_email:
+            flash("Username has already been taken", "info")
+        else:
+            age = request.form["ag"]
+            pic = request.files["png"]
+            session["user"] = user
+            session["word"] = word
+            session["email"] = email
+            session["age"] = age
+            picture = os.path.join("static", "profilePic")
+            pic.save(picture)
+            session["image"] = picture
+            usr = users(user, email, age, word, picture)
+            #add the new account to the database
+            db.session.add(usr)
+            db.session.commit()
+            #Sends the new user to the user page
+            return redirect(url_for("user"))
     #Will return the user to the create template if they do not submit a post request
     return render_template("create.html")
     # found_user = users.query.filter_by(name = user).first()
@@ -163,15 +174,31 @@ def logout():
 @app.route("/edit")
 def edit():
     if "user" in session:
-        username = session["user"]
-        found_user = users.query.filter_by(uname=username).first()
-        signed = True
-        image = found_user.image
-        email = found_user.email
-        return render_template("edit.html", pic = image, email = email)
+        if request.method == "POST":
+            username = session["user"]
+            found_user = users.query.filter_by(uname=username).first()
+            image = request.files["image"]
+            if image:
+                path = found_user.image
+                image.save("path")
+            email = request.form["email"]
+            if email:
+                session["email"] = email
+                found_user.email = email
+
+
+        else:
+            username = session["user"]
+            found_user = users.query.filter_by(uname=username).first()
+            signed = True
+            image = found_user.image
+            email = found_user.email
+            phone = found_user.phone
+            return render_template("edit.html", pic = image, email = email, phone = phone)
     else:
         flash("You are not logged in", "info")
         return redirect(url_for("login"))
+
 
 if __name__ == "__main__":
     with app.app_context():
