@@ -185,7 +185,26 @@ def edit():
             if email:
                 session["email"] = email
                 found_user.email = email
-
+            phone = request.form["phone"]
+            if phone:
+                session["phone"] = phone
+                found_user.phone = phone
+            education1 = request.form["active1"]
+            education2 = request.form["active2"]
+            education3 = request.form["active3"]
+            if education1:
+                session["edu1"] = education1
+                found_user.education1 = education1
+            if education2:
+                session["edu2"] = education2
+                found_user.education2 = education2
+            if education3:
+                session["edu3"] = education3
+                found_user.education3 = education3
+            bio = request.form["bio"]
+            if bio:
+                session["bio"] = bio
+                found_user.bio = bio
 
         else:
             username = session["user"]
@@ -194,7 +213,8 @@ def edit():
             image = found_user.image
             email = found_user.email
             phone = found_user.phone
-            return render_template("edit.html", pic = image, email = email, phone = phone)
+            bio = found_user.bio
+            return render_template("edit.html", pic = image, email = email, phone = phone, bio = bio)
     else:
         flash("You are not logged in", "info")
         return redirect(url_for("login"))

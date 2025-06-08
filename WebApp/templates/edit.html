@@ -36,7 +36,7 @@
     {% endif %}
     </div>
     <img src="static/edit_symbol.png" id="edit2" alt="Change Email" width="30px">
-    <input type="number" id="phoneChange" class="hide">
+    <input type="number" id="phoneChange" class="hide" name="phone">
     <p style="font-size: 32px"><b>Education: </b></p>
     <div class="image-text-container">
     <p id="edu1" style="border: 2px dashed black; border-radius: 10px;">Add(optional)</p>
@@ -48,6 +48,14 @@
     <p id="edu3" class="hide" style="border: 2px dashed black; border-radius: 10px;">Add(optional)</p>
         <textarea rows="3" cols="30" id="text3" name="active3" class="hide"></textarea>
         <button type="button" style="padding: 3px" id="edu3.2" class="hide">save</button>
+    </div>
+    <div style="transform: translate(700px, -800px); max-width: 600px;">
+    <p style="font-size: 32px"><b>Bio: </b></p>
+        {% if bio %}
+            <textarea rows="15" cols="50" name="bio" class="text">{{bio}}</textarea>
+        {% else %}
+            <textarea rows="15" cols="50" name="bio" class="text">Add Bio Here</textarea>
+        {% endif %}
     </div>
     <button type="submit"> Submit Changes</button>
 </form>
@@ -87,6 +95,40 @@
             text1.classList.remove("hide");
         } else {
             text1.classList.add("hide");
+        }
+    });
+
+    act2.addEventListener("click", function(){
+        if(text2.classList.contains("hide")){
+            text2.classList.remove("hide");
+        } else {
+            text2.classList.add("hide");
+        }
+    });
+
+    act3.addEventListener("click", function(){
+        if(text3.classList.contains("hide")){
+            text3.classList.remove("hide");
+        } else {
+            text3.classList.add("hide");
+        }
+    });
+
+    save1.addEventListener("click", function(){
+        if(act2.classList.contains("hide")){
+            act2.classList.remove("hide");
+        }
+        if(save2.classList.contains("hide")){
+            save2.classList.remove("hide");
+        }
+    });
+
+    save2.addEventListener("click", function(){
+        if(act3.classList.contains("hide")){
+            act3.classList.remove("hide");
+        }
+        if(save3.classList.contains("hide")){
+            save3.classList.remove("hide");
         }
     });
 
