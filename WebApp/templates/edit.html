@@ -48,7 +48,11 @@
     const email = document.getElementById("emailChange");
     const email2 = document.getElementById("phoneChange");
     pencil.addEventListener("click", function(){
-        email.classList.remove("hide");
+        if(email.classList.contains("hide")){
+            email.classList.remove("hide");
+        } else {
+            email.classList.add("hide");
+        }
     });
 </script>
 {% endblock %}

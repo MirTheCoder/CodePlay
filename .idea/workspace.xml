@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="Commented my code to give the viewers an idea of what is going on">
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="more editing made towards my edit template">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/templates/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/edit.html" afterDir="false" />
     </list>
@@ -365,7 +365,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749057027165</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="more editing made towards my edit template">
+      <option name="closed" value="true" />
+      <created>1749314480857</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1749314480857</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -399,6 +407,7 @@
     <MESSAGE value="We made some edits to the rate class and addReview method" />
     <MESSAGE value="We added an option for the user to see eviews that have already been made or just add their own reviews" />
     <MESSAGE value="Added a reader that allows the user to read whatever book they have selected" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a reader that allows the user to read whatever book they have selected" />
+    <MESSAGE value="more editing made towards my edit template" />
+    <option name="LAST_COMMIT_MESSAGE" value="more editing made towards my edit template" />
   </component>
 </project>
