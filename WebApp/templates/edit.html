@@ -52,9 +52,9 @@
     <div style="transform: translate(700px, -800px); max-width: 600px;">
     <p style="font-size: 32px"><b>Bio: </b></p>
         {% if bio %}
-            <textarea rows="15" cols="50" name="bio" class="text">{{bio}}</textarea>
+            <textarea rows="15" cols="70" name="bio" class="text">{{bio}}</textarea>
         {% else %}
-            <textarea rows="15" cols="50" name="bio" class="text">Add Bio Here</textarea>
+            <textarea rows="15" cols="70" name="bio" class="text">Add Bio Here</textarea>
         {% endif %}
     </div>
     <button type="submit"> Submit Changes</button>
@@ -120,6 +120,9 @@
         }
         if(save2.classList.contains("hide")){
             save2.classList.remove("hide");
+        }
+        if(text1.value){
+            act1.textContent = text1.value();
         }
     });
 
