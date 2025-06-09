@@ -43,28 +43,30 @@ info as they see fit-->
     load the email into the template as well when it is rendered-->
     <div class="image-text-container">
     {% if email %}
-        <p>Email: {{email}}</p>
+        <p id="email1">Email: {{email}}</p>
     {% else %}
-        <p>Enter email:</p>
+        <p id="email2">Enter email:</p>
     {% endif %}
     </div>
     <!-- We will use this image to trigger the reveal of the text box that users can
     use to change their email-->
     <img src="static/edit_symbol.png" id="edit1" alt="Change Email" width="30px">
     <input type="text" id="emailChange" class = "hide" name="email">
+    <button class="hide" type="button" style="padding: 2.5px" id="emailSave">save</button>
     <!-- Checks to see if the phone number is there and if so, the phone number will
     also be loaded into the template upon rendering -->
     <div class="image-text-container">
     {% if phone %}
-        <p>Phone Number: {{phone}}</p>
+        <p id="number1">Phone Number: {{phone}}</p>
     {% else %}
-        <p>Enter Phone Number:</p>
+        <p id="number2">Enter Phone Number:</p>
     {% endif %}
     </div>
     <!-- We will use this image to trigger the reveal of the text box that users can
     use to change their email-->
     <img src="static/edit_symbol.png" id="edit2" alt="Change Email" width="30px">
     <input type="number" id="phoneChange" class="hide" name="phone">
+    <button class="hide" type="button" style="padding: 2.5px" id="phoneSave">save</button>
     <p style="font-size: 32px"><b>Education: </b></p>
     <!-- Here we wil give the user the ability to add up to three levels of education that
     they have received-->
@@ -89,6 +91,8 @@ info as they see fit-->
             {% else %}
                 <textarea rows="15" cols="70" name="bio" class="text">Add Bio Here</textarea>
             {% endif %}
+         <!-- Here we have the list of activities that the user can fill out in order to put on their profile
+         what activities they participate in-->
         <p style="font-size: 32px"><b>Activities: </b></p>
         <div class="image-text-container">
         <p id="hob1" style="border: 2px dashed black; border-radius: 10px;">Add(optional)</p>
@@ -102,16 +106,20 @@ info as they see fit-->
             <button type="button" style="padding: 3px" id="hob3.2" class="hide">save</button>
     </div>
     </div>
+    <!-- Here is our submit button that submits all the changes that we have made and sends them to our user database-->
     <div style="transform: translate(0px, -600px);">
     <p style="font-size: 32px"><b>Personal Info: </b></p>
     <button type="submit" > Submit Changes</button>
     </div>
 </form>
 <script>
+    /* Here we have all the elements of interest that are within the form right here by their ID's.*/
     const pencil = document.getElementById("edit1");
     const pencil1 = document.getElementById("edit2");
     const email = document.getElementById("emailChange");
     const phone = document.getElementById("phoneChange");
+    const emailSave = document.getElementById("emailSave");
+    const phoneSave = document.getElementById("phoneSave");
     const act1 = document.getElementById("edu1");
     const act2 = document.getElementById("edu2");
     const act3 = document.getElementById("edu3");
@@ -130,13 +138,27 @@ info as they see fit-->
     const push1 = document.getElementById("hob1.2");
     const push2 = document.getElementById("hob2.2");
     const push3 = document.getElementById("hob3.2");
+    const theEmail1 = document.getElementById("email1");
+    const theEmail2 = document.getElementById("email2");
+    const thePhone1 = document.getElementById("number1");
+    const thePhone2 = document.getElementById("number2");
 
+
+    /* These first two functions are meant to allow the user to toggle the input box for the phone number
+    and email if they would like to change it from what it currently is to something else*/
     pencil.addEventListener("click", function(){
         if(email.classList.contains("hide")){
             email.classList.remove("hide");
         } else {
             email.classList.add("hide");
         }
+
+        if(emailSave.classList.contains("hide")){
+            emailSave.classList.remove("hide");
+        } else {
+            emailSave.classList.add("hide");
+        }
+
     });
 
     pencil1.addEventListener("click", function(){
@@ -145,8 +167,57 @@ info as they see fit-->
         } else {
             phone.classList.add("hide");
         }
+
+        if(phoneSave.classList.contains("hide")){
+            phoneSave.classList.remove("hide");
+        } else {
+            phoneSave.classList.add("hide");
+        }
     });
 
+    emailSave.addEventListener("click", function(){
+        if(email.value){
+            if(!(theEmail1 == null)){
+                theEmail1.textContent = "Email: " + email.value;
+            }
+            if(!(theEmail2 == null)){
+                theEmail2.textContent = "Email: " + email.value;
+            }
+        } else {
+        const letter = "{{email}}";
+            if(letter){
+                theEmail1.textContent = "Email: " + letter;
+            } else {
+                theEmail2.textContent = "Enter Email: "
+            }
+        }
+    });
+
+    phoneSave.addEventListener("click", function(){
+        if(phone.value){
+            if(!(thePhone1 == null)){
+                thePhone1.textContent = "Phone Number: " + phone.value;
+            }
+            if(!(thePhone2 == null)){
+                thePhone2.textContent = "Phone Number: " + phone.value;
+            }
+        } else {
+        const num = {{phone}};
+            if(num){
+                if(!(thePhone1 == null)){
+                    thePhone1.textContent = "Phone Number: " + num;
+                }
+            } else {
+                if(!(thePhone2 == null)){
+                    thePhone2.textContent = "Enter Phone Number";
+                }
+            }
+        }
+    });
+
+    /* These next six functions allow the user to trigger the text box for either an activity that they would like to
+    add or an education that they would like to add. I have each activity box or education box linked up to their
+    respective text box*/
     act1.addEventListener("click", function(){
         if(text1.classList.contains("hide")){
             text1.classList.remove("hide");
@@ -195,6 +266,10 @@ info as they see fit-->
         }
     });
 
+    /* These next 6 boxes will basically reveal the next education or activity box once the user has saved their
+    previous edited activity or education box. Once the save button is clicked, it will reveal the choice to add another
+    activity or education (if they have not already added three yet). It will also set whatever the user put into the
+    textarea as the new education or activity as the user in the box displayed*/
     save1.addEventListener("click", function(){
         if(act2.classList.contains("hide")){
             act2.classList.remove("hide");
