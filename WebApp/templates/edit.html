@@ -2,6 +2,9 @@
 {% block title %}Editor{% endblock %}
 {% block content %}
 
+<!--log determines whether the user is actually logged in when on this page
+ so if log is true then we wil redirect the user to the login page, else, we will proceed
+ with the edit page-->
 {% if log %}
     <script>
     function showMessage() {
@@ -11,12 +14,18 @@
 
     showMessage();
     </script>
+<!-- This form will hold all the users current info, and allow the user to edit the
+info as they see fit-->
 {% endif %}
 <form action="#" method="post" enctype="multipart/form-data">
     <input type="file" id="fileUpload" accept="image/*" style="display: none" name="image">
-
+    <!-- Hre we label the file input with the users current profile image so that
+    when they click on their current image, it will pull up their files so that they can select
+    a new image if they want to-->
     <label for="fileUpload">
     <div style="overflow: auto;">
+      <!-- Checks to see if the user already has an image uploaded, but if they don't
+       then, they will just have an icon image that they can click on-->
       {% if pic %}
         <img src="{{pic}}" alt="Click to upload"  width="300" style="cursor: pointer; border: 2px dashed gray; padding: 5px;
         float: left; margin: 10px; width: 200px;">
@@ -30,6 +39,8 @@
     </label>
 
     <p style="font-size: 32px"><b>Contact: </b></p>
+    <!-- This checks to see if there is an email for the user and if so it will
+    load the email into the template as well when it is rendered-->
     <div class="image-text-container">
     {% if email %}
         <p>Email: {{email}}</p>
@@ -37,8 +48,12 @@
         <p>Enter email:</p>
     {% endif %}
     </div>
+    <!-- We will use this image to trigger the reveal of the text box that users can
+    use to change their email-->
     <img src="static/edit_symbol.png" id="edit1" alt="Change Email" width="30px">
     <input type="text" id="emailChange" class = "hide" name="email">
+    <!-- Checks to see if the phone number is there and if so, the phone number will
+    also be loaded into the template upon rendering -->
     <div class="image-text-container">
     {% if phone %}
         <p>Phone Number: {{phone}}</p>
@@ -46,9 +61,13 @@
         <p>Enter Phone Number:</p>
     {% endif %}
     </div>
+    <!-- We will use this image to trigger the reveal of the text box that users can
+    use to change their email-->
     <img src="static/edit_symbol.png" id="edit2" alt="Change Email" width="30px">
     <input type="number" id="phoneChange" class="hide" name="phone">
     <p style="font-size: 32px"><b>Education: </b></p>
+    <!-- Here we wil give the user the ability to add up to three levels of education that
+    they have received-->
     <div class="image-text-container">
     <p id="edu1" style="border: 2px dashed black; border-radius: 10px;">Add(optional)</p>
         <textarea rows="3" cols="30" id="text1" name="active1" class="hide"></textarea>
@@ -60,6 +79,9 @@
         <textarea rows="3" cols="30" id="text3" name="active3" class="hide"></textarea>
         <button type="button" style="padding: 3px" id="edu3.2" class="hide">save</button>
     </div>
+    <!-- Here we move the bio to the right and also check to see if a bio is present.
+     If a bio is present, then we wll load it onto the screen or page when the template
+     does render-->
     <div style="transform: translate(700px, -850px); max-width: 600px;">
         <p style="font-size: 32px"><b>Bio: </b></p>
             {% if bio %}
