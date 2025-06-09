@@ -172,9 +172,14 @@ def logout():
     #Returns the user back to the login page
     return redirect(url_for("login"))
 @app.route("/edit")
+#This method allows the user to edit their information that shows up on their details page or profile page
 def edit():
+    #Checks to see if the user is in session or logged in
     if "user" in session:
+        #Checks to see if the method or the route is receiving a post request
         if request.method == "POST":
+            #This is where we locate the user in our database and update all the attributes of the users profile
+            #they have edited so that we can then save them as their new information
             username = session["user"]
             found_user = users.query.filter_by(uname=username).first()
             image = request.files["image"]
@@ -205,19 +210,58 @@ def edit():
             if bio:
                 session["bio"] = bio
                 found_user.bio = bio
-
+            activity1 = request.form["hobby1"]
+            activity2 = request.form["hobby2"]
+            activity3 = request.form["hobby3"]
+            if activity1:
+                session["activity1"] = activity1
+                found_user.activity1 = activity1
+            if activity2:
+                session["activity2"] = activity2
+                found_user.activity2 = activity2
+            if activity3:
+                session["activity3"] = activity3
+                found_user.activity3 = activity3
+            age = request.files["age"]
+            if age:
+                session["age"] = age
+                found_user.age = age
+            address = request.files["address"]
+            if address:
+                session["address"] = address
+                found_user.address = address
+            birth = request.files["birth"]
+            if birth:
+                session["birth"] = birth
+                found_user.birth = birth
         else:
+            #If it is not a post request, then we will just upload current data of the user into the edit page
+            #So that the user can see what their data currently is
             username = session["user"]
+            #We first have to locate the specific users database
             found_user = users.query.filter_by(uname=username).first()
-            signed = True
             image = found_user.image
             email = found_user.email
             phone = found_user.phone
             bio = found_user.bio
-            return render_template("edit.html", pic = image, email = email, phone = phone, bio = bio)
+            education1 = found_user.education1
+            education2 = found_user.education2
+            education3 = found_user.education3
+            activity1 = found_user.activity1
+            activity2 = found_user.activity2
+            activity3 = found_user.activity3
+            age = found_user.age
+            address = found_user.address
+            birth = found_user.birth
+            #In the render template we will pass all the data of the user into the edit template as context so that it
+            #can show on the edit page
+            return render_template("edit.html", pic = image, email = email, phone = phone, bio = bio,
+            education1 = education1, education2 = education2, education3 = education3, activity1 = activity1,
+            activity2 = activity2, activity3 = activity3, age = age, address = address, birth = birth)
     else:
-        flash("You are not logged in", "info")
-        return redirect(url_for("login"))
+        log = True
+        #This will show if the user is not logged in
+        return render_template("edit.html", log = log)
 
 
 if __name__ == "__main__":

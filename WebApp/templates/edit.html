@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 {% block title %}Editor{% endblock %}
 {% block content %}
+
+{% if log %}
+    <script>
+    function showMessage() {
+        alert("Please log in first in order to access this point");
+        window.location.href = "http://127.0.0.1:5000/login"
+    }
+
+    showMessage();
+    </script>
+{% endif %}
 <form action="#" method="post" enctype="multipart/form-data">
     <input type="file" id="fileUpload" accept="image/*" style="display: none" name="image">
 
@@ -49,15 +60,30 @@
         <textarea rows="3" cols="30" id="text3" name="active3" class="hide"></textarea>
         <button type="button" style="padding: 3px" id="edu3.2" class="hide">save</button>
     </div>
-    <div style="transform: translate(700px, -800px); max-width: 600px;">
-    <p style="font-size: 32px"><b>Bio: </b></p>
-        {% if bio %}
-            <textarea rows="15" cols="70" name="bio" class="text">{{bio}}</textarea>
-        {% else %}
-            <textarea rows="15" cols="70" name="bio" class="text">Add Bio Here</textarea>
-        {% endif %}
+    <div style="transform: translate(700px, -850px); max-width: 600px;">
+        <p style="font-size: 32px"><b>Bio: </b></p>
+            {% if bio %}
+                <textarea rows="15" cols="70" name="bio" class="text">{{bio}}</textarea>
+            {% else %}
+                <textarea rows="15" cols="70" name="bio" class="text">Add Bio Here</textarea>
+            {% endif %}
+        <p style="font-size: 32px"><b>Activities: </b></p>
+        <div class="image-text-container">
+        <p id="hob1" style="border: 2px dashed black; border-radius: 10px;">Add(optional)</p>
+            <textarea rows="3" cols="30" id="write1" name="hobby1" class="hide"></textarea>
+            <button type="button" style="padding: 3px" id="hob1.2">save</button>
+        <p id="hob2" class="hide" style="border: 2px dashed black; border-radius: 10px;">Add(optional)</p>
+            <textarea rows="3" cols="30" id="write2" name="hobby2" class="hide"></textarea>
+            <button type="button" style="padding: 3px" id="hob2.2" class="hide">save</button>
+        <p id="hob3" class="hide" style="border: 2px dashed black; border-radius: 10px;">Add(optional)</p>
+            <textarea rows="3" cols="30" id="write3" name="hobby3" class="hide"></textarea>
+            <button type="button" style="padding: 3px" id="hob3.2" class="hide">save</button>
     </div>
-    <button type="submit"> Submit Changes</button>
+    </div>
+    <div style="transform: translate(0px, -600px);">
+    <p style="font-size: 32px"><b>Personal Info: </b></p>
+    <button type="submit" > Submit Changes</button>
+    </div>
 </form>
 <script>
     const pencil = document.getElementById("edit1");
@@ -67,12 +93,21 @@
     const act1 = document.getElementById("edu1");
     const act2 = document.getElementById("edu2");
     const act3 = document.getElementById("edu3");
+    const hob1 = document.getElementById("hob1");
+    const hob2 = document.getElementById("hob2");
+    const hob3 = document.getElementById("hob3");
     const text1 = document.getElementById("text1");
     const text2 = document.getElementById("text2");
     const text3 = document.getElementById("text3");
+    const write1 = document.getElementById("write1");
+    const write2 = document.getElementById("write2");
+    const write3 = document.getElementById("write3");
     const save1 = document.getElementById("edu1.2");
     const save2 = document.getElementById("edu2.2");
     const save3 = document.getElementById("edu3.2");
+    const push1 = document.getElementById("hob1.2");
+    const push2 = document.getElementById("hob2.2");
+    const push3 = document.getElementById("hob3.2");
 
     pencil.addEventListener("click", function(){
         if(email.classList.contains("hide")){
@@ -98,11 +133,27 @@
         }
     });
 
+    hob1.addEventListener("click", function(){
+        if(write1.classList.contains("hide")){
+            write1.classList.remove("hide");
+        } else {
+            write1.classList.add("hide");
+        }
+    });
+
     act2.addEventListener("click", function(){
         if(text2.classList.contains("hide")){
             text2.classList.remove("hide");
         } else {
             text2.classList.add("hide");
+        }
+    });
+
+    hob2.addEventListener("click", function(){
+        if(write2.classList.contains("hide")){
+            write2.classList.remove("hide");
+        } else {
+            write2.classList.add("hide");
         }
     });
 
@@ -114,6 +165,14 @@
         }
     });
 
+    hob3.addEventListener("click", function(){
+        if(write3.classList.contains("hide")){
+            write3.classList.remove("hide");
+        } else {
+            write3.classList.add("hide");
+        }
+    });
+
     save1.addEventListener("click", function(){
         if(act2.classList.contains("hide")){
             act2.classList.remove("hide");
@@ -122,7 +181,23 @@
             save2.classList.remove("hide");
         }
         if(text1.value){
-            act1.textContent = text1.value();
+            act1.textContent = text1.value;
+        } else {
+            act1.textContent = "Add(optional)"
+        }
+    });
+
+    push1.addEventListener("click", function(){
+        if(hob2.classList.contains("hide")){
+            hob2.classList.remove("hide");
+        }
+        if(push2.classList.contains("hide")){
+            push2.classList.remove("hide");
+        }
+        if(write1.value){
+            hob1.textContent = write1.value;
+        } else {
+            hob1.textContent = "Add(optional)"
         }
     });
 
@@ -133,7 +208,45 @@
         if(save3.classList.contains("hide")){
             save3.classList.remove("hide");
         }
+        if(text2.value){
+            act2.textContent = text2.value;
+        } else {
+            act2.textContent = "Add(optional)"
+
+        }
     });
+
+    push2.addEventListener("click", function(){
+        if(hob3.classList.contains("hide")){
+            hob3.classList.remove("hide");
+        }
+        if(push3.classList.contains("hide")){
+           push3.classList.remove("hide");
+        }
+        if(write2.value){
+            hob2.textContent = write2.value;
+        } else {
+            hob2.textContent = "Add(optional)"
+
+        }
+    });
+
+    save3.addEventListener("click", function(){
+        if(text3.value){
+            act3.textContent = text3.value;
+        } else {
+            act3.textContent = "Add(optional)"
+        }
+    });
+
+    push3.addEventListener("click", function(){
+        if(write3.value){
+            hob3.textContent = write3.value;
+        } else {
+            hob3.textContent = "Add(optional)"
+        }
+    });
+
 
 
 </script>
