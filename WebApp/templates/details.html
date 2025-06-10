@@ -23,27 +23,50 @@
 {% else %}
     <img style="border: 7px solid #555; border-radius: 10px; background-color: powderblue;" src="static/profile_icon.png" alt="Your Profile Picture" class="pic" width="200">
 {% endif %}
+
+
 <p style="font-size: 42px; color: black"> {{user}} </p>
 <p style="font-size: 32px"><b>Contact: </b></p>
+{% if email %}
 <p><u>Email: {{email}} </u></p>
+{% else %}
+<p><u>Email: N/A </u></p>
+{% endif %}
+
+{% if phone %}
 <p><u>Phone Number: {{phone}}</u></p>
+{% else %}
+<p><u>Phone Number: N/A</u></p>
+{% endif %}
+
 <p style="font-size: 32px"><b>Personal Info: </b></p>
+{% if age %}
 <p><u> Age: {{num}}</u></p>
+{% else %}
+<p><u> Age: N/A</u></p>
+{% endif %}
+
+{% if birth %}
+<p><u>Birthday: {{birth}}</u></p>
+{% else %}
 <p><u>Birthday: N/A</u></p>
-<p><u>Address: 123 practice street, pretend town, fake state</u></p>
+{% endif %}
+
+{% if address %}
+<p><u>Address: {{address}}</u></p>
+{% else %}
+<p><u>Address: N/A</u></p>
+{% endif %}
+
+
 <p style="font-size: 32px"><b>Education: </b></p>
 <div style="transform: translate(800px, -850px); max-width: 600px;"  >
     <p style="font-size: 32px;"><b>Bio: </b></p>
-    <p style="color: white; " class="word">
-    This is just  practice bio in order to see just how things look on the screen but let us just start by just talking
-    about a bunch of stuff that doesn't really matter because I honestly am just testing out the system to see how
-    things look and the view on this page. It is pretty cool and phenomenal the amount of things you can do with code
-    and the opportunists that it gives you. So much beauty in code, and it definitely is a gift that was given to us
-    indeed. This is just  practice bio in order to see just how things look on the screen but let us just start by just
-    talking about a bunch of stuff that doesn't really matter because I honestly am just testing out the system  to
-    see how things look and the view on this page. It is pretty cool and phenomenal the amount of things you can do
-    with code and the opportunists that it gives you. So much beauty in code, and it definitely is a gift that was
-    given to us indeed</p>
+    {% if bio %}
+    <p style="color: white; " class="word"> {{bio}}</p>
+    {% else %}
+    <p style="color: white; " class="word"> N/A</p>
+    {% endif %}
     <p style="font-size: 32px;"><b>Activities/Hobbies: </b></p>
     <p style="color: white; " class="word">Activity 1: </p>
     <p style="color: white; " class="word">Activity 2: </p>
