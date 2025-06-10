@@ -119,10 +119,15 @@ def details():
             age = found_user.age
             picture = found_user.image
             mail = found_user.email
+            phone = found_user.phone
+            brith = found_user.birth
+            address = found_user.address
+            bio = found_user.bio
     else:
         flash("You are not logged in","info")
         return redirect(url_for("login"))
-    return render_template("details.html", photo = picture, email = mail, num = age, user = username)
+    return render_template("details.html", photo = picture, email = mail, num = age, user = username,
+                           phone = phone, brith = brith, address = address, bio = bio)
 @app.route("/create",methods = ["POST", "GET"])
 def create():
     #This allows the user to create an account and have all their details stored within the session
