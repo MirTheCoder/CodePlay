@@ -84,6 +84,7 @@ info as they see fit-->
     <!-- Here we move the bio to the right and also check to see if a bio is present.
      If a bio is present, then we wll load it onto the screen or page when the template
      does render-->
+
     <div style="transform: translate(700px, -850px); max-width: 600px;">
         <p style="font-size: 32px"><b>Bio: </b></p>
             {% if bio %}
@@ -107,7 +108,7 @@ info as they see fit-->
     </div>
     </div>
     <!-- Here is our submit button that submits all the changes that we have made and sends them to our user database-->
-    <div style="transform: translate(0px, -600px);">
+    <div style="transform: translate(0px, -600px); position: absolute;">
     <p style="font-size: 32px"><b>Personal Info: </b></p>
 
     <div class="image-text-container">
@@ -378,7 +379,7 @@ info as they see fit-->
                 addressNext.textContent = "Address: " + address.value;
             }
         } else {
-        const num = {{address}};
+        const num = "{{address}}";
             if(num){
                 if(!(address1 == null)){
                     address1.textContent = "Address: " + num;

@@ -1,3 +1,5 @@
+
+
 from flask import Flask, redirect, url_for,render_template, request, session
 from flask import flash
 from datetime import timedelta
@@ -171,7 +173,7 @@ def logout():
     session.pop("email", None)
     #Returns the user back to the login page
     return redirect(url_for("login"))
-@app.route("/edit")
+@app.route("/edit", methods = ["POST", "GET"])
 #This method allows the user to edit their information that shows up on their details page or profile page
 def edit():
     #Checks to see if the user is in session or logged in
@@ -186,54 +188,89 @@ def edit():
             if image:
                 path = found_user.image
                 image.save("path")
+            else:
+                image = found_user.image
             email = request.form["email"]
             if email:
                 session["email"] = email
                 found_user.email = email
+            else:
+                email = found_user.email
             phone = request.form["phone"]
             if phone:
                 session["phone"] = phone
                 found_user.phone = phone
+            else:
+                phone = found_user.phone
             education1 = request.form["active1"]
             education2 = request.form["active2"]
             education3 = request.form["active3"]
             if education1:
                 session["edu1"] = education1
                 found_user.education1 = education1
+            else:
+                education1 = found_user.education1
             if education2:
                 session["edu2"] = education2
                 found_user.education2 = education2
+            else:
+                education2 = found_user.education2
             if education3:
                 session["edu3"] = education3
                 found_user.education3 = education3
+            else:
+                education3 = found_user.education3
             bio = request.form["bio"]
             if bio:
                 session["bio"] = bio
                 found_user.bio = bio
+            else:
+                bio = found_user.bio
+
             activity1 = request.form["hobby1"]
             activity2 = request.form["hobby2"]
             activity3 = request.form["hobby3"]
             if activity1:
                 session["activity1"] = activity1
                 found_user.activity1 = activity1
+            else:
+                activity1 = found_user.activity1
             if activity2:
                 session["activity2"] = activity2
                 found_user.activity2 = activity2
+            else:
+                activity2 = found_user.activity2
             if activity3:
                 session["activity3"] = activity3
                 found_user.activity3 = activity3
-            age = request.files["age"]
+            else:
+                activity3 = found_user.activity3
+            age = request.form["age"]
             if age:
                 session["age"] = age
                 found_user.age = age
-            address = request.files["address"]
+            else:
+                age = found_user.age
+            address = request.form["address"]
             if address:
                 session["address"] = address
                 found_user.address = address
-            birth = request.files["birth"]
+            else:
+                address = found_user.address
+            birth = request.form["birth"]
             if birth:
                 session["birth"] = birth
                 found_user.birth = birth
+            else:
+                birth = found_user.birth
+
+            db.session.commit()
+
+            # In the render template we will pass all the data of the user into the edit template as context so that it
+            # can show on the edit page
+            return render_template("edit.html", pic=image, email=email, phone=phone, bio=bio,
+            education1=education1, education2=education2, education3=education3, activity1=activity1,
+            activity2=activity2, activity3=activity3, age=age, address=address, birth=birth)
         else:
             #If it is not a post request, then we will just upload current data of the user into the edit page
             #So that the user can see what their data currently is
@@ -262,6 +299,7 @@ def edit():
         log = True
         #This will show if the user is not logged in
         return render_template("edit.html", log = log)
+
 
 
 if __name__ == "__main__":
