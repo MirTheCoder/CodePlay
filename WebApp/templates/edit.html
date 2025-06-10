@@ -63,8 +63,8 @@ info as they see fit-->
     {% endif %}
     </div>
     <!-- We will use this image to trigger the reveal of the text box that users can
-    use to change their email-->
-    <img src="static/edit_symbol.png" id="edit2" alt="Change Email" width="30px">
+    use to change their phone-->
+    <img src="static/edit_symbol.png" id="edit2" alt="Change Phone" width="30px">
     <input type="number" id="phoneChange" class="hide" name="phone">
     <button class="hide" type="button" style="padding: 2.5px" id="phoneSave">save</button>
     <p style="font-size: 32px"><b>Education: </b></p>
@@ -73,7 +73,7 @@ info as they see fit-->
     <div class="image-text-container">
     <p id="edu1" style="border: 2px dashed black; border-radius: 10px;">Add(optional)</p>
         <textarea rows="3" cols="30" id="text1" name="active1" class="hide"></textarea>
-        <button type="button" style="padding: 3px" id="edu1.2">save</button>
+        <button class="hide" type="button" style="padding: 3px" id="edu1.2">save</button>
     <p id="edu2" class="hide" style="border: 2px dashed black; border-radius: 10px;">Add(optional)</p>
         <textarea rows="3" cols="30" id="text2" name="active2" class="hide"></textarea>
         <button type="button" style="padding: 3px" id="edu2.2" class="hide">save</button>
@@ -97,7 +97,7 @@ info as they see fit-->
         <div class="image-text-container">
         <p id="hob1" style="border: 2px dashed black; border-radius: 10px;">Add(optional)</p>
             <textarea rows="3" cols="30" id="write1" name="hobby1" class="hide"></textarea>
-            <button type="button" style="padding: 3px" id="hob1.2">save</button>
+            <button class="hide" type="button" style="padding: 3px" id="hob1.2">save</button>
         <p id="hob2" class="hide" style="border: 2px dashed black; border-radius: 10px;">Add(optional)</p>
             <textarea rows="3" cols="30" id="write2" name="hobby2" class="hide"></textarea>
             <button type="button" style="padding: 3px" id="hob2.2" class="hide">save</button>
@@ -109,17 +109,69 @@ info as they see fit-->
     <!-- Here is our submit button that submits all the changes that we have made and sends them to our user database-->
     <div style="transform: translate(0px, -600px);">
     <p style="font-size: 32px"><b>Personal Info: </b></p>
-    <button type="submit" > Submit Changes</button>
+
+    <div class="image-text-container">
+    {% if age %}
+        <p id="age1">Age: {{age}}</p>
+    {% else %}
+        <p id="ageNext">Enter Age:</p>
+    {% endif %}
     </div>
+    <!-- We will use this image to trigger the reveal of the text box that users can
+    use to change their age-->
+    <img src="static/edit_symbol.png" id="edit3" alt="Change age" width="30px">
+    <input type="number" id="ageChange" class="hide" name="age">
+    <button class="hide" type="button" style="padding: 2.5px" id="ageSave">save</button>
+
+     <div class="image-text-container">
+    {% if birth %}
+        <p id="birth1">Birth Date: {{birth}}</p>
+    {% else %}
+        <p id="birthNext">Enter Birth Date:</p>
+    {% endif %}
+    </div>
+    <!-- We will use this image to trigger the reveal of the text box that users can
+    use to change their birthdate-->
+    <img src="static/edit_symbol.png" id="edit4" alt="Change birth" width="30px">
+    <input type="text" id="birthChange" class="hide" name="birth">
+    <button class="hide" type="button" style="padding: 2.5px" id="birthSave">save</button>
+
+    <div class="image-text-container">
+    {% if address %}
+        <p id="address1">Address: {{address}}</p>
+    {% else %}
+        <p id="addressNext">Enter Address:</p>
+    {% endif %}
+    </div>
+    <!-- We will use this image to trigger the reveal of the text box that users can
+    use to change their address-->
+    <img src="static/edit_symbol.png" id="edit5" alt="Change Address" width="30px">
+    <input type="text" id="addressChange" class="hide" name="address">
+    <button class="hide" type="button" style="padding: 2.5px" id="addressSave">save</button>
+
+    <button type="submit" style="transform: translate(0px, 50px);" > Submit Changes</button>
+    </div>
+
+
+
 </form>
 <script>
     /* Here we have all the elements of interest that are within the form right here by their ID's.*/
     const pencil = document.getElementById("edit1");
     const pencil1 = document.getElementById("edit2");
+    const pencil2 = document.getElementById("edit3");
+    const pencil3 = document.getElementById("edit4");
+    const pencil4 = document.getElementById("edit5");
     const email = document.getElementById("emailChange");
     const phone = document.getElementById("phoneChange");
+    const age = document.getElementById("ageChange");
+    const birth = document.getElementById("birthChange");
+    const address = document.getElementById("addressChange");
     const emailSave = document.getElementById("emailSave");
     const phoneSave = document.getElementById("phoneSave");
+    const addressSave = document.getElementById("addressSave");
+    const birthSave = document.getElementById("birthSave");
+    const ageSave = document.getElementById("ageSave");
     const act1 = document.getElementById("edu1");
     const act2 = document.getElementById("edu2");
     const act3 = document.getElementById("edu3");
@@ -142,6 +194,12 @@ info as they see fit-->
     const theEmail2 = document.getElementById("email2");
     const thePhone1 = document.getElementById("number1");
     const thePhone2 = document.getElementById("number2");
+    const birth1 = document.getElementById("birth1");
+    const birthNext = document.getElementById("birthNext");
+    const age1 = document.getElementById("age1");
+    const ageNext = document.getElementById("ageNext");
+    const address1 = document.getElementById("address1");
+    const addressNext = document.getElementById("addressNext");
 
 
     /* These first two functions are meant to allow the user to toggle the input box for the phone number
@@ -175,6 +233,59 @@ info as they see fit-->
         }
     });
 
+
+
+
+    /* These next three functions are meant to allow the user to toggle the input box for the age,
+     birth, and address if they would like to change it from what it currently is to something else*/
+    pencil2.addEventListener("click", function(){
+        if(age.classList.contains("hide")){
+            age.classList.remove("hide");
+        } else {
+            age.classList.add("hide");
+        }
+
+        if(ageSave.classList.contains("hide")){
+            ageSave.classList.remove("hide");
+        } else {
+            ageSave.classList.add("hide");
+        }
+
+    });
+
+
+    pencil3.addEventListener("click", function(){
+        if(birth.classList.contains("hide")){
+            birth.classList.remove("hide");
+        } else {
+            birth.classList.add("hide");
+        }
+
+        if(birthSave.classList.contains("hide")){
+            birthSave.classList.remove("hide");
+        } else {
+            birthSave.classList.add("hide");
+        }
+    });
+
+
+    pencil4.addEventListener("click", function(){
+        if(address.classList.contains("hide")){
+            address.classList.remove("hide");
+        } else {
+            address.classList.add("hide");
+        }
+
+        if(addressSave.classList.contains("hide")){
+            addressSave.classList.remove("hide");
+        } else {
+            addressSave.classList.add("hide");
+        }
+    });
+
+
+    /* These next two functions handle editing the email and phone values that are displayed
+    based off of the inputs of the user*/
     emailSave.addEventListener("click", function(){
         if(email.value){
             if(!(theEmail1 == null)){
@@ -215,6 +326,72 @@ info as they see fit-->
         }
     });
 
+
+    /* These next three functions handle editing the birth, address, and age values that are displayed
+    based off of the inputs of the user*/
+    birthSave.addEventListener("click", function(){
+        if(birth.value){
+            if(!(birth1 == null)){
+                birth1.textContent = "Birth: " + birth.value;
+            }
+            if(!(birthNext == null)){
+                birthNext.textContent = "Birth: " + birth.value;
+            }
+        } else {
+        const letter = "{{birth}}";
+            if(letter){
+                birth.textContent = "Birth: " + letter;
+            } else {
+                birth.textContent = "Enter Birth: "
+            }
+        }
+    });
+
+     ageSave.addEventListener("click", function(){
+        if(age.value){
+            if(!(age1 == null)){
+                age1.textContent = "Age: " + age.value;
+            }
+            if(!(ageNext == null)){
+                ageNext.textContent = "Age: " + age.value;
+            }
+        } else {
+        const num = {{age}};
+            if(num){
+                if(!(age1 == null)){
+                    age1.textContent = "Age: " + num;
+                }
+            } else {
+                if(!(ageNext == null)){
+                    ageNext.textContent = "Enter Age";
+                }
+            }
+        }
+    });
+
+    addressSave.addEventListener("click", function(){
+        if(address.value){
+            if(!(address1 == null)){
+                address1.textContent = "Address: " + address.value;
+            }
+            if(!(addressNext == null)){
+                addressNext.textContent = "Address: " + address.value;
+            }
+        } else {
+        const num = {{address}};
+            if(num){
+                if(!(address1 == null)){
+                    address1.textContent = "Address: " + num;
+                }
+            } else {
+                if(!(addressNext == null)){
+                    addressNext.textContent = "Enter Address:";
+                }
+            }
+        }
+    });
+
+
     /* These next six functions allow the user to trigger the text box for either an activity that they would like to
     add or an education that they would like to add. I have each activity box or education box linked up to their
     respective text box*/
@@ -224,6 +401,11 @@ info as they see fit-->
         } else {
             text1.classList.add("hide");
         }
+        if(save1.classList.contains("hide")){
+            save1.classList.remove("hide");
+        } else {
+            save1.classList.add("hide");
+        }
     });
 
     hob1.addEventListener("click", function(){
@@ -232,6 +414,14 @@ info as they see fit-->
         } else {
             write1.classList.add("hide");
         }
+
+        if(push1.classList.contains("hide")){
+            push1.classList.remove("hide");
+        } else {
+            push1.classList.add("hide");
+        }
+
+
     });
 
     act2.addEventListener("click", function(){
@@ -274,9 +464,9 @@ info as they see fit-->
         if(act2.classList.contains("hide")){
             act2.classList.remove("hide");
         }
-        if(save2.classList.contains("hide")){
-            save2.classList.remove("hide");
-        }
+
+
+
         if(text1.value){
             act1.textContent = text1.value;
         } else {
@@ -284,13 +474,21 @@ info as they see fit-->
         }
     });
 
+    act2.addEventListener("click", function(){
+       if(save2.classList.contains("hide")){
+            save2.classList.remove("hide");
+        } else {
+            save2.classList.add("hide");
+        }
+
+
+    });
+
     push1.addEventListener("click", function(){
         if(hob2.classList.contains("hide")){
             hob2.classList.remove("hide");
         }
-        if(push2.classList.contains("hide")){
-            push2.classList.remove("hide");
-        }
+
         if(write1.value){
             hob1.textContent = write1.value;
         } else {
@@ -298,13 +496,20 @@ info as they see fit-->
         }
     });
 
+    hob2.addEventListener("click", function(){
+        if (push2.classList.contains("hide")){
+            push2.classList.remove("hide");
+        } else {
+            push2.classList.add("hide");
+        }
+
+    });
+
     save2.addEventListener("click", function(){
         if(act3.classList.contains("hide")){
             act3.classList.remove("hide");
         }
-        if(save3.classList.contains("hide")){
-            save3.classList.remove("hide");
-        }
+
         if(text2.value){
             act2.textContent = text2.value;
         } else {
@@ -313,13 +518,21 @@ info as they see fit-->
         }
     });
 
+    act3.addEventListener("click", function(){
+
+        if(save3.classList.contains("hide")){
+            save3.classList.remove("hide");
+        } else {
+            save3.classList.add("hide");
+        }
+
+    });
+
     push2.addEventListener("click", function(){
         if(hob3.classList.contains("hide")){
             hob3.classList.remove("hide");
         }
-        if(push3.classList.contains("hide")){
-           push3.classList.remove("hide");
-        }
+
         if(write2.value){
             hob2.textContent = write2.value;
         } else {
@@ -327,6 +540,20 @@ info as they see fit-->
 
         }
     });
+
+    hob3.addEventListener("click", function(){
+
+
+        if(push3.classList.contains("hide")){
+           push3.classList.remove("hide");
+        } else {
+           push3.classList.add("hide");
+        }
+
+
+    });
+
+
 
     save3.addEventListener("click", function(){
         if(text3.value){
