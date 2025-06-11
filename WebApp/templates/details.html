@@ -60,7 +60,20 @@
 
 
 <p style="font-size: 32px"><b>Education: </b></p>
-<div style="transform: translate(800px, -850px); max-width: 600px;"  >
+<div style="display: inline-block">
+{% if education1 %}
+    <p style="color: white; " class="word"> {{education1}}</p>
+{% endif %}
+
+{% if education2 %}
+    <p style="color: white; " class="word"> {{education2}}</p>
+{% endif %}
+
+{% if education3 %}
+    <p style="color: white; " class="word"> {{education3}}</p>
+{% endif %}
+</div>
+    <div style=" transform: translate(800px, -950px); max-width: 600px;"  >
     <p style="font-size: 32px;"><b>Bio: </b></p>
     {% if bio %}
     <p style="color: white; " class="word"> {{bio}}</p>
@@ -68,9 +81,19 @@
     <p style="color: white; " class="word"> N/A</p>
     {% endif %}
     <p style="font-size: 32px;"><b>Activities/Hobbies: </b></p>
-    <p style="color: white; " class="word">Activity 1: </p>
-    <p style="color: white; " class="word">Activity 2: </p>
-    <p style="color: white; " class="word">Activity 3: </p>
+    <div style="display: inline-block">
+        {% if activity1 %}
+            <p style="color: white; " class="word"> {{activity1}}</p>
+        {% endif %}
+
+        {% if activity2 %}
+            <p style="color: white; " class="word"> {{activity2}}</p>
+        {% endif %}
+
+        {% if activity3 %}
+            <p style="color: white; " class="word"> {{activity3}}</p>
+        {% endif %}
+    </div>
 </div>
 </body>
 {% endblock %}

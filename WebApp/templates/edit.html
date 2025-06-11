@@ -85,6 +85,8 @@ info as they see fit-->
      If a bio is present, then we wll load it onto the screen or page when the template
      does render-->
 
+
+
     <div style="transform: translate(700px, -850px); max-width: 600px;">
         <p style="font-size: 32px"><b>Bio: </b></p>
             {% if bio %}
@@ -201,6 +203,62 @@ info as they see fit-->
     const ageNext = document.getElementById("ageNext");
     const address1 = document.getElementById("address1");
     const addressNext = document.getElementById("addressNext");
+
+
+    const degree1 = "{{education1}}";
+    const degree2 = "{{education2}}";
+    const degree3 = "{{education3}}";
+
+    const action1 = "{{activity1}}";
+    const action2 = "{{activity2}}";
+    const action3 = "{{activity3}}";
+
+
+    if(action1){
+        hob1.textContent = action1;
+        if(hob1.classList.contains("hide")){
+            hob1.classList.remove("hide");
+        }
+    }
+
+    if(action2){
+        hob2.textContent = action2;
+        if(hob2.classList.contains("hide")){
+            hob2.classList.remove("hide");
+        }
+    }
+
+    if(action3){
+        hob3.textContent = action3;
+        if(hob3.classList.contains("hide")){
+            hob3.classList.remove("hide");
+        }
+    }
+
+
+
+    if(degree1){
+        act1.textContent = degree1;
+        if(act1.classList.contains("hide")){
+            act1.classList.remove("hide");
+        }
+    }
+
+    if(degree2){
+        act2.textContent = degree2;
+        if(act2.classList.contains("hide")){
+            act2.classList.remove("hide");
+        }
+    }
+
+    if(degree3){
+        act3.textContent = degree3;
+        if(act3.classList.contains("hide")){
+            act3.classList.remove("hide");
+        }
+    }
+
+
 
 
     /* These first two functions are meant to allow the user to toggle the input box for the phone number
@@ -470,6 +528,8 @@ info as they see fit-->
 
         if(text1.value){
             act1.textContent = text1.value;
+        } else if(degree1) {
+            act1.textContent = degree1;
         } else {
             act1.textContent = "Add(optional)"
         }
@@ -492,6 +552,8 @@ info as they see fit-->
 
         if(write1.value){
             hob1.textContent = write1.value;
+        } else if(action1){
+            hob1.textContent = action1;
         } else {
             hob1.textContent = "Add(optional)"
         }
@@ -513,9 +575,10 @@ info as they see fit-->
 
         if(text2.value){
             act2.textContent = text2.value;
+        } else if(degree2){
+            act2.textContent = degree2;
         } else {
             act2.textContent = "Add(optional)"
-
         }
     });
 
@@ -536,9 +599,10 @@ info as they see fit-->
 
         if(write2.value){
             hob2.textContent = write2.value;
+        } else if(action2){
+            hob2.textContent = action2;
         } else {
-            hob2.textContent = "Add(optional)"
-
+            hob2.textContent = "Add(optional)";
         }
     });
 
@@ -559,6 +623,9 @@ info as they see fit-->
     save3.addEventListener("click", function(){
         if(text3.value){
             act3.textContent = text3.value;
+        } else if(degree3){
+
+            act3.textContent = degree3;
         } else {
             act3.textContent = "Add(optional)"
         }
@@ -567,8 +634,10 @@ info as they see fit-->
     push3.addEventListener("click", function(){
         if(write3.value){
             hob3.textContent = write3.value;
+        } else if(action3){
+            hob3.textContent = action3;
         } else {
-            hob3.textContent = "Add(optional)"
+            hob3.textContent = "Add(optional)";
         }
     });
 

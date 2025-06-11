@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = "QETYUIPKHGDAVXBM10928374"
 #We use this in order to have the user once logged in, have their session logged in for 13 minutes, this means that
 #for 13 minutes they will be logged in already or auto logged in
-app.permanent_session_lifetime = timedelta(minutes = 13)
+app.permanent_session_lifetime = timedelta(minutes = 20)
 db = SQLAlchemy()
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -123,11 +123,19 @@ def details():
             brith = found_user.birth
             address = found_user.address
             bio = found_user.bio
+            education1 = found_user.education1
+            education2 = found_user.education2
+            education3 = found_user.education3
+            activity1 = found_user.activity1
+            activity2 = found_user.activity2
+            activity3 = found_user.activity3
     else:
         flash("You are not logged in","info")
         return redirect(url_for("login"))
     return render_template("details.html", photo = picture, email = mail, num = age, user = username,
-                           phone = phone, brith = brith, address = address, bio = bio)
+                           phone = phone, brith = brith, address = address, bio = bio, education1 = education1
+                           , education2 = education2, education3 = education3, activity1 = activity1,
+            activity2 = activity2, activity3 = activity3)
 @app.route("/create",methods = ["POST", "GET"])
 def create():
     #This allows the user to create an account and have all their details stored within the session
