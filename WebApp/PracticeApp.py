@@ -16,7 +16,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 
-#Here is our database where we will store the image of each user
+#Here is our database where we will store the data for each user
 class users(db.Model):
     #Each row will be given a unique id, this is how we store data in the database view rows and columns
     _id = db.Column("id", db.Integer, primary_key=True)
@@ -43,6 +43,21 @@ class users(db.Model):
         self.age = age
         self.pswd = pswd
         self.image = image
+
+#This database is used to store the friendships between people
+class friends(db.Model):
+    # Each row will be given a unique id, this is how we store data in the database view rows and columns
+    _id = db.Column("id", db.Integer, primary_key=True)
+    friend1 = db.Column(db.String(2000))
+    friend2 = db.Column(db.String(2000))
+
+    # Used to define each friendship or ID within our database
+    def __init__(self, friend1, friend2):
+        self.friend1 = friend1
+        self.friend2 = friend2
+
+
+
 
 
 @app.route("/")
@@ -104,7 +119,8 @@ def user():
         else:
             if "email" in session:
                 email = session["email"]
-        return render_template("user.html", text = user, email = email)
+                return render_template("user.html", text = user, email = email)
+        return render_template("user.html", text=user)
     else:
         #If the user is not in session and has been logged out, then they will be denied the chance to access users and
         #will be returned to the login page to start up their session or create a new account
@@ -154,7 +170,8 @@ def create():
         found_pswd = users.query.filter_by(uname=word).first()
         email = request.form["em"]
         found_email = users.query.filter_by(uname=email).first()
-
+        #Checks to make sure that the username, password, or email is not matching any of the users within
+        #our database
         if found_user:
             flash("Username has already been taken","info")
         elif found_pswd:
@@ -163,7 +180,19 @@ def create():
             flash("Username has already been taken", "info")
         else:
             age = request.form["ag"]
+            #Since we made age optional, we have to check for age and see if a value ha been inputted for
+            #age, else we just assign its value to None
+            if not age:
+                age = None
             pic = request.files["png"]
+            # Since we made profile pic optional, we have to check for profile pic and see if a value ha been inputted
+            # for profile pic, else we just assign its value to None
+            if not pic:
+                picture = None
+            else:
+                picture = os.path.join("static", "profilePic")
+                pic.save(picture)
+                session["image"] = picture
             session["user"] = user
             session["word"] = word
             session["email"] = email
@@ -321,7 +350,19 @@ def edit():
         #This will show if the user is not logged in
         return render_template("edit.html", log = log)
 
-
+@app.route("/seeUsers", methods = ["POST", "GET"])
+def seeUsers():
+    if request.method == "POST":
+        name = request.form["person"]
+        found_user = found_user = users.query.filter_by(uname=name).first()
+        if found_user:
+            return redirect(url_for("seeDetails"))
+    #Used to get all the usernames within our database =)
+    usernames = [u.uname for u in users.query.with_entities(users.uname).all()]
+    return render_template("seeUsers.html", usernames = usernames)
+@app.route("/seeUsers", methods = ["POST", "GET"])
+def seeUsers():
+    return render_template("seeUsers.html")
 
 if __name__ == "__main__":
     with app.app_context():

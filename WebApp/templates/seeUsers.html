@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}User{% endblock %}
+{% block content %}
+<style>
+    /* Base style: look like a search bar */
+textarea.searchbar {
+  height: 40px;
+  padding: 0 15px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  resize: none; /* removes the draggable corner */
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* On focus: subtle highlight like a search input */
+textarea.searchbar:focus {
+  border-color: #66afe9;
+  box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
+}
+
+</style>
+<h2 style="text-align: center"><b>See Users</b></h2>
+<p style="text-align: center">Type name of user, whose profile you would like to view down below in the search bar</p>
+<form action="#" enctype="multipart/form-data" method="POST">
+<div style="text-align: center">
+    <textarea name="person" class="searchbar" style="border-radius: 10px;" rows="2" cols="80">Enter users name in here</textarea>
+    <label for="search">
+        <img src="static/searchLogo.png" alt="Search Users" width="40px">
+    </label>
+
+    <button type="submit" id="search" style="display: none"></button>
+</div>
+</form>
+{% endblock %}

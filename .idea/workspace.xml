@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="made some edits to allow all the info to appear in edit template and details template, now I have to troubleshoot the image portion of the edit template and also add the friends list attribute of the code">
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="made comments on my code">
+      <change afterPath="$PROJECT_DIR$/WebApp/static/searchLogo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WebApp/templates/seeUsers.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/PracticeApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/PracticeApp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/templates/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/create.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/templates/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/templates/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/user.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -458,7 +457,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749617386296</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="made comments on my code">
+      <option name="closed" value="true" />
+      <created>1749851021818</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1749851021818</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -473,7 +480,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="more edits to the files, I was successfully able to save the file that is selected and then call it again from a different html. We have also been able to toggle some of the options. Still working on calling the python functions to edit the videos via ffmpeg." />
     <MESSAGE value="We have started working on a new web applicaiton that has sessions, user login, and will potentially have a database to save data that is specific to the user who  is logged in." />
     <MESSAGE value="We have now added a section that allows users to enter in their email which we will later save under their name in the database that we hope to create eventually" />
     <MESSAGE value="We have started working on creating the database to store the users email and name. We are having some little errors for storing in the database but we are still working on it. Will hopefully be able to" />
@@ -498,6 +504,7 @@
     <MESSAGE value="Finished making the edit page editable so that the user can update the information. Next im gong to have to fix education adn activity so that they can display info that is already in the database. I was able to get the database to change the information, but now im going to have to edit the details to accommodate the new database attributes and make it show all the users credentials that they have added" />
     <MESSAGE value="made some edits to the details page along with the context that I pass within my details page rendering" />
     <MESSAGE value="made some edits to allow all the info to appear in edit template and details template, now I have to troubleshoot the image portion of the edit template and also add the friends list attribute of the code" />
-    <option name="LAST_COMMIT_MESSAGE" value="made some edits to allow all the info to appear in edit template and details template, now I have to troubleshoot the image portion of the edit template and also add the friends list attribute of the code" />
+    <MESSAGE value="made comments on my code" />
+    <option name="LAST_COMMIT_MESSAGE" value="made comments on my code" />
   </component>
 </project>
