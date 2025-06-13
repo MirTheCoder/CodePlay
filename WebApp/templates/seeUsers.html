@@ -32,6 +32,13 @@ textarea.searchbar:focus {
     </label>
 
     <button type="submit" id="search" style="display: none"></button>
+
+    {% if valid %}
+        <div>
+           <img src="{{img}}" alt="Users profile pic" width="60px">
+           <p>{{name}}</p>
+        </div>
+    {% endif %}
 </div>
 </form>
 {% endblock %}

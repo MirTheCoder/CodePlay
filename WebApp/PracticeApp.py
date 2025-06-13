@@ -352,17 +352,23 @@ def edit():
 
 @app.route("/seeUsers", methods = ["POST", "GET"])
 def seeUsers():
-    if request.method == "POST":
-        name = request.form["person"]
-        found_user = found_user = users.query.filter_by(uname=name).first()
-        if found_user:
-            return redirect(url_for("seeDetails"))
-    #Used to get all the usernames within our database =)
-    usernames = [u.uname for u in users.query.with_entities(users.uname).all()]
-    return render_template("seeUsers.html", usernames = usernames)
-@app.route("/seeUsers", methods = ["POST", "GET"])
-def seeUsers():
-    return render_template("seeUsers.html")
+   if "user" in session:
+       valid = False
+       if request.method == "POST":
+            name = request.form["person"]
+            found_user = found_user = users.query.filter_by(uname=name).first()
+            if found_user:
+                valid = True
+                name = found_user.uname
+                img = found_user.image
+                return render_template("seeUsers.html", text = valid, name = name, img = img)
+            else:
+                alert = "User does not exist"
+                return render_template("seeUsers.html", alert = alert)
+       return render_template("seeUsers.html")
+   else:
+       return redirect(url_for("login"))
+
 
 if __name__ == "__main__":
     with app.app_context():

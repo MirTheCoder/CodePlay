@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="made comments on my code">
-      <change afterPath="$PROJECT_DIR$/WebApp/static/searchLogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/templates/seeUsers.html" afterDir="false" />
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="creating a page that allows users to search for other users within the database">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/PracticeApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/PracticeApp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/templates/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/seeUsers.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/seeUsers.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -465,7 +463,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749851021818</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="creating a page that allows users to search for other users within the database">
+      <option name="closed" value="true" />
+      <created>1749855653850</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1749855653850</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -480,7 +486,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="We have started working on a new web applicaiton that has sessions, user login, and will potentially have a database to save data that is specific to the user who  is logged in." />
     <MESSAGE value="We have now added a section that allows users to enter in their email which we will later save under their name in the database that we hope to create eventually" />
     <MESSAGE value="We have started working on creating the database to store the users email and name. We are having some little errors for storing in the database but we are still working on it. Will hopefully be able to" />
     <MESSAGE value="We have edited the database" />
@@ -505,6 +510,7 @@
     <MESSAGE value="made some edits to the details page along with the context that I pass within my details page rendering" />
     <MESSAGE value="made some edits to allow all the info to appear in edit template and details template, now I have to troubleshoot the image portion of the edit template and also add the friends list attribute of the code" />
     <MESSAGE value="made comments on my code" />
-    <option name="LAST_COMMIT_MESSAGE" value="made comments on my code" />
+    <MESSAGE value="creating a page that allows users to search for other users within the database" />
+    <option name="LAST_COMMIT_MESSAGE" value="creating a page that allows users to search for other users within the database" />
   </component>
 </project>
