@@ -2,6 +2,7 @@
 {% block title %} Login Page {% endblock %}
 
 {% block content %}
+<!-- This renders all the flashed messages that were produce on the backend -->
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for msg in messages %}

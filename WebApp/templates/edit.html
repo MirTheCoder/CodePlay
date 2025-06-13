@@ -94,7 +94,7 @@ info as they see fit-->
             {% else %}
                 <textarea rows="15" cols="70" name="bio" class="text">Add Bio Here</textarea>
             {% endif %}
-         <!-- Here we have the list of activities that the user can fill out in order to put on their profile
+         <!-- Here we have the list of activities or hobbies that the user can fill out in order to put on their profile
          what activities they participate in-->
         <p style="font-size: 32px"><b>Activities: </b></p>
         <div class="image-text-container">
@@ -109,10 +109,11 @@ info as they see fit-->
             <button type="button" style="padding: 3px" id="hob3.2" class="hide">save</button>
     </div>
     </div>
-    <!-- Here is our submit button that submits all the changes that we have made and sends them to our user database-->
+    <!-- Here is the users personal info section -->
     <div style="transform: translate(0px, -600px); position: absolute;">
     <p style="font-size: 32px"><b>Personal Info: </b></p>
 
+    <!-- Checks to see if the users age has been inputted already into the system in order to load it up-->
     <div class="image-text-container">
     {% if age %}
         <p id="age1">Age: {{age}}</p>
@@ -125,7 +126,8 @@ info as they see fit-->
     <img src="static/edit_symbol.png" id="edit3" alt="Change age" width="30px">
     <input type="number" id="ageChange" class="hide" name="age">
     <button class="hide" type="button" style="padding: 2.5px" id="ageSave">save</button>
-
+    <!-- Checks to see if the users date of birthdate is already in the system so that we can upload it
+     to the edit template-->
      <div class="image-text-container">
     {% if birth %}
         <p id="birth1">Birth Date: {{birth}}</p>
@@ -139,6 +141,8 @@ info as they see fit-->
     <input type="text" id="birthChange" class="hide" name="birth">
     <button class="hide" type="button" style="padding: 2.5px" id="birthSave">save</button>
 
+    <!-- Checks to see if the users address is already in the system so that we can upload it
+     to the edit template-->
     <div class="image-text-container">
     {% if address %}
         <p id="address1">Address: {{address}}</p>
@@ -151,7 +155,7 @@ info as they see fit-->
     <img src="static/edit_symbol.png" id="edit5" alt="Change Address" width="30px">
     <input type="text" id="addressChange" class="hide" name="address">
     <button class="hide" type="button" style="padding: 2.5px" id="addressSave">save</button>
-
+    <!-- Used to submit the edits made by the user to their information-->
     <button type="submit" style="transform: translate(0px, 50px);" > Submit Changes</button>
     </div>
 
@@ -204,7 +208,7 @@ info as they see fit-->
     const address1 = document.getElementById("address1");
     const addressNext = document.getElementById("addressNext");
 
-
+    /* Here we collect or call all the education and activity that has been passed into the edit rendering */
     const degree1 = "{{education1}}";
     const degree2 = "{{education2}}";
     const degree3 = "{{education3}}";
@@ -213,7 +217,8 @@ info as they see fit-->
     const action2 = "{{activity2}}";
     const action3 = "{{activity3}}";
 
-
+    /* Here we check if the three educations and three activities have a value assigned to them, and if they do
+     then we will upload them here and also remove hide from the corresponding <p> tag*/
     if(action1){
         hob1.textContent = action1;
         if(hob1.classList.contains("hide")){

@@ -104,7 +104,7 @@ def user():
         else:
             if "email" in session:
                 email = session["email"]
-        return render_template("user.html", text = user)
+        return render_template("user.html", text = user, email = email)
     else:
         #If the user is not in session and has been logged out, then they will be denied the chance to access users and
         #will be returned to the login page to start up their session or create a new account
@@ -112,9 +112,11 @@ def user():
         return redirect(url_for("login"))
 @app.route("/details")
 def details():
+    #Here we check to see if the user is in session
     if "user" in session:
         username = session["user"]
         found_user = users.query.filter_by(uname = username).first()
+        #If the user data is found in the database, then we will collect all teh users information to display
         if found_user:
             age = found_user.age
             picture = found_user.image
@@ -130,13 +132,17 @@ def details():
             activity2 = found_user.activity2
             activity3 = found_user.activity3
     else:
+        #this will only pop up if the user is not logged in and tries to access the details page
         flash("You are not logged in","info")
+        #if the user is not logged in, then we will redirect the user to the login page
         return redirect(url_for("login"))
+        #We pass the information into the details page to display the users details
     return render_template("details.html", photo = picture, email = mail, num = age, user = username,
                            phone = phone, brith = brith, address = address, bio = bio, education1 = education1
                            , education2 = education2, education3 = education3, activity1 = activity1,
             activity2 = activity2, activity3 = activity3)
 @app.route("/create",methods = ["POST", "GET"])
+#This is used to help create a new user within the database
 def create():
     #This allows the user to create an account and have all their details stored within the session
     #basically, their data will be saved in the session
@@ -195,6 +201,7 @@ def edit():
         if request.method == "POST":
             #This is where we locate the user in our database and update all the attributes of the users profile
             #they have edited so that we can then save them as their new information
+            #We will also just use the user database info if the user does not edit their information with the edit page
             username = session["user"]
             found_user = users.query.filter_by(uname=username).first()
             image = request.files["image"]
@@ -277,6 +284,7 @@ def edit():
             else:
                 birth = found_user.birth
 
+            #We commit the changes once we have finished editing the users databse
             db.session.commit()
 
             # In the render template we will pass all the data of the user into the edit template as context so that it

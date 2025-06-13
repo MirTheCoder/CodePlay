@@ -18,13 +18,15 @@
     }
 </style>
 <body style="background-color:lightgrey">
+<!-- This checks to see if there is a profile photo that the user has -->
 {% if photo %}
     <img style="border: 7px solid #555; border-radius: 10px; background-color: powderblue;" src="{{photo}}" alt="Your Profile Picture" class="pic" width="200">
 {% else %}
     <img style="border: 7px solid #555; border-radius: 10px; background-color: powderblue;" src="static/profile_icon.png" alt="Your Profile Picture" class="pic" width="200">
 {% endif %}
 
-
+<!-- This will check the info assigned to the specific user and will render it in the details page if they have
+ data for that category, else, a placeholder will be assigned -->
 <p style="font-size: 42px; color: black"> {{user}} </p>
 <p style="font-size: 32px"><b>Contact: </b></p>
 {% if email %}
