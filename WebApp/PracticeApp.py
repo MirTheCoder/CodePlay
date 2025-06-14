@@ -360,14 +360,55 @@ def seeUsers():
             if found_user:
                 valid = True
                 name = found_user.uname
+                session["person"] = name
                 img = found_user.image
-                return render_template("seeUsers.html", text = valid, name = name, img = img)
+                if not img:
+                    img = "static/profile_icon.png"
+                age = found_user.age
+                if not age:
+                    age = "N/A"
+                email = found_user.email
+                if not email:
+                    email = "N/A"
+                return render_template("seeUsers.html", text = valid, name = name, img = img,
+                                       age = age, email = email)
             else:
                 alert = "User does not exist"
                 return render_template("seeUsers.html", alert = alert)
        return render_template("seeUsers.html")
    else:
        return redirect(url_for("login"))
+
+@app.route("/displayUser", methods = ["POST", "GET"])
+def displayUser():
+    if "user" in session:
+        username = session["person"]
+        found_user = users.query.filter_by(uname=username).first()
+        # If the user data is found in the database, then we will collect all teh users information to display
+        if found_user:
+            age = found_user.age
+            picture = found_user.image
+            mail = found_user.email
+            phone = found_user.phone
+            brith = found_user.birth
+            address = found_user.address
+            bio = found_user.bio
+            education1 = found_user.education1
+            education2 = found_user.education2
+            education3 = found_user.education3
+            activity1 = found_user.activity1
+            activity2 = found_user.activity2
+            activity3 = found_user.activity3
+    else:
+        # this will only pop up if the user is not logged in and tries to access the details page
+        flash("You are not logged in", "info")
+        # if the user is not logged in, then we will redirect the user to the login page
+        return redirect(url_for("login"))
+        # We pass the information into the details page to display the users details
+    return render_template("details.html", photo=picture, email=mail, num=age, user=username,
+                           phone=phone, brith=brith, address=address, bio=bio, education1=education1
+                           , education2=education2, education3=education3, activity1=activity1,
+                           activity2=activity2, activity3=activity3)
 
 
 if __name__ == "__main__":
