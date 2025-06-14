@@ -1,10 +1,11 @@
 
 
-from flask import Flask, redirect, url_for,render_template, request, session
+from flask import Flask, redirect, url_for,render_template, request, session, jsonify
 from flask import flash
 from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
 import os
+import json
 import sqlalchemy
 app = Flask(__name__)
 app.secret_key = "QETYUIPKHGDAVXBM10928374"
@@ -56,7 +57,17 @@ class friends(db.Model):
         self.friend1 = friend1
         self.friend2 = friend2
 
+#This database will handle all friend requests that get sent to users
+class requests(db.Model):
+    # Each row will be given a unique id, this is how we store data in the database view rows and columns
+    _id = db.Column("id", db.Integer, primary_key=True)
+    toFriend = db.Column(db.String(2000))
+    fromFriend = db.Column(db.String(2000))
 
+    # Used to define each friendship or ID within our database
+    def __init__(self, toFriend, fromFriend):
+        self.toFriend = toFriend
+        self.fromFriend = fromFriend
 
 
 
@@ -184,21 +195,20 @@ def create():
             #age, else we just assign its value to None
             if not age:
                 age = None
+            else:
+                session["age"] = age
             pic = request.files["png"]
             # Since we made profile pic optional, we have to check for profile pic and see if a value ha been inputted
             # for profile pic, else we just assign its value to None
             if not pic:
-                picture = None
+                picture = "static/profile_icon.png"
             else:
-                picture = os.path.join("static", "profilePic")
+                filespace = pic.filename
+                picture = os.path.join("static", filespace)
                 pic.save(picture)
-                session["image"] = picture
             session["user"] = user
             session["word"] = word
             session["email"] = email
-            session["age"] = age
-            picture = os.path.join("static", "profilePic")
-            pic.save(picture)
             session["image"] = picture
             usr = users(user, email, age, word, picture)
             #add the new account to the database
@@ -318,7 +328,7 @@ def edit():
 
             # In the render template we will pass all the data of the user into the edit template as context so that it
             # can show on the edit page
-            return render_template("edit.html", pic=image, email=email, phone=phone, bio=bio,
+            return render_template("edit.html", pic=path, email=email, phone=phone, bio=bio,
             education1=education1, education2=education2, education3=education3, activity1=activity1,
             activity2=activity2, activity3=activity3, age=age, address=address, birth=birth)
         else:
@@ -409,6 +419,34 @@ def displayUser():
                            phone=phone, brith=brith, address=address, bio=bio, education1=education1
                            , education2=education2, education3=education3, activity1=activity1,
                            activity2=activity2, activity3=activity3)
+
+@app.route("/addRequest", methods = ["POST","GET"])
+def addRequest():
+    data = request.json
+    sender = data.get["name"]
+    reciever = data.get["friend"]
+    friending = requests(reciever, sender)
+    # add the new account to the database
+    db.session.add(friending)
+    db.session.commit()
+    return jsonify({"message": f"Your friend request to {reciever} has been successfully sent"})
+
+@app.route("/viewRequests")
+def viewRequets():
+    if "user" in session:
+        void = []
+        username = session["user"]
+        catalog = requests.query.filter_by(toFriend=username).all()
+        for cat in catalog:
+            found_person = users.query.filter_by(uname=cat.fromFriend).first()
+            if found_person:
+                void.append(found_person)
+
+
+        return render_template("viewRequests.html", catalog = void)
+    else:
+        alert = "You need to log in first to access this page"
+        return render_template("viewRequests.html", alert = alert)
 
 
 if __name__ == "__main__":

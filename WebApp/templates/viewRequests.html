@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}User{% endblock %}
+{% block content %}
+<style>
+    /* Base style: look like a search bar */
+textarea.searchbar {
+  height: 40px;
+  padding: 0 15px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  resize: none; /* removes the draggable corner */
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* On focus: subtle highlight like a search input */
+textarea.searchbar:focus {
+  border-color: #66afe9;
+  box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
+}
+</style>
+
+{% if alert %}
+<script>
+  alert("{{alert}}");
+  window.location.href = "http://127.0.0.1:5000/login";
+</script>
+{% endif %}
+
+{% if catalog %}
+  {% for cat in catalog %}
+    <div style="display: flex; justify-content: center;">
+           <img src="{{img}}" alt="Users profile pic" width="60px" class="wrapped-img">
+            <div>
+           <p>{{cat.name}}</p>
+           <p>{{cat.age}}</p>
+           <p>{{cat.email}}</p>
+            </div>
+        </div>
+        <div style="text-align: center">
+            <button type="button" style="background-color: green" id="add">Add {{cat.name}} back</button>
+            <button type="button" id="profile">View Profile</button>
+        </div>
+<hr>
+  {% endfor %}
+{% else %}
+<p><b>No Request at the moment</b></p>
+{% endif %}
+
+{% endblock %}

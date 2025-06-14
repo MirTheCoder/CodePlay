@@ -26,7 +26,8 @@ textarea.searchbar:focus {
 <p style="text-align: center">Type name of user, whose profile you would like to view down below in the search bar</p>
 <form action="#" enctype="multipart/form-data" method="POST">
 <div style="text-align: center">
-    <textarea name="person" class="searchbar" style="border-radius: 10px;" rows="2" cols="80">Enter users name in here</textarea>
+    <textarea name="person" class="searchbar" style="border-radius: 10px;" rows="2" cols="80" id="pick">
+        Enter users name in here</textarea>
     <label for="search">
         <img src="static/searchLogo.png" alt="Search Users" width="40px">
     </label>
@@ -35,7 +36,7 @@ textarea.searchbar:focus {
 </div>
 </form>
 {% if text %}
-        <div style="display: flex; justify-content: center;" id="profile">
+        <div style="display: flex; justify-content: center;">
            <img src="{{img}}" alt="Users profile pic" width="60px" class="wrapped-img">
             <div>
            <p>{{name}}</p>
@@ -43,12 +44,44 @@ textarea.searchbar:focus {
            <p>{{email}}</p>
             </div>
         </div>
+        <div style="text-align: center">
+            <button type="button" style="background-color: green" id="add">Send Friend Request</button>
+            <button type="button" id="profile">View Profile</button>
+        </div>
 {% endif %}
+
+<a href="http://127.0.0.1:5000/user">
+    <button type = "button">Return Home</button>
+</a>
 <script>
+    const selection = document.getElementById("pick");
     const choice = document.getElementById("profile");
     if(choice){
         choice.addEventListener("click", function(){
             window.location.href = "http://127.0.0.1:5000/displayUser";
+
+        });
+    }
+
+    const friend = document.getElementById("add");
+    if(friend){
+        friend.addEventListener("click", function(){
+            fetch("http://127.0.0.1:5000/addRequest", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: "{{name}}",
+                    friend: selection.textContent.trim()
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                answer = data.message;
+                alert(answer);
+            })
+            .catch(error => alert("Error:", error));
 
         });
     }
