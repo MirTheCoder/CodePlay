@@ -460,6 +460,10 @@ def addBack():
         found_request = requests.query.filter_by(fromFriend=name).first()
         if found_request:
             match = friends(username,found_request.fromFriend)
+            db.session.add(match)
+            db.session.commit()
+            db.session.delete(found_request)
+
 
 
 
