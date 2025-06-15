@@ -63,25 +63,23 @@ textarea.searchbar:focus {
         });
     }
 
-    const friend = document.getElementById("add");
+    const friend = document.getElementById("add")
+    formData = new FormData();
+    formData.append("name","{{name}}");
+
     if(friend){
         friend.addEventListener("click", function(){
             fetch("http://127.0.0.1:5000/addRequest", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    name: "{{name}}",
-                    friend: selection.textContent.trim()
+                    method: "POST",
+                    body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
                 })
-            })
-            .then(response => response.json())
-            .then(data => {
-                answer = data.message;
-                alert(answer);
-            })
-            .catch(error => alert("Error:", error));
+                .catch(error => {
+                    alert("ERROR");
+                });
 
         });
     }

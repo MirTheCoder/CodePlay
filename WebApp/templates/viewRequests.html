@@ -32,7 +32,7 @@ textarea.searchbar:focus {
 {% if catalog %}
   {% for cat in catalog %}
     <div style="display: flex; justify-content: center;">
-           <img src="{{img}}" alt="Users profile pic" width="60px" class="wrapped-img">
+           <img src="{{cat.image}}" alt="Users profile pic" width="60px" class="wrapped-img">
             <div>
            <p>{{cat.name}}</p>
            <p>{{cat.age}}</p>

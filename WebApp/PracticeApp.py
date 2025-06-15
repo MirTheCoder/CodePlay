@@ -422,9 +422,8 @@ def displayUser():
 
 @app.route("/addRequest", methods = ["POST","GET"])
 def addRequest():
-    data = request.json
-    sender = data.get["name"]
-    reciever = data.get["friend"]
+    sender = session["user"]
+    reciever = request.form["name"]
     friending = requests(reciever, sender)
     # add the new account to the database
     db.session.add(friending)
