@@ -366,6 +366,8 @@ def seeUsers():
        valid = False
        if request.method == "POST":
             name = request.form["person"]
+            if name == session["user"]:
+                return render_template("seeUsers.html")
             found_user = found_user = users.query.filter_by(uname=name).first()
             if found_user:
                 valid = True
@@ -424,6 +426,9 @@ def displayUser():
 def addRequest():
     sender = session["user"]
     reciever = request.form["name"]
+    found_request = requests.query.filter_by(toFriend=reciever, fromFriend=sender).first()
+    if found_request:
+        return jsonify({"message": f"You have already sent a friend request to {reciever}"})
     friending = requests(reciever, sender)
     # add the new account to the database
     db.session.add(friending)
@@ -446,6 +451,16 @@ def viewRequets():
     else:
         alert = "You need to log in first to access this page"
         return render_template("viewRequests.html", alert = alert)
+
+@app.route("/addBack")
+def addBack():
+    username = session["user"]
+    name = request.form["name"]
+    if name:
+        found_request = requests.query.filter_by(fromFriend=name).first()
+        if found_request:
+            match = friends(username,found_request.fromFriend)
+
 
 
 if __name__ == "__main__":

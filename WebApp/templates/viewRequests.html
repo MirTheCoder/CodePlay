@@ -15,6 +15,10 @@ textarea.searchbar {
   box-sizing: border-box;
 }
 
+.friends{
+
+}
+
 /* On focus: subtle highlight like a search input */
 textarea.searchbar:focus {
   border-color: #66afe9;
@@ -40,7 +44,7 @@ textarea.searchbar:focus {
             </div>
         </div>
         <div style="text-align: center">
-            <button type="button" style="background-color: green" id="add">Add {{cat.name}} back</button>
+            <button type="button" style="background-color: green" id="add" class="friends">Add {{cat.name}} back</button>
             <button type="button" id="profile">View Profile</button>
         </div>
 <hr>
@@ -49,4 +53,25 @@ textarea.searchbar:focus {
 <p><b>No Request at the moment</b></p>
 {% endif %}
 
+<script>
+    const formData = new FormData();
+    formData.append("name","{{name}}");
+    const adding = document.querySelectorAll(".friends");
+    adding.forEach(function(additive) {
+        additive.addEventListener("click", function() {
+            fetch("http://127.0.0.1:5000/loadReviews", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert("You have successfully added " + data.name)
+      })
+      /* Catch an error if it is present*/
+      .catch(error => alert("Error: " + error));
+
+        });
+    });
+
+</script>
 {% endblock %}
