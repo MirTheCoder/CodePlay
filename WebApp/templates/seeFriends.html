@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}User{% endblock %}
+{% block content %}
+<style>
+    .viewer{
+
+
+    }
+
+    .remover{
+
+
+    }
+</style>
+<h2><b>View Friends</b></h2>
+{% if network %}
+  {% for friend in network %}
+    <div style="display: flex; justify-content: center;">
+           <img src="{{friend.image}}" alt="Users profile pic" width="60px" class="wrapped-img">
+            <div>
+           <p>{{friend.uname}}</p>
+           <p>{{friend.age}}</p>
+           <p>{{friend.email}}</p>
+            </div>
+        </div>
+        <div style="text-align: center">
+            <button type="button" id="profile" class="viewer">View {{friend.uname}}'s Profile</button>
+            <button type="button" class="remover">Remove {{friend.uname}}</button>
+        </div>
+<hr>
+  {% endfor %}
+{% else %}
+<p><b>No Friends on your Friends List at the moment</b></p>
+{% endif %}
+<a href="http://127.0.0.1:5000/user">
+    <button type = "button">Return Home</button>
+</a>
+
+<script>
+    const dataPlan = new FormData();
+    const booth = document.querySelectorAll(".viewer");
+    booth.forEach(function(tooth) {
+        tooth.addEventListener("click", function() {
+            word = tooth.textContent.trim();
+            name = word.substring(5,word.length - 10);
+            dataPlan.append("name",name);
+            fetch("http://127.0.0.1:5000/displayPerson", {
+        method: "POST",
+        body: dataPlan
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert(data.message)
+        window.location.href = "http://127.0.0.1:5000/displayUser";
+      })
+      /* Catch an error if it is present*/
+      .catch(error => alert("Error: " + error));
+
+        });
+    });
+
+    const formData = new FormData();
+    const remove = document.querySelectorAll(".remover");
+    remove.forEach(function(remover) {
+        remover.addEventListener("click", function() {
+            word = remover.textContent.trim();
+            name = word.substring(7);
+            formData.append("name",name);
+            fetch("http://127.0.0.1:5000/removeFriend", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if(!data.message){
+            alert("Please first log in to access this page")
+            window.location.href = "http://127.0.0.1:5000/login"
+        } else {
+            alert(data.message)
+            window.location.reload();
+        }
+      })
+      /* Catch an error if it is present*/
+      .catch(error => alert("Error: " + error));
+
+        });
+    });
+
+
+</script>
+{% endblock %}

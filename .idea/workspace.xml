@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="made some edits to my edit template for the user to edit their information">
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="We have successfully edited the page to allow users to see each others profiles and are now establishing a friend requests system">
+      <change afterPath="$PROJECT_DIR$/WebApp/templates/chat.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WebApp/templates/seeFriends.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/PracticeApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/PracticeApp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/static/Miracle's headshot.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/viewRequests.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/viewRequests.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +67,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\pythonProject\CodePlay\WebApp\templates" />
       <recent name="C:\pythonProject\CodePlay\WebApp\static" />
       <recent name="C:\pythonProject\CodePlay\VidEdits\static" />
       <recent name="$PROJECT_DIR$/WebApp/WebApp2/templates" />
@@ -101,7 +107,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/WebApp" />
+      <option name="WORKING_DIRECTORY" value="C:\pythonProject\CodePlay\WebApp" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -398,7 +404,111 @@
       <option name="project" value="LOCAL" />
       <updated>1749274739353</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="made some edits to my edit template for the user to edit their information">
+      <option name="closed" value="true" />
+      <created>1749439821784</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1749439821784</updated>
+    </task>
+    <task id="LOCAL-00029" summary="made some edits to my edit template for the user to edit their information">
+      <option name="closed" value="true" />
+      <created>1749488441057</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1749488441057</updated>
+    </task>
+    <task id="LOCAL-00030" summary="edited the layout and toggle system of certain aspect sin my edit template along with adding a personal info section as well">
+      <option name="closed" value="true" />
+      <created>1749528217262</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1749528217262</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Finished making the edit page editable so that the user can update the information. Next im gong to have to fix education adn activity so that they can display info that is already in the database. I was able to get the database to change the information, but now im going to have to edit the details to accommodate the new database attributes and make it show all the users credentials that they have added">
+      <option name="closed" value="true" />
+      <created>1749531278834</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1749531278834</updated>
+    </task>
+    <task id="LOCAL-00032" summary="made some edits to the details page along with the context that I pass within my details page rendering">
+      <option name="closed" value="true" />
+      <created>1749572074192</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1749572074192</updated>
+    </task>
+    <task id="LOCAL-00033" summary="made some edits to the details page along with the context that I pass within my details page rendering">
+      <option name="closed" value="true" />
+      <created>1749581741455</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1749581741455</updated>
+    </task>
+    <task id="LOCAL-00034" summary="made some edits to allow all the info to appear in edit template and details template, now I have to troubleshoot the image portion of the edit template and also add the friends list attribute of the code">
+      <option name="closed" value="true" />
+      <created>1749617386296</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1749617386296</updated>
+    </task>
+    <task id="LOCAL-00035" summary="made comments on my code">
+      <option name="closed" value="true" />
+      <created>1749851021818</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1749851021818</updated>
+    </task>
+    <task id="LOCAL-00036" summary="creating a page that allows users to search for other users within the database">
+      <option name="closed" value="true" />
+      <created>1749855653850</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1749855653850</updated>
+    </task>
+    <task id="LOCAL-00037" summary="creating a page that allows users to search for other users within the database">
+      <option name="closed" value="true" />
+      <created>1749859155807</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1749859155807</updated>
+    </task>
+    <task id="LOCAL-00038" summary="creating a page that allows users to search for other users within the database">
+      <option name="closed" value="true" />
+      <created>1749923357564</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1749923357564</updated>
+    </task>
+    <task id="LOCAL-00039" summary="We have successfully edited the page to allow users to see each others profiles and are now establishing a friend requests system">
+      <option name="closed" value="true" />
+      <created>1749935670921</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1749935670922</updated>
+    </task>
+    <task id="LOCAL-00040" summary="We have successfully edited the page to allow users to see each others profiles and are now establishing a friend requests system">
+      <option name="closed" value="true" />
+      <created>1749955604678</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1749955604679</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -413,11 +523,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Some of the python files and html files needed for the video editing code" />
-    <MESSAGE value="Some edits to the video editor, added some editing functions using ffmpeg and was able to create a toggle affect for some of the editing options talked about in my html files" />
-    <MESSAGE value="more edits to the files, I was successfully able to save the file that is selected and then call it again from a different html. We have also been able to toggle some of the options. Still working on calling the python functions to edit the videos via ffmpeg." />
-    <MESSAGE value="We have started working on a new web applicaiton that has sessions, user login, and will potentially have a database to save data that is specific to the user who  is logged in." />
-    <MESSAGE value="We have now added a section that allows users to enter in their email which we will later save under their name in the database that we hope to create eventually" />
     <MESSAGE value="We have started working on creating the database to store the users email and name. We are having some little errors for storing in the database but we are still working on it. Will hopefully be able to" />
     <MESSAGE value="We have edited the database" />
     <MESSAGE value="The database has finally been set up and we have successfully got it initialized and can now start inputing data into the database and also putting rows or different catagories for each user (ex. phone number, grade, job, etc...)" />
@@ -435,6 +540,14 @@
     <MESSAGE value="With the help of iframe, I am now able to display the text visibly for the reader to read the book that they selected to read" />
     <MESSAGE value="Adding some comments to my web art project" />
     <MESSAGE value="Made some edits to the details page, to touch up on how the users details appear along. I also edited the database class as well" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made some edits to the details page, to touch up on how the users details appear along. I also edited the database class as well" />
+    <MESSAGE value="made some edits to my edit template for the user to edit their information" />
+    <MESSAGE value="edited the layout and toggle system of certain aspect sin my edit template along with adding a personal info section as well" />
+    <MESSAGE value="Finished making the edit page editable so that the user can update the information. Next im gong to have to fix education adn activity so that they can display info that is already in the database. I was able to get the database to change the information, but now im going to have to edit the details to accommodate the new database attributes and make it show all the users credentials that they have added" />
+    <MESSAGE value="made some edits to the details page along with the context that I pass within my details page rendering" />
+    <MESSAGE value="made some edits to allow all the info to appear in edit template and details template, now I have to troubleshoot the image portion of the edit template and also add the friends list attribute of the code" />
+    <MESSAGE value="made comments on my code" />
+    <MESSAGE value="creating a page that allows users to search for other users within the database" />
+    <MESSAGE value="We have successfully edited the page to allow users to see each others profiles and are now establishing a friend requests system" />
+    <option name="LAST_COMMIT_MESSAGE" value="We have successfully edited the page to allow users to see each others profiles and are now establishing a friend requests system" />
   </component>
 </project>

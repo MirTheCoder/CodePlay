@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}User{% endblock %}
+{% block content %}
+</style>
+<h2 style="text-align: center"><b>Chat With Users</b></h2>
+<p style="text-align: center">Type name of user,you would like to chat with</p>
+<form action="#" enctype="multipart/form-data" method="POST">
+<div style="text-align: center">
+    <textarea name="person" class="searchbar" style="border-radius: 10px;" rows="2" cols="80" id="pick">
+        Enter users name in here</textarea>
+    <label for="search">
+        <img src="static/searchLogo.png" alt="Search Users" width="40px">
+    </label>
+
+    <button type="submit" id="search" style="display: none"></button>
+</div>
+</form>
+
+
+{% if text %}
+        <div style="display: flex; justify-content: center;">
+           <img src="{{img}}" alt="Users profile pic" width="60px" class="wrapped-img">
+            <div>
+           <p>{{name}}</p>
+           <p>{{age}}</p>
+           <p>{{email}}</p>
+            </div>
+        </div>
+        <div style="text-align: center">
+            <button type="button" style="background-color: green" id="add">Send Friend Request</button>
+            <button type="button" id="profile">View Profile</button>
+        </div>
+{% endif %}
+
+<a href="http://127.0.0.1:5000/user">
+    <button type = "button">Return Home</button>
+</a>
+{% endblock %}

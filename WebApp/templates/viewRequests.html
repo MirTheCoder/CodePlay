@@ -19,6 +19,10 @@ textarea.searchbar {
 
 }
 
+.viewer{
+
+}
+
 /* On focus: subtle highlight like a search input */
 textarea.searchbar:focus {
   border-color: #66afe9;
@@ -38,14 +42,14 @@ textarea.searchbar:focus {
     <div style="display: flex; justify-content: center;">
            <img src="{{cat.image}}" alt="Users profile pic" width="60px" class="wrapped-img">
             <div>
-           <p>{{cat.name}}</p>
+           <p>{{cat.uname}}</p>
            <p>{{cat.age}}</p>
            <p>{{cat.email}}</p>
             </div>
         </div>
         <div style="text-align: center">
-            <button type="button" style="background-color: green" id="add" class="friends">Add {{cat.name}} back</button>
-            <button type="button" id="profile">View Profile</button>
+            <button type="button" style="background-color: green" id="add" class="friends">Add {{cat.uname}}</button>
+            <button type="button" id="profile" class="viewer">View {{cat.uname}}'s Profile</button>
         </div>
 <hr>
   {% endfor %}
@@ -55,17 +59,42 @@ textarea.searchbar:focus {
 
 <script>
     const formData = new FormData();
-    formData.append("name","{{name}}");
     const adding = document.querySelectorAll(".friends");
     adding.forEach(function(additive) {
         additive.addEventListener("click", function() {
-            fetch("http://127.0.0.1:5000/loadReviews", {
+            word = additive.textContent.trim();
+            name = word.substring(4);
+            formData.append("name",name);
+            fetch("http://127.0.0.1:5000/addBack", {
         method: "POST",
         body: formData
       })
       .then(response => response.json())
       .then(data => {
-        alert("You have successfully added " + data.name)
+        alert(data.message)
+        window.location.reload();
+      })
+      /* Catch an error if it is present*/
+      .catch(error => alert("Error: " + error));
+
+        });
+    });
+
+    const dataPlan = new FormData();
+    const booth = document.querySelectorAll(".viewer");
+    booth.forEach(function(tooth) {
+        tooth.addEventListener("click", function() {
+            word = tooth.textContent.trim();
+            name = word.substring(5,word.length - 10);
+            dataPlan.append("name",name);
+            fetch("http://127.0.0.1:5000/displayPerson", {
+        method: "POST",
+        body: dataPlan
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert(data.message)
+        window.location.href = "http://127.0.0.1:5000/displayUser";
       })
       /* Catch an error if it is present*/
       .catch(error => alert("Error: " + error));

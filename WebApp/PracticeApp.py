@@ -1,5 +1,4 @@
 
-
 from flask import Flask, redirect, url_for,render_template, request, session, jsonify
 from flask import flash
 from datetime import timedelta
@@ -246,7 +245,7 @@ def edit():
             image = request.files["image"]
             if image:
                 path = found_user.image
-                image.save("path")
+                image.save(path)
             else:
                 image = found_user.image
             email = request.form["email"]
@@ -328,7 +327,7 @@ def edit():
 
             # In the render template we will pass all the data of the user into the edit template as context so that it
             # can show on the edit page
-            return render_template("edit.html", pic=path, email=email, phone=phone, bio=bio,
+            return render_template("edit.html", pic=found_user.image, email=email, phone=phone, bio=bio,
             education1=education1, education2=education2, education3=education3, activity1=activity1,
             activity2=activity2, activity3=activity3, age=age, address=address, birth=birth)
         else:
@@ -411,16 +410,19 @@ def displayUser():
             activity1 = found_user.activity1
             activity2 = found_user.activity2
             activity3 = found_user.activity3
+            return render_template("details.html", photo=picture, email=mail, num=age, user=username,
+                                   phone=phone, brith=brith, address=address, bio=bio, education1=education1
+                                   , education2=education2, education3=education3, activity1=activity1,
+                                   activity2=activity2, activity3=activity3)
+        else:
+            flash("User not found", "info")
+            return redirect(url_for("user"))
     else:
         # this will only pop up if the user is not logged in and tries to access the details page
         flash("You are not logged in", "info")
         # if the user is not logged in, then we will redirect the user to the login page
         return redirect(url_for("login"))
         # We pass the information into the details page to display the users details
-    return render_template("details.html", photo=picture, email=mail, num=age, user=username,
-                           phone=phone, brith=brith, address=address, bio=bio, education1=education1
-                           , education2=education2, education3=education3, activity1=activity1,
-                           activity2=activity2, activity3=activity3)
 
 @app.route("/addRequest", methods = ["POST","GET"])
 def addRequest():
@@ -429,13 +431,18 @@ def addRequest():
     found_request = requests.query.filter_by(toFriend=reciever, fromFriend=sender).first()
     if found_request:
         return jsonify({"message": f"You have already sent a friend request to {reciever}"})
+    friendsFirst = friends.query.filter_by(friend1=sender,friend2=reciever).first()
+    friendsSecond = friends.query.filter_by(friend1=reciever, friend2=sender).first()
+    if friendsFirst or friendsSecond:
+        return jsonify({"message": f"{reciever} is already one of your friends"})
+
     friending = requests(reciever, sender)
     # add the new account to the database
     db.session.add(friending)
     db.session.commit()
     return jsonify({"message": f"Your friend request to {reciever} has been successfully sent"})
 
-@app.route("/viewRequests")
+@app.route("/viewRequests", methods=["POST","GET"])
 def viewRequets():
     if "user" in session:
         void = []
@@ -452,7 +459,7 @@ def viewRequets():
         alert = "You need to log in first to access this page"
         return render_template("viewRequests.html", alert = alert)
 
-@app.route("/addBack")
+@app.route("/addBack", methods=["POST","GET"])
 def addBack():
     username = session["user"]
     name = request.form["name"]
@@ -461,11 +468,100 @@ def addBack():
         if found_request:
             match = friends(username,found_request.fromFriend)
             db.session.add(match)
-            db.session.commit()
             db.session.delete(found_request)
+            db.session.commit()
+            return jsonify({"message": f"{name} is now your friend"})
+        else:
+            return jsonify({"message": "There was an error with finding the user"})
+    else:
+        return jsonify({"message": "Name not found"})
+
+@app.route("/seeFriends", methods=["POST","GET"])
+def seeFriends():
+    list = []
+    username = session["user"]
+    for partner in friends.query.all():
+        if partner.friend1 == username:
+            name = partner.friend2
+            found_user = users.query.filter_by(uname=name).first()
+            list.append(found_user)
+        elif partner.friend2 == username:
+            name = partner.friend1
+            found_user = users.query.filter_by(uname=name).first()
+            list.append(found_user)
 
 
+    return render_template("seeFriends.html",network = list)
 
+@app.route("/displayPerson", methods = ["POST", "GET"])
+def displayPerson():
+    if "user" in session:
+        session["person"] = request.form["name"]
+        username = session["person"]
+        found_user = users.query.filter_by(uname=username).first()
+        return jsonify({"message": f"Navigating to {session["person"]}'s profile"})
+        # If the user data is found in the database, then we will collect all teh users information to display
+    else:
+        # this will only pop up if the user is not logged in and tries to access the details page
+        flash("You are not logged in", "info")
+        # if the user is not logged in, then we will redirect the user to the login page
+        return redirect(url_for("login"))
+        # We pass the information into the details page to display the users details
+
+@app.route("/removeFriend", methods = ["POST", "GET"])
+def removeFriend():
+    if "user" in session:
+        remove = request.form["name"]
+        username = session["user"]
+        found_friend1 = friends.query.filter_by(friend1=remove, friend2=username).first()
+        found_friend2 = friends.query.filter_by(friend1=username, friend2=remove).first()
+        if found_friend1:
+            db.session.delete(found_friend1)
+            db.session.commit()
+            return jsonify({"message": f"{remove} has successfully been removed from your friends list"})
+        elif found_friend2:
+            db.session.delete(found_friend1)
+            db.session.commit()
+            return jsonify({"message": f"{remove} has successfully been removed from your friends list"})
+        else:
+            return jsonify({"message": "User not found"})
+        # If the user data is found in the database, then we will collect all teh users information to display
+    else:
+        # this will only pop up if the user is not logged in and tries to access the details page
+        # if the user is not logged in, then we will redirect the user to the login page
+        return jsonify({"message": False})
+        # We pass the information into the details page to display the users details
+
+@app.route("/chat", methods=["POST","GET"])
+def chat():
+    if "user" in session:
+        valid = False
+        if request.method == "POST":
+            name = request.form["name"]
+            if name == session["user"]:
+                return render_template("seeUsers.html")
+            found_user = found_user = users.query.filter_by(uname=name).first()
+            if found_user:
+                valid = True
+                name = found_user.uname
+                session["person"] = name
+                img = found_user.image
+                if not img:
+                    img = "static/profile_icon.png"
+                age = found_user.age
+                if not age:
+                    age = "N/A"
+                email = found_user.email
+                if not email:
+                    email = "N/A"
+                return render_template("seeUsers.html", text=valid, name=name, img=img,
+                                       age=age, email=email)
+            else:
+                alert = "User does not exist"
+                return render_template("seeUsers.html", alert=alert)
+        return render_template("seeUsers.html")
+    else:
+        return redirect(url_for("login"))
 
 if __name__ == "__main__":
     with app.app_context():
