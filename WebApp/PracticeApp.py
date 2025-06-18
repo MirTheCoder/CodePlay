@@ -67,8 +67,9 @@ class requests(db.Model):
     def __init__(self, toFriend, fromFriend):
         self.toFriend = toFriend
         self.fromFriend = fromFriend
-
+#This database will store every sent message from one user to another
 class talk(db.Model):
+    # Each row will be given a unique id, this is how we store data in the database view rows and columns
     _id = db.Column("id", db.Integer, primary_key=True)
     speaker = db.Column(db.String(2000))
     hearer = db.Column(db.String(2000))
@@ -365,15 +366,21 @@ def edit():
 
 @app.route("/seeUsers", methods = ["POST", "GET"])
 def seeUsers():
+    #First we check and see if the user is logged in already
    if "user" in session:
        valid = False
        if request.method == "POST":
+           #If the user submits the name of the user they would like to see, we will get the input
+           #To see if it is a user in our database.
             name = request.form["person"]
             session["chat1"] = name
+           #To ensure that the user can not accidentally pull up their own profile
             if name == session["user"]:
                 return render_template("seeUsers.html")
             found_user = found_user = users.query.filter_by(uname=name).first()
             if found_user:
+                #We will send these values of the user to the template, but we will first check that the values
+                #are not empty, because if the are then we will just put in a substitute or placeholder value
                 valid = True
                 name = found_user.uname
                 session["person"] = name
@@ -389,13 +396,20 @@ def seeUsers():
                 return render_template("seeUsers.html", text = valid, name = name, img = img,
                                        age = age, email = email)
             else:
+                #If the user is not found, then we will let the user know via an alert
                 alert = "User does not exist"
                 return render_template("seeUsers.html", alert = alert)
+       #Runs if the user is not searching up a user
        return render_template("seeUsers.html")
    else:
-       return redirect(url_for("login"))
+       #This text will display on the seeUsers page and direct the user to the login page if they are not logged in
+       speech = "You must log in first to access this page"
+       return render_template("seeUsers.html", speech=speech)
+
+
 
 @app.route("/displayUser", methods = ["POST", "GET"])
+#This handles the displaying of profiles of other users that the user in session would like to view
 def displayUser():
     if "user" in session:
         username = session["person"]
@@ -420,6 +434,7 @@ def displayUser():
                                    , education2=education2, education3=education3, activity1=activity1,
                                    activity2=activity2, activity3=activity3)
         else:
+            #Displays if the user does not exist within our database
             flash("User not found", "info")
             return redirect(url_for("user"))
     else:
@@ -430,44 +445,55 @@ def displayUser():
         # We pass the information into the details page to display the users details
 
 @app.route("/addRequest", methods = ["POST","GET"])
+#This helps to create the friend requests sent out by users to other users
 def addRequest():
     sender = session["user"]
     reciever = request.form["name"]
     found_request = requests.query.filter_by(toFriend=reciever, fromFriend=sender).first()
+    #Checks first to see if the user has already sent a friend request that is pending currently
     if found_request:
         return jsonify({"message": f"You have already sent a friend request to {reciever}"})
     friendsFirst = friends.query.filter_by(friend1=sender,friend2=reciever).first()
     friendsSecond = friends.query.filter_by(friend1=reciever, friend2=sender).first()
+    #Checks to see if the user is already friends with the person they are trying to send a friend request to
     if friendsFirst or friendsSecond:
         return jsonify({"message": f"{reciever} is already one of your friends"})
-
+    #Where we exactly crate teh friend request and add it to our friend request database
     friending = requests(reciever, sender)
     # add the new account to the database
     db.session.add(friending)
     db.session.commit()
+    #Notify the user that the friend request was successful
     return jsonify({"message": f"Your friend request to {reciever} has been successfully sent"})
 
 @app.route("/viewRequests", methods=["POST","GET"])
+#Allows the user to view friend request that were sent to them
 def viewRequets():
     if "user" in session:
+        # we will get all the friend request sent to the user and store it within a list
         void = []
         username = session["user"]
         catalog = requests.query.filter_by(toFriend=username).all()
         for cat in catalog:
+            #checks to see if the sender of the request is a user within our database
             found_person = users.query.filter_by(uname=cat.fromFriend).first()
             if found_person:
                 void.append(found_person)
 
-
+        #We will send the list of people who sent a friend request to the user to the front end for the page to display
         return render_template("viewRequests.html", catalog = void)
     else:
+        #Activates if the user is not logged in currently
         alert = "You need to log in first to access this page"
         return render_template("viewRequests.html", alert = alert)
 
 @app.route("/addBack", methods=["POST","GET"])
+#Used to allow the user to add people back that requested to be friends
 def addBack():
     username = session["user"]
     name = request.form["name"]
+    #Here we will get the user that the person in session added back as a friend
+    #Once the user has been added back as a friend, we will then delete the friend request
     if name:
         found_request = requests.query.filter_by(fromFriend=name).first()
         if found_request:
@@ -475,16 +501,23 @@ def addBack():
             db.session.add(match)
             db.session.delete(found_request)
             db.session.commit()
+            #Lets the user in session know that the friend has been added back successfully
             return jsonify({"message": f"{name} is now your friend"})
         else:
+            #Will display if the friend request could not be found
             return jsonify({"message": "There was an error with finding the user"})
     else:
+        #If the name of the user is not within our database, then we send this message
         return jsonify({"message": "Name not found"})
 
 @app.route("/seeFriends", methods=["POST","GET"])
+#Allows the user to see all the friends on their friends list
 def seeFriends():
+    #We will store all the users friendships within this list
     list = []
     username = session["user"]
+    #If the users name is found in a paired friendship within our database, then we will add that user to their
+    #friends list
     for partner in friends.query.all():
         if partner.friend1 == username:
             name = partner.friend2
@@ -544,18 +577,18 @@ def chat():
         username = session["user"]
         found_hearer = users.query.filter_by(uname=speakTo).first()
         found_speaker = users.query.filter_by(uname=username).first()
-        found_convo = talk.query.filter_by(speaker=username, hearer=speakTo).all()
+        found_convo = talk.query.all()
         if found_convo:
-            return render_template("chat.html", speaker=found_speaker, hearing=found_hearer, convo=found_convo)
-        if request.method == "POST":
-            message = request.form["message"]
-            if message:
-                converse = talk(speaker=username, hearer=speakTo, text= message)
-                db.session.add(converse)
-                db.session.commit()
-            else:
-                return render_template("chat.html", speaking=found_speaker, hearing=found_hearer, convo=found_convo)
-
+            if request.method == "POST":
+                message = request.form["message"]
+                if message:
+                    converse = talk(speaker=username, hearer=speakTo, text=message)
+                    db.session.add(converse)
+                    db.session.commit()
+                    found_convo = talk.query.all()
+                else:
+                    return render_template("chat.html", speaking=found_speaker, hearing=found_hearer, convo=found_convo)
+            return render_template("chat.html", speaking =found_speaker, hearing=found_hearer, convo=found_convo)
 
         return render_template("chat.html", speaking = found_speaker, hearing = found_hearer)
 

@@ -90,36 +90,38 @@
 
 </style>
 
+<form action="#" enctype="multipart/form-data" method="POST">
 <div class="chat-container">
   <div class="message-container">
     {% if convo %}
         {% for speak in convo %}
-            {% if speak.hearer == hearing.uname %}
+            {% if speak.speaker == hearing.uname %}
                 <div class="message left">
                     <img src="{{hearing.image}}" alt="User 1" class="avatar">
-                    <div class="bubble">{{convo.text}}</div>
+                    <div class="bubble">{{speak.text}}</div>
                 </div>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-
-    {% if convo %}
-        {% for speak in convo %}
-            {% if speak.speaker == speaking.uname %}
+            {% elif speak.speaker == speaking.uname %}
             <div class="message right">
-                <div class="bubble">{{convo.text}}</div>
                 <img src="{{speaking.image}}" alt="User 2" class="avatar">
+                <div class="bubble">{{speak.text}}</div>
             </div>
             {% endif %}
         {% endfor %}
+    {% else %}
+      <div class="message right">
+          <img src="{{speaking.image}}" alt="User 2" class="avatar">
+      </div>
+      <div class="message left">
+          <img src="{{hearing.image}}" alt="User 1" class="avatar">
+      </div>
     {% endif %}
   </div>
   <div class="input-area">
-    <input type="text" placeholder="Type a message..." />
+    <input type="text" name="message" placeholder="Type a message..." />
     <button type="submit">Send</button>
   </div>
 </div>
-
+</form>
 
 <a href="http://127.0.0.1:5000/user">
     <button type = "button">Return Home</button>

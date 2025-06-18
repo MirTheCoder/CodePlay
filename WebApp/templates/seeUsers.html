@@ -22,6 +22,15 @@ textarea.searchbar:focus {
 }
 
 </style>
+
+{% if speech %}
+<script>
+    alert("{{speech}}")
+    window.location.href = "http://127.0.0.1:5000/login"
+</script>
+
+{% endif %}
+
 <h2 style="text-align: center"><b>See Users</b></h2>
 <p style="text-align: center">Type name of user, whose profile you would like to view down below in the search bar</p>
 <form action="#" enctype="multipart/form-data" method="POST">
