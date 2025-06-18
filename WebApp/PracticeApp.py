@@ -68,7 +68,11 @@ class requests(db.Model):
         self.toFriend = toFriend
         self.fromFriend = fromFriend
 
-
+class talk(db.Model):
+    _id = db.Column("id", db.Integer, primary_key=True)
+    speaker = db.Column(db.String(2000))
+    hearer = db.Column(db.String(2000))
+    text = db.Column(db.String(2000))
 
 @app.route("/")
 def home():
@@ -365,6 +369,7 @@ def seeUsers():
        valid = False
        if request.method == "POST":
             name = request.form["person"]
+            session["chat1"] = name
             if name == session["user"]:
                 return render_template("seeUsers.html")
             found_user = found_user = users.query.filter_by(uname=name).first()
@@ -535,33 +540,29 @@ def removeFriend():
 @app.route("/chat", methods=["POST","GET"])
 def chat():
     if "user" in session:
-        valid = False
+        speakTo = session["chat1"]
+        username = session["user"]
+        found_hearer = users.query.filter_by(uname=speakTo).first()
+        found_speaker = users.query.filter_by(uname=username).first()
+        found_convo = talk.query.filter_by(speaker=username, hearer=speakTo).all()
+        if found_convo:
+            return render_template("chat.html", speaker=found_speaker, hearing=found_hearer, convo=found_convo)
         if request.method == "POST":
-            name = request.form["name"]
-            if name == session["user"]:
-                return render_template("seeUsers.html")
-            found_user = found_user = users.query.filter_by(uname=name).first()
-            if found_user:
-                valid = True
-                name = found_user.uname
-                session["person"] = name
-                img = found_user.image
-                if not img:
-                    img = "static/profile_icon.png"
-                age = found_user.age
-                if not age:
-                    age = "N/A"
-                email = found_user.email
-                if not email:
-                    email = "N/A"
-                return render_template("seeUsers.html", text=valid, name=name, img=img,
-                                       age=age, email=email)
+            message = request.form["message"]
+            if message:
+                converse = talk(speaker=username, hearer=speakTo, text= message)
+                db.session.add(converse)
+                db.session.commit()
             else:
-                alert = "User does not exist"
-                return render_template("seeUsers.html", alert=alert)
-        return render_template("seeUsers.html")
+                return render_template("chat.html", speaking=found_speaker, hearing=found_hearer, convo=found_convo)
+
+
+        return render_template("chat.html", speaking = found_speaker, hearing = found_hearer)
+
     else:
-        return redirect(url_for("login"))
+        alert = "you are not logged in, log in first to access this page"
+        return render_template("chat.html")
+
 
 if __name__ == "__main__":
     with app.app_context():

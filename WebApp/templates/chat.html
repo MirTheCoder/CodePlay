@@ -1,36 +1,125 @@
 {% extends "base.html" %}
 {% block title %}User{% endblock %}
 {% block content %}
+<style>
+    .chat-container {
+  max-width: 600px;
+  margin: 50px auto;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  overflow: hidden;
+}
+
+.message-container {
+  flex: 1;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.message {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 15px;
+}
+
+.message.left {
+  justify-content: flex-start;
+}
+
+.message.right {
+  justify-content: flex-end;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.bubble {
+  max-width: 70%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  margin: 0 10px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.message.left .bubble {
+  background-color: #e0e0e0;
+  color: #000;
+  border-top-left-radius: 0;
+}
+
+.message.right .bubble {
+  background-color: #4CAF50;
+  color: #fff;
+  border-top-right-radius: 0;
+}
+
+.input-area {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background: #fff;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+}
+
+.input-area button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
 </style>
-<h2 style="text-align: center"><b>Chat With Users</b></h2>
-<p style="text-align: center">Type name of user,you would like to chat with</p>
-<form action="#" enctype="multipart/form-data" method="POST">
-<div style="text-align: center">
-    <textarea name="person" class="searchbar" style="border-radius: 10px;" rows="2" cols="80" id="pick">
-        Enter users name in here</textarea>
-    <label for="search">
-        <img src="static/searchLogo.png" alt="Search Users" width="40px">
-    </label>
 
-    <button type="submit" id="search" style="display: none"></button>
-</div>
-</form>
+<div class="chat-container">
+  <div class="message-container">
+    {% if convo %}
+        {% for speak in convo %}
+            {% if speak.hearer == hearing.uname %}
+                <div class="message left">
+                    <img src="{{hearing.image}}" alt="User 1" class="avatar">
+                    <div class="bubble">{{convo.text}}</div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 
-
-{% if text %}
-        <div style="display: flex; justify-content: center;">
-           <img src="{{img}}" alt="Users profile pic" width="60px" class="wrapped-img">
-            <div>
-           <p>{{name}}</p>
-           <p>{{age}}</p>
-           <p>{{email}}</p>
+    {% if convo %}
+        {% for speak in convo %}
+            {% if speak.speaker == speaking.uname %}
+            <div class="message right">
+                <div class="bubble">{{convo.text}}</div>
+                <img src="{{speaking.image}}" alt="User 2" class="avatar">
             </div>
-        </div>
-        <div style="text-align: center">
-            <button type="button" style="background-color: green" id="add">Send Friend Request</button>
-            <button type="button" id="profile">View Profile</button>
-        </div>
-{% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+  </div>
+  <div class="input-area">
+    <input type="text" placeholder="Type a message..." />
+    <button type="submit">Send</button>
+  </div>
+</div>
+
 
 <a href="http://127.0.0.1:5000/user">
     <button type = "button">Return Home</button>

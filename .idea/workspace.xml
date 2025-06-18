@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="We have successfully edited the page to allow users to see each others profiles and are now establishing a friend requests system">
-      <change afterPath="$PROJECT_DIR$/WebApp/templates/chat.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebApp/templates/seeFriends.html" afterDir="false" />
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="creating a chat system for users">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/PracticeApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/PracticeApp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/static/Miracle's headshot.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/chat.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/chat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/seeUsers.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/seeUsers.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/templates/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/templates/viewRequests.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/viewRequests.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -508,7 +506,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749955604679</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="creating a chat system for users">
+      <option name="closed" value="true" />
+      <created>1750134268989</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1750134268990</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -523,7 +529,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="We have started working on creating the database to store the users email and name. We are having some little errors for storing in the database but we are still working on it. Will hopefully be able to" />
     <MESSAGE value="We have edited the database" />
     <MESSAGE value="The database has finally been set up and we have successfully got it initialized and can now start inputing data into the database and also putting rows or different catagories for each user (ex. phone number, grade, job, etc...)" />
     <MESSAGE value="We have created a new database and have included a password and age column within the database. We also have a create account feature where the user can create an account if they don't have one and have it stored within the database that we have created. When the user tries to log in, they have to use their username and password which will only go through if they have it registered within the database" />
@@ -548,6 +553,7 @@
     <MESSAGE value="made comments on my code" />
     <MESSAGE value="creating a page that allows users to search for other users within the database" />
     <MESSAGE value="We have successfully edited the page to allow users to see each others profiles and are now establishing a friend requests system" />
-    <option name="LAST_COMMIT_MESSAGE" value="We have successfully edited the page to allow users to see each others profiles and are now establishing a friend requests system" />
+    <MESSAGE value="creating a chat system for users" />
+    <option name="LAST_COMMIT_MESSAGE" value="creating a chat system for users" />
   </component>
 </project>
