@@ -1,6 +1,101 @@
 {% extends "base.html" %}
 {% block title %}User{% endblock %}
 {% block content %}
+<style>
+    body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f4f8;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 60px auto;
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Flash message style */
+p {
+  background-color: #e0f7fa;
+  color: #00796b;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Form styling */
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+input[type="email"] {
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+input[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Welcome text */
+a:first-of-type {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+/* Button links */
+a button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  margin: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 15px;
+}
+a button:hover {
+  background-color: #1e7e34;
+}
+
+/* Center buttons */
+a {
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+</style>
 <!-- Used to pass all the flash messages that we create or pass in the backend-->
 {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -13,7 +108,7 @@
  will have their email pop up-->
 <form action = "#" method = "POST">
     <input type = "email" name = "email" placeholder="Enter email" value="{{email if email}}">
-    <input type = "submit" value = "submit">
+    <input type = "submit" value = "submit" >
 </form>
 <!-- Links to various pages that the user can navigate to since they are logged in-->
 <a>Welcome {{text}}</a>

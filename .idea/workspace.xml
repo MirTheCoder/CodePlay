@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="Finished the chat feature, I still have to make the chat feature accessible from the seeFriends page, and I am also making comments as well. I have to make sure that every page can not be accessed unless the user is in session">
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="made some comments to my code along with adding some session checks to ensure that the user is logged in before they access certain pages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/PracticeApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/PracticeApp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/details.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/templates/seeFriends.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/seeFriends.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/user.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -528,7 +529,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750286622710</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="made some comments to my code along with adding some session checks to ensure that the user is logged in before they access certain pages">
+      <option name="closed" value="true" />
+      <created>1750302771139</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1750302771139</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -543,7 +552,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="We have created a new database and have included a password and age column within the database. We also have a create account feature where the user can create an account if they don't have one and have it stored within the database that we have created. When the user tries to log in, they have to use their username and password which will only go through if they have it registered within the database" />
     <MESSAGE value="Just added another web app directory that has a web application about some digital art that I have made over the past year or so. I also just did a little reformatting in CodePlay to make it look a little more neater" />
     <MESSAGE value="did some css styling to my webArt" />
     <MESSAGE value="making some edits to the upload function to see how I can store the users file selection into our uploads directory" />
@@ -568,6 +576,7 @@
     <MESSAGE value="creating a chat system for users" />
     <MESSAGE value="Formatting and editing the chat interface for users" />
     <MESSAGE value="Finished the chat feature, I still have to make the chat feature accessible from the seeFriends page, and I am also making comments as well. I have to make sure that every page can not be accessed unless the user is in session" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished the chat feature, I still have to make the chat feature accessible from the seeFriends page, and I am also making comments as well. I have to make sure that every page can not be accessed unless the user is in session" />
+    <MESSAGE value="made some comments to my code along with adding some session checks to ensure that the user is logged in before they access certain pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="made some comments to my code along with adding some session checks to ensure that the user is logged in before they access certain pages" />
   </component>
 </project>

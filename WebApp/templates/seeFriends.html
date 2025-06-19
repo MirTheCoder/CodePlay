@@ -2,6 +2,7 @@
 {% block title %}User{% endblock %}
 {% block content %}
 <style>
+
     .viewer{
 
 
@@ -11,6 +12,89 @@
 
 
     }
+    /* Container for each friend card */
+.friend-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Friend profile picture */
+.friend-card img {
+  border-radius: 50%;
+  border: 3px solid #007bff;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+}
+
+/* Friend info */
+.friend-info p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #333;
+}
+
+/* Buttons */
+button.viewer,
+button.remover,
+a button {
+  margin: 8px;
+  padding: 10px 18px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+button.viewer {
+  background-color: #007bff;
+  color: white;
+}
+button.viewer:hover {
+  background-color: #0056b3;
+}
+
+button.remover {
+  background-color: #dc3545;
+  color: white;
+}
+button.remover:hover {
+  background-color: #b02a37;
+}
+
+/* Return home button */
+a button {
+  background-color: #6c757d;
+  color: white;
+}
+a button:hover {
+  background-color: #5a6268;
+}
+
+/* Header */
+h2 {
+  text-align: center;
+  margin-top: 30px;
+  color: #222;
+  font-size: 26px;
+}
+
+/* No friends message */
+p {
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
 </style>
 
 {% if alert %}
@@ -21,8 +105,10 @@
 
 {% endif %}
 <h2><b>View Friends</b></h2>
+<!-- Checks to see if the user has any friends within his or her friends list-->
 {% if network %}
   {% for friend in network %}
+<!-- We will display these details of each friend of the user-->
     <div style="display: flex; justify-content: center;">
            <img src="{{friend.image}}" alt="Users profile pic" width="60px" class="wrapped-img">
             <div>
@@ -32,6 +118,7 @@
             </div>
         </div>
         <div style="text-align: center">
+            <!-- The various ways the user can interact with their friends-->
             <button type="button" id="profile" class="viewer">View {{friend.uname}}'s Profile</button>
             <button type="button" class="remover">Remove {{friend.uname}}</button>
         </div>
