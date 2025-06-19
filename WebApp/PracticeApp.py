@@ -120,17 +120,20 @@ def user():
     #If the user is able to log in and the session starts, then the user will be notified that it was a success
     if "user" in session:
         user = session["user"]
+        found_user = users.query.filter_by(uname=user).first()
         flash("Login successful", "info")
         #In the user page, the user can add their email, and it will be saved within the database for their specific user
         if request.method == "POST":
             email = request.form["email"]
-            session["email"] = email
-            found_user = users.query.filter_by(name=user).first()
-            found_user.email = email
-            db.session.commit()
-            #Message to notify the user that the email was successfully saved
-            flash("Email was saved!")
-            flash(f"Email: {email}")
+            if email:
+                session["email"] = email
+                found_user.email = email
+                db.session.commit()
+                #Message to notify the user that the email was successfully saved
+                flash("Email was saved!")
+                flash(f"Email: {email}")
+            else:
+                email = found_user.email
         else:
             if "email" in session:
                 email = session["email"]
@@ -429,7 +432,7 @@ def displayUser():
             activity1 = found_user.activity1
             activity2 = found_user.activity2
             activity3 = found_user.activity3
-            return render_template("details.html", photo=picture, email=mail, num=age, user=username,
+            return render_template("details.html", photo=picture, email=mail, age=age, user=username,
                                    phone=phone, brith=brith, address=address, bio=bio, education1=education1
                                    , education2=education2, education3=education3, activity1=activity1,
                                    activity2=activity2, activity3=activity3)
@@ -514,6 +517,9 @@ def addBack():
 #Allows the user to see all the friends on their friends list
 def seeFriends():
     if "user" in session:
+        if request.method == "POST":
+            session["chat1"] = request.form["chat"]
+            return jsonify({"message": "Navigating to chat room"})
         #We will store all the users friendships within this list
         list = []
         username = session["user"]
@@ -545,7 +551,10 @@ def displayPerson():
         username = session["person"]
         found_user = users.query.filter_by(uname=username).first()
         #Let the user know that we will be successfully navigating to the user of interest profile
-        return jsonify({"message": f"Navigating to {session["person"]}'s profile"})
+        if found_user:
+            return jsonify({"message": f"Navigating to {session["person"]}'s profile"})
+        else:
+            return jsonify({"message": "User not found"})
     else:
         # this will only pop up if the user is not logged in and tries to access the details page
         flash("You are not logged in", "info")

@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="made some comments to my code along with adding some session checks to ensure that the user is logged in before they access certain pages">
+    <list default="true" id="c5fb4df1-a9c3-445c-a203-2ff77ade7b58" name="Changes" comment="made some comments to my code along with adding some session checks to ensure that the user is logged in before they access certain pages. Also used some css styling to make some pages look more appealing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/templates/details.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/PracticeApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/PracticeApp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/static/profile_icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/static/profile_icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebApp/templates/chat.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/chat.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebApp/templates/seeFriends.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/seeFriends.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebApp/templates/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebApp/templates/user.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -537,7 +538,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750302771139</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="made some comments to my code along with adding some session checks to ensure that the user is logged in before they access certain pages. Also used some css styling to make some pages look more appealing">
+      <option name="closed" value="true" />
+      <created>1750305962784</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1750305962784</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -552,7 +561,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Just added another web app directory that has a web application about some digital art that I have made over the past year or so. I also just did a little reformatting in CodePlay to make it look a little more neater" />
     <MESSAGE value="did some css styling to my webArt" />
     <MESSAGE value="making some edits to the upload function to see how I can store the users file selection into our uploads directory" />
     <MESSAGE value="Finally got the video to save to the uploads directory" />
@@ -577,6 +585,7 @@
     <MESSAGE value="Formatting and editing the chat interface for users" />
     <MESSAGE value="Finished the chat feature, I still have to make the chat feature accessible from the seeFriends page, and I am also making comments as well. I have to make sure that every page can not be accessed unless the user is in session" />
     <MESSAGE value="made some comments to my code along with adding some session checks to ensure that the user is logged in before they access certain pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="made some comments to my code along with adding some session checks to ensure that the user is logged in before they access certain pages" />
+    <MESSAGE value="made some comments to my code along with adding some session checks to ensure that the user is logged in before they access certain pages. Also used some css styling to make some pages look more appealing" />
+    <option name="LAST_COMMIT_MESSAGE" value="made some comments to my code along with adding some session checks to ensure that the user is logged in before they access certain pages. Also used some css styling to make some pages look more appealing" />
   </component>
 </project>

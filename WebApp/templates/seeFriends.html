@@ -12,6 +12,10 @@
 
 
     }
+    .talker{
+
+
+    }
     /* Container for each friend card */
 .friend-card {
   display: flex;
@@ -121,6 +125,7 @@ p {
             <!-- The various ways the user can interact with their friends-->
             <button type="button" id="profile" class="viewer">View {{friend.uname}}'s Profile</button>
             <button type="button" class="remover">Remove {{friend.uname}}</button>
+            <button type="button" class="talker">Chat with {{friend.uname}}</button>
         </div>
 <hr>
   {% endfor %}
@@ -173,6 +178,32 @@ p {
         } else {
             alert(data.message)
             window.location.reload();
+        }
+      })
+      /* Catch an error if it is present*/
+      .catch(error => alert("Error: " + error));
+
+        });
+    });
+
+     const talk = document.querySelectorAll(".talker");
+    talk.forEach(function(talking) {
+        talking.addEventListener("click", function() {
+            word = talking.textContent.trim();
+            name = word.substring(10);
+            formData.append("chat",name);
+            fetch("http://127.0.0.1:5000/seeFriends", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if(!data.message){
+            alert("Please first log in to access this page")
+            window.location.href = "http://127.0.0.1:5000/login"
+        } else {
+            alert(data.message)
+            window.location.href = "http://127.0.0.1:5000/chat";
         }
       })
       /* Catch an error if it is present*/

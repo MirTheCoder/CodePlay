@@ -104,12 +104,12 @@
   <div class="message-container">
     {% if convo %}
         {% for speak in convo %}
-            {% if speak.speaker == hearing.uname %}
+            {% if speak.speaker == hearing.uname and speak.hearer == speaking.uname %}
                 <div class="message left">
                     <img src="{{hearing.image}}" alt="User 1" class="avatar">
                     <div class="bubble">{{speak.text}}</div>
                 </div>
-            {% elif speak.speaker == speaking.uname %}
+            {% elif speak.speaker == speaking.uname and speak.hearer == hearing.uname %}
             <div class="message right">
                 <img src="{{speaking.image}}" alt="User 2" class="avatar">
                 <div class="bubble">{{speak.text}}</div>
