@@ -90,6 +90,15 @@
 
 </style>
 
+    {% if alert %}
+        <script>
+            alert("{{alert}}");
+            window.location.href = "http://127.0.0.1:5000/login";
+        </script>
+    {% endif %}
+
+
+
 <form action="#" enctype="multipart/form-data" method="POST">
 <div class="chat-container">
   <div class="message-container">

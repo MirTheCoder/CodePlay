@@ -513,88 +513,101 @@ def addBack():
 @app.route("/seeFriends", methods=["POST","GET"])
 #Allows the user to see all the friends on their friends list
 def seeFriends():
-    #We will store all the users friendships within this list
-    list = []
-    username = session["user"]
-    #If the users name is found in a paired friendship within our database, then we will add that user to their
-    #friends list
-    for partner in friends.query.all():
-        if partner.friend1 == username:
-            name = partner.friend2
-            found_user = users.query.filter_by(uname=name).first()
-            list.append(found_user)
-        elif partner.friend2 == username:
-            name = partner.friend1
-            found_user = users.query.filter_by(uname=name).first()
-            list.append(found_user)
+    if "user" in session:
+        #We will store all the users friendships within this list
+        list = []
+        username = session["user"]
+        #If the users name is found in a paired friendship within our database, then we will add that user to their
+        #friends list
+        for partner in friends.query.all():
+            if partner.friend1 == username:
+                name = partner.friend2
+                found_user = users.query.filter_by(uname=name).first()
+                list.append(found_user)
+            elif partner.friend2 == username:
+                name = partner.friend1
+                found_user = users.query.filter_by(uname=name).first()
+                list.append(found_user)
 
 
-    return render_template("seeFriends.html",network = list)
+        return render_template("seeFriends.html",network = list)
+    else:
+        #Executes only if the user is not logged in
+        alert = "You are currently not logged in, please log in first to access this page"
+        return render_template("seeFriends.html", alert = alert)
 
 @app.route("/displayPerson", methods = ["POST", "GET"])
 def displayPerson():
+    #Checks to see if the user is logged in
     if "user" in session:
         session["person"] = request.form["name"]
+        #This is where we get the name of the user that the user in session would like to view
         username = session["person"]
         found_user = users.query.filter_by(uname=username).first()
+        #Let the user know that we will be successfully navigating to the user of interest profile
         return jsonify({"message": f"Navigating to {session["person"]}'s profile"})
-        # If the user data is found in the database, then we will collect all teh users information to display
     else:
         # this will only pop up if the user is not logged in and tries to access the details page
         flash("You are not logged in", "info")
         # if the user is not logged in, then we will redirect the user to the login page
         return redirect(url_for("login"))
-        # We pass the information into the details page to display the users details
 
 @app.route("/removeFriend", methods = ["POST", "GET"])
+#This will be in charge of removing friends from a users friend list
 def removeFriend():
     if "user" in session:
         remove = request.form["name"]
         username = session["user"]
+        #We will look through the friends list to locate the friend of interest that the user wants to remove
+        #So that we can remove them
         found_friend1 = friends.query.filter_by(friend1=remove, friend2=username).first()
         found_friend2 = friends.query.filter_by(friend1=username, friend2=remove).first()
         if found_friend1:
             db.session.delete(found_friend1)
             db.session.commit()
+            #Notify the user if the removal was successful
             return jsonify({"message": f"{remove} has successfully been removed from your friends list"})
         elif found_friend2:
             db.session.delete(found_friend1)
             db.session.commit()
+            # Notify the user if the removal was successful
             return jsonify({"message": f"{remove} has successfully been removed from your friends list"})
         else:
+            #Appears if we can not find the user
             return jsonify({"message": "User not found"})
-        # If the user data is found in the database, then we will collect all teh users information to display
     else:
-        # this will only pop up if the user is not logged in and tries to access the details page
-        # if the user is not logged in, then we will redirect the user to the login page
+        # this will only pop up if the user is not logged in and tries to remove a Friend
         return jsonify({"message": False})
-        # We pass the information into the details page to display the users details
 
 @app.route("/chat", methods=["POST","GET"])
+#Used to handle chats between all users
 def chat():
     if "user" in session:
+        #Here we will get the two users that we will be making a chat room between
         speakTo = session["chat1"]
         username = session["user"]
+        #We will also find the two people chatting within our user database
         found_hearer = users.query.filter_by(uname=speakTo).first()
         found_speaker = users.query.filter_by(uname=username).first()
+        #We will get all the conversations
         found_convo = talk.query.all()
+        #Used to update the conversation logs between both users if a message is sent
+        if request.method == "POST":
+            message = request.form["message"]
+            if message:
+                converse = talk(speaker=username, hearer=speakTo, text=message)
+                db.session.add(converse)
+                db.session.commit()
+                found_convo = talk.query.all()
         if found_convo:
-            if request.method == "POST":
-                message = request.form["message"]
-                if message:
-                    converse = talk(speaker=username, hearer=speakTo, text=message)
-                    db.session.add(converse)
-                    db.session.commit()
-                    found_convo = talk.query.all()
-                else:
-                    return render_template("chat.html", speaking=found_speaker, hearing=found_hearer, convo=found_convo)
             return render_template("chat.html", speaking =found_speaker, hearing=found_hearer, convo=found_convo)
 
         return render_template("chat.html", speaking = found_speaker, hearing = found_hearer)
 
     else:
+        #executes is the user tries to access chat without being logged in
         alert = "you are not logged in, log in first to access this page"
-        return render_template("chat.html")
+        return render_template("chat.html", alert=alert)
 
 
 if __name__ == "__main__":

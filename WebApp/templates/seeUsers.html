@@ -31,8 +31,10 @@ textarea.searchbar:focus {
 
 {% endif %}
 
+
 <h2 style="text-align: center"><b>See Users</b></h2>
 <p style="text-align: center">Type name of user, whose profile you would like to view down below in the search bar</p>
+<!--In this form, the user in session will type in the name of user whom they would like to view the profile of -->
 <form action="#" enctype="multipart/form-data" method="POST">
 <div style="text-align: center">
     <textarea name="person" class="searchbar" style="border-radius: 10px;" rows="2" cols="80" id="pick">
@@ -44,6 +46,7 @@ textarea.searchbar:focus {
     <button type="submit" id="search" style="display: none"></button>
 </div>
 </form>
+<!-- Used to display the details of the user that the user in session searched up-->
 {% if text %}
         <div style="display: flex; justify-content: center;">
            <img src="{{img}}" alt="Users profile pic" width="60px" class="wrapped-img">
@@ -54,6 +57,8 @@ textarea.searchbar:focus {
             </div>
         </div>
         <div style="text-align: center">
+            <!-- Here are the various options that the user in session can do in regards to the user that they wanted
+            to see-->
             <button type="button" style="background-color: green" id="add">Send Friend Request</button>
             <button type="button" id="profile">View Profile</button>
            <a href="http://127.0.0.1:5000/chat">
@@ -61,11 +66,12 @@ textarea.searchbar:focus {
             </a>
         </div>
 {% endif %}
-
+<!-- allows the user to return to their user page -->
 <a href="http://127.0.0.1:5000/user">
     <button type = "button">Return Home</button>
 </a>
 <script>
+    /*Used to handle the display of the user if the user in session wants to view the persons profile*/
     const selection = document.getElementById("pick");
     const choice = document.getElementById("profile");
     if(choice){
@@ -79,6 +85,7 @@ textarea.searchbar:focus {
     formData = new FormData();
     formData.append("name","{{name}}");
 
+    /*Used to handle friend request if the user wants to befriend them*/
     if(friend){
         friend.addEventListener("click", function(){
             fetch("http://127.0.0.1:5000/addRequest", {
@@ -95,24 +102,5 @@ textarea.searchbar:focus {
 
         });
     }
-
-    /*const speak = document.getElementById("tone");
-    formData.append("speech", speak);
-    if(speak){
-        friend.addEventListener("click", function(){
-            fetch("http://127.0.0.1:5000/chat", {
-                    method: "POST",
-                    body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    alert(data.message);
-                })
-                .catch(error => {
-                    alert("ERROR");
-                });
-
-        });
-    }*/
 </script>
 {% endblock %}
